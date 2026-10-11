@@ -1,8 +1,8 @@
-package me.byteful.plugin.leveltools;
+package dev.s3tupw1zard.awkgearmastery;
 
-import me.byteful.plugin.leveltools.api.item.LevelToolsItem;
-import me.byteful.plugin.leveltools.profile.item.ItemProfile;
-import me.byteful.plugin.leveltools.util.LevelToolsUtil;
+import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.profile.item.ItemProfile;
+import dev.s3tupw1zard.awkgearmastery.util.LevelToolsUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static java.lang.String.format;
-import static me.byteful.plugin.leveltools.util.Text.colorize;
+import static dev.s3tupw1zard.awkgearmastery.util.Text.colorize;
 
 @Command("leveltools")
 public class LevelToolsCommand {

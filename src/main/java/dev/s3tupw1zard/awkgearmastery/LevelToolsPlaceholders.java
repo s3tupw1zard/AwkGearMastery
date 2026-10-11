@@ -1,10 +1,10 @@
-package me.byteful.plugin.leveltools;
+package dev.s3tupw1zard.awkgearmastery;
 
-import me.byteful.plugin.leveltools.api.item.LevelToolsItem;
-import me.byteful.plugin.leveltools.profile.ProfileManager;
-import me.byteful.plugin.leveltools.profile.display.DisplayProfile;
-import me.byteful.plugin.leveltools.profile.item.ItemProfile;
-import me.byteful.plugin.leveltools.util.LevelToolsUtil;
+import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.profile.ProfileManager;
+import dev.s3tupw1zard.awkgearmastery.profile.display.DisplayProfile;
+import dev.s3tupw1zard.awkgearmastery.profile.item.ItemProfile;
+import dev.s3tupw1zard.awkgearmastery.util.LevelToolsUtil;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

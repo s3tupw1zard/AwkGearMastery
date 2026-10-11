@@ -1,8 +1,8 @@
-package me.byteful.plugin.leveltools.api.block;
+package dev.s3tupw1zard.awkgearmastery.api.block;
 
-import me.byteful.plugin.leveltools.api.block.impl.FileBlockDataManager;
-import me.byteful.plugin.leveltools.api.block.impl.SqliteBlockDataManager;
-import me.byteful.plugin.leveltools.api.scheduler.Scheduler;
+import dev.s3tupw1zard.awkgearmastery.api.block.impl.FileBlockDataManager;
+import dev.s3tupw1zard.awkgearmastery.api.block.impl.SqliteBlockDataManager;
+import dev.s3tupw1zard.awkgearmastery.api.scheduler.Scheduler;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.nio.file.Path;

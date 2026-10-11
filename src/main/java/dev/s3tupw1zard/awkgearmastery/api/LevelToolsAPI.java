@@ -1,13 +1,13 @@
-package me.byteful.plugin.leveltools.api;
+package dev.s3tupw1zard.awkgearmastery.api;
 
-import me.byteful.plugin.leveltools.LevelToolsPlugin;
-import me.byteful.plugin.leveltools.api.trigger.Trigger;
-import me.byteful.plugin.leveltools.api.trigger.TriggerRegistry;
-import me.byteful.plugin.leveltools.profile.ProfileManager;
-import me.byteful.plugin.leveltools.profile.display.DisplayProfile;
-import me.byteful.plugin.leveltools.profile.item.ItemProfile;
-import me.byteful.plugin.leveltools.profile.reward.RewardProfile;
-import me.byteful.plugin.leveltools.profile.trigger.TriggerProfile;
+import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.Trigger;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.TriggerRegistry;
+import dev.s3tupw1zard.awkgearmastery.profile.ProfileManager;
+import dev.s3tupw1zard.awkgearmastery.profile.display.DisplayProfile;
+import dev.s3tupw1zard.awkgearmastery.profile.item.ItemProfile;
+import dev.s3tupw1zard.awkgearmastery.profile.reward.RewardProfile;
+import dev.s3tupw1zard.awkgearmastery.profile.trigger.TriggerProfile;
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

@@ -1,6 +1,6 @@
-package me.byteful.plugin.leveltools.api;
+package dev.s3tupw1zard.awkgearmastery.api;
 
-import me.byteful.plugin.leveltools.model.LevelAndXPModel;
+import dev.s3tupw1zard.awkgearmastery.model.LevelAndXPModel;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.BinaryOperator;

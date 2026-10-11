@@ -1,10 +1,10 @@
-package me.byteful.plugin.leveltools.api.block.impl;
+package dev.s3tupw1zard.awkgearmastery.api.block.impl;
 
-import me.byteful.plugin.leveltools.api.block.BlockDataManager;
-import me.byteful.plugin.leveltools.api.block.BlockPosition;
-import me.byteful.plugin.leveltools.api.scheduler.ScheduledTask;
-import me.byteful.plugin.leveltools.api.scheduler.Scheduler;
-import me.byteful.plugin.leveltools.util.Text;
+import dev.s3tupw1zard.awkgearmastery.api.block.BlockDataManager;
+import dev.s3tupw1zard.awkgearmastery.api.block.BlockPosition;
+import dev.s3tupw1zard.awkgearmastery.api.scheduler.ScheduledTask;
+import dev.s3tupw1zard.awkgearmastery.api.scheduler.Scheduler;
+import dev.s3tupw1zard.awkgearmastery.util.Text;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

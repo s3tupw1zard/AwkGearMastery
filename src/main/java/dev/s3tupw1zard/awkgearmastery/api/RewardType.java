@@ -1,8 +1,8 @@
-package me.byteful.plugin.leveltools.api;
+package dev.s3tupw1zard.awkgearmastery.api;
 
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
-import me.byteful.plugin.leveltools.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;

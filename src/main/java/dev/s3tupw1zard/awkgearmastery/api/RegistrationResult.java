@@ -1,4 +1,4 @@
-package me.byteful.plugin.leveltools.api;
+package dev.s3tupw1zard.awkgearmastery.api;
 
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;

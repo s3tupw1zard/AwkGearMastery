@@ -1,4 +1,4 @@
-package me.byteful.plugin.leveltools.api.block;
+package dev.s3tupw1zard.awkgearmastery.api.block;
 
 
 import java.io.Closeable;
