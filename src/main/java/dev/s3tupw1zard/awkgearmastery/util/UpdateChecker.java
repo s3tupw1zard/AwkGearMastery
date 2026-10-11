@@ -1,7 +1,7 @@
-package me.byteful.plugin.leveltools.util;
+package dev.s3tupw1zard.awkgearmastery.util;
 
-import me.byteful.plugin.leveltools.LevelToolsPlugin;
-import me.byteful.plugin.leveltools.api.scheduler.Scheduler;
+import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.api.scheduler.Scheduler;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;

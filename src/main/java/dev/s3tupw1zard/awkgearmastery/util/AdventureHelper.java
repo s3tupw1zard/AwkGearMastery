@@ -1,4 +1,4 @@
-package me.byteful.plugin.leveltools.util;
+package dev.s3tupw1zard.awkgearmastery.util;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;

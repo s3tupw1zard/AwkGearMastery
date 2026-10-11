@@ -1,4 +1,4 @@
-package me.byteful.plugin.leveltools.util;
+package dev.s3tupw1zard.awkgearmastery.util;
 
 import org.jetbrains.annotations.NotNull;
 

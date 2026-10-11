@@ -1,24 +1,24 @@
-package me.byteful.plugin.leveltools.util;
+package dev.s3tupw1zard.awkgearmastery.util;
 
 import de.tr7zw.changeme.nbtapi.NBT;
 import de.tr7zw.changeme.nbtapi.iface.ReadableItemNBT;
-import me.byteful.plugin.leveltools.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
-import me.byteful.plugin.leveltools.api.item.LevelToolsItem;
-import me.byteful.plugin.leveltools.api.item.impl.PDCLevelToolsItem;
-import me.byteful.plugin.leveltools.api.scheduler.Scheduler;
-import me.byteful.plugin.leveltools.api.scheduler.impl.bukkit.BukkitScheduler;
-import me.byteful.plugin.leveltools.api.scheduler.impl.folia.FoliaScheduler;
-import me.byteful.plugin.leveltools.api.trigger.TriggerSlot;
-import me.byteful.plugin.leveltools.profile.ProfileManager;
-import me.byteful.plugin.leveltools.profile.display.DisplayProfile;
-import me.byteful.plugin.leveltools.profile.display.ProgressBarConfig;
-import me.byteful.plugin.leveltools.profile.item.ItemProfile;
-import me.byteful.plugin.leveltools.profile.progression.ProgressionProfile;
-import me.byteful.plugin.leveltools.profile.stat.CalculatedStats;
-import me.byteful.plugin.leveltools.profile.reward.RewardEntry;
-import me.byteful.plugin.leveltools.profile.reward.RewardProfile;
+import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.api.item.impl.PDCLevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.api.scheduler.Scheduler;
+import dev.s3tupw1zard.awkgearmastery.api.scheduler.impl.bukkit.BukkitScheduler;
+import dev.s3tupw1zard.awkgearmastery.api.scheduler.impl.folia.FoliaScheduler;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.TriggerSlot;
+import dev.s3tupw1zard.awkgearmastery.profile.ProfileManager;
+import dev.s3tupw1zard.awkgearmastery.profile.display.DisplayProfile;
+import dev.s3tupw1zard.awkgearmastery.profile.display.ProgressBarConfig;
+import dev.s3tupw1zard.awkgearmastery.profile.item.ItemProfile;
+import dev.s3tupw1zard.awkgearmastery.profile.progression.ProgressionProfile;
+import dev.s3tupw1zard.awkgearmastery.profile.stat.CalculatedStats;
+import dev.s3tupw1zard.awkgearmastery.profile.reward.RewardEntry;
+import dev.s3tupw1zard.awkgearmastery.profile.reward.RewardProfile;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -47,7 +47,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static me.byteful.plugin.leveltools.util.Text.*;
+import static dev.s3tupw1zard.awkgearmastery.util.Text.*;
 
 public final class LevelToolsUtil {
     public static final int MID_VERSION;

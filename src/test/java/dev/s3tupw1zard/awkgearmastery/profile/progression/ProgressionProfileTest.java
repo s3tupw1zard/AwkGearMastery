@@ -1,4 +1,4 @@
-package me.byteful.plugin.leveltools.profile.progression;
+package dev.s3tupw1zard.awkgearmastery.profile.progression;
 
 import org.junit.jupiter.api.Test;
 
