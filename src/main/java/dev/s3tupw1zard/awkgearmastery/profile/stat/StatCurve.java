@@ -1,4 +1,4 @@
-package me.byteful.plugin.leveltools.profile.stat;
+package dev.s3tupw1zard.awkgearmastery.profile.stat;
 
 public final class StatCurve {
     private final double start;

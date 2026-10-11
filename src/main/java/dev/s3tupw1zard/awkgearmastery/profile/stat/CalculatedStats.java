@@ -1,4 +1,4 @@
-package me.byteful.plugin.leveltools.profile.stat;
+package dev.s3tupw1zard.awkgearmastery.profile.stat;
 
 public record CalculatedStats(
         double damageBonus,

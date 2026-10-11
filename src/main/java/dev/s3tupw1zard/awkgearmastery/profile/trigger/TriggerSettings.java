@@ -1,4 +1,4 @@
-package me.byteful.plugin.leveltools.profile.trigger;
+package dev.s3tupw1zard.awkgearmastery.profile.trigger;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

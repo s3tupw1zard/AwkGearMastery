@@ -1,9 +1,9 @@
-package me.byteful.plugin.leveltools.profile.stat;
+package dev.s3tupw1zard.awkgearmastery.profile.stat;
 
-import me.byteful.plugin.leveltools.config.EnchantmentModifierRegistry;
-import me.byteful.plugin.leveltools.profile.ProfileManager;
-import me.byteful.plugin.leveltools.profile.item.ItemProfile;
-import me.byteful.plugin.leveltools.profile.progression.ProgressionProfile;
+import dev.s3tupw1zard.awkgearmastery.config.EnchantmentModifierRegistry;
+import dev.s3tupw1zard.awkgearmastery.profile.ProfileManager;
+import dev.s3tupw1zard.awkgearmastery.profile.item.ItemProfile;
+import dev.s3tupw1zard.awkgearmastery.profile.progression.ProgressionProfile;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

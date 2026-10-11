@@ -1,6 +1,6 @@
-package me.byteful.plugin.leveltools.profile.trigger;
+package dev.s3tupw1zard.awkgearmastery.profile.trigger;
 
-import me.byteful.plugin.leveltools.api.trigger.TriggerIds;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.TriggerIds;
 import org.jetbrains.annotations.NotNull;
 
 public final class TriggerProfile {

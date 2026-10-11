@@ -1,7 +1,7 @@
-package me.byteful.plugin.leveltools.profile.trigger;
+package dev.s3tupw1zard.awkgearmastery.profile.trigger;
 
-import me.byteful.plugin.leveltools.api.trigger.TriggerSlot;
-import me.byteful.plugin.leveltools.api.trigger.TriggerIds;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.TriggerSlot;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.TriggerIds;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.jetbrains.annotations.NotNull;
