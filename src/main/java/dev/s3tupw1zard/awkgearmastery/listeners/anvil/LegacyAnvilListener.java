@@ -1,10 +1,10 @@
-package me.byteful.plugin.leveltools.listeners.anvil;
+package dev.s3tupw1zard.awkgearmastery.listeners.anvil;
 
-import me.byteful.plugin.leveltools.LevelToolsPlugin;
-import me.byteful.plugin.leveltools.api.AnvilCombineMode;
-import me.byteful.plugin.leveltools.api.item.LevelToolsItem;
-import me.byteful.plugin.leveltools.model.LevelAndXPModel;
-import me.byteful.plugin.leveltools.util.LevelToolsUtil;
+import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.api.AnvilCombineMode;
+import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.model.LevelAndXPModel;
+import dev.s3tupw1zard.awkgearmastery.util.LevelToolsUtil;
 import com.google.common.collect.Multimap;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
@@ -19,8 +19,8 @@ import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import static me.byteful.plugin.leveltools.listeners.anvil.AnvilHelper.getResultItem;
-import static me.byteful.plugin.leveltools.listeners.anvil.AnvilHelper.shouldBlockEnchantedBookResult;
+import static dev.s3tupw1zard.awkgearmastery.listeners.anvil.AnvilHelper.getResultItem;
+import static dev.s3tupw1zard.awkgearmastery.listeners.anvil.AnvilHelper.shouldBlockEnchantedBookResult;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;

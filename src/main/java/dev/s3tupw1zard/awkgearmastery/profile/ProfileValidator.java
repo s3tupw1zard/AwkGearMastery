@@ -1,12 +1,12 @@
-package me.byteful.plugin.leveltools.profile;
+package dev.s3tupw1zard.awkgearmastery.profile;
 
-import me.byteful.plugin.leveltools.config.XpFormulaRegistry;
-import me.byteful.plugin.leveltools.profile.display.DisplayProfile;
-import me.byteful.plugin.leveltools.profile.item.ItemProfile;
-import me.byteful.plugin.leveltools.profile.reward.RewardProfile;
-import me.byteful.plugin.leveltools.profile.progression.ProgressionProfile;
-import me.byteful.plugin.leveltools.profile.stat.StatProfile;
-import me.byteful.plugin.leveltools.profile.trigger.TriggerProfile;
+import dev.s3tupw1zard.awkgearmastery.config.XpFormulaRegistry;
+import dev.s3tupw1zard.awkgearmastery.profile.display.DisplayProfile;
+import dev.s3tupw1zard.awkgearmastery.profile.item.ItemProfile;
+import dev.s3tupw1zard.awkgearmastery.profile.reward.RewardProfile;
+import dev.s3tupw1zard.awkgearmastery.profile.progression.ProgressionProfile;
+import dev.s3tupw1zard.awkgearmastery.profile.stat.StatProfile;
+import dev.s3tupw1zard.awkgearmastery.profile.trigger.TriggerProfile;
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 

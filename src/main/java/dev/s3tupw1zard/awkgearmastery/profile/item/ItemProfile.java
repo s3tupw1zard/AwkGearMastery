@@ -1,4 +1,4 @@
-package me.byteful.plugin.leveltools.profile.item;
+package dev.s3tupw1zard.awkgearmastery.profile.item;
 
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;

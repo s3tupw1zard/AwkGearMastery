@@ -1,4 +1,4 @@
-package me.byteful.plugin.leveltools.profile.display;
+package dev.s3tupw1zard.awkgearmastery.profile.display;
 
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;

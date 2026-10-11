@@ -1,4 +1,4 @@
-package me.byteful.plugin.leveltools.profile.reward;
+package dev.s3tupw1zard.awkgearmastery.profile.reward;
 
 import org.jetbrains.annotations.NotNull;
 

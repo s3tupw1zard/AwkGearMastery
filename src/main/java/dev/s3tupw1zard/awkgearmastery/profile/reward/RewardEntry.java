@@ -1,7 +1,7 @@
-package me.byteful.plugin.leveltools.profile.reward;
+package dev.s3tupw1zard.awkgearmastery.profile.reward;
 
-import me.byteful.plugin.leveltools.api.RewardType;
-import me.byteful.plugin.leveltools.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.api.RewardType;
+import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 

@@ -1,4 +1,4 @@
-package me.byteful.plugin.leveltools.listeners.anvil;
+package dev.s3tupw1zard.awkgearmastery.listeners.anvil;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -7,9 +7,9 @@ import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.inventory.ItemStack;
 
-import static me.byteful.plugin.leveltools.listeners.anvil.AnvilHelper.shouldBlockEnchantedBookResult;
-import static me.byteful.plugin.leveltools.listeners.anvil.LegacyAnvilListener.createUpdatedResult;
-import static me.byteful.plugin.leveltools.listeners.anvil.LegacyAnvilListener.isHandledAnvilAction;
+import static dev.s3tupw1zard.awkgearmastery.listeners.anvil.AnvilHelper.shouldBlockEnchantedBookResult;
+import static dev.s3tupw1zard.awkgearmastery.listeners.anvil.LegacyAnvilListener.createUpdatedResult;
+import static dev.s3tupw1zard.awkgearmastery.listeners.anvil.LegacyAnvilListener.isHandledAnvilAction;
 
 public class AnvilListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

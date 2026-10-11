@@ -1,7 +1,7 @@
-package me.byteful.plugin.leveltools.model;
+package dev.s3tupw1zard.awkgearmastery.model;
 
-import me.byteful.plugin.leveltools.api.item.LevelToolsItem;
-import me.byteful.plugin.leveltools.util.LevelToolsUtil;
+import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.util.LevelToolsUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
