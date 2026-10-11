@@ -6,11 +6,13 @@
 
 ![Logo](https://github.com/byteful/LevelTools/blob/main/LevelTools%20Large%20Logo.png?raw=true)
 
-<h3 align="center">LevelTools, originally created by byteful and extended by s3tupw1zard.</h3>
+<h3 align="center">AwkGearMastery — configurable RPG-style equipment progression for Paper and Purpur.</h3>
 
-## 2026.1 Direction
+AwkGearMastery is based on LevelTools by byteful. Original authorship and licensing are preserved.
 
-The maintained fork targets Paper/Purpur 26.2+ and Java 25. Versioning uses
+## AwkGearMastery 2026.1 Direction
+
+The first release candidate targets Paper/Purpur 26.2 and Java 25. Later candidates will target 26.3. Versioning uses
 SemVer-compatible CalVer (`YYYY.RELEASE.PATCH`), with `2026.1.0` as the first
 stable target and `2026.1.0-SNAPSHOT` for development builds.
 
@@ -84,6 +86,10 @@ When multiple players/items contribute damage:
 Configured boss mobs can also grant a level-based bonus. This bonus can require
 one or more LevelTools critical hits and is protected by a persistent per-player,
 per-mob claim interval.
+
+## Upgrade from LevelTools
+
+Remove the old LevelTools JAR before installing AwkGearMastery. The plugin copies the old `plugins/LevelTools/` data directory into `plugins/AwkGearMastery/` on its first start if the new directory does not already exist; keep a server backup before upgrading. Existing item progression keeps the legacy `leveltools` PDC namespace for compatibility. Legacy commands, permissions and `%leveltools_*%` placeholders are retained for the first release candidate.
 
 ## Configuration Layout
 
