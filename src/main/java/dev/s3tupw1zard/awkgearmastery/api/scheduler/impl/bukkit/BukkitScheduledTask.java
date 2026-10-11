@@ -1,6 +1,6 @@
-package me.byteful.plugin.leveltools.api.scheduler.impl.bukkit;
+package dev.s3tupw1zard.awkgearmastery.api.scheduler.impl.bukkit;
 
-import me.byteful.plugin.leveltools.api.scheduler.ScheduledTask;
+import dev.s3tupw1zard.awkgearmastery.api.scheduler.ScheduledTask;
 import org.bukkit.scheduler.BukkitTask;
 
 public class BukkitScheduledTask implements ScheduledTask {

@@ -1,8 +1,8 @@
-package me.byteful.plugin.leveltools.api.item.impl;
+package dev.s3tupw1zard.awkgearmastery.api.item.impl;
 
-import me.byteful.plugin.leveltools.LevelToolsPlugin;
-import me.byteful.plugin.leveltools.api.item.LevelToolsItem;
-import me.byteful.plugin.leveltools.util.LevelToolsUtil;
+import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.util.LevelToolsUtil;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
 import org.bukkit.NamespacedKey;
@@ -27,10 +27,10 @@ import java.util.UUID;
 public class PDCLevelToolsItem implements LevelToolsItem {
     @NotNull
     public static final NamespacedKey
-            LEVEL_KEY = new NamespacedKey(LevelToolsPlugin.getInstance(), "levelToolsLevel"),
-            XP_KEY = new NamespacedKey(LevelToolsPlugin.getInstance(), "levelToolsXp"),
-            LAST_REWARD_KEY = new NamespacedKey(LevelToolsPlugin.getInstance(), "levelToolsReward"),
-            ITEM_ID_KEY = new NamespacedKey(LevelToolsPlugin.getInstance(), "item_id");
+            LEVEL_KEY = new NamespacedKey("leveltools", "levelToolsLevel"),
+            XP_KEY = new NamespacedKey("leveltools", "levelToolsXp"),
+            LAST_REWARD_KEY = new NamespacedKey("leveltools", "levelToolsReward"),
+            ITEM_ID_KEY = new NamespacedKey("leveltools", "item_id");
 
     @NotNull
     private ItemStack stack;
@@ -109,7 +109,7 @@ public class PDCLevelToolsItem implements LevelToolsItem {
             final Attribute attribute = resolveAttribute(attributeRegistry, name);
             final NamespacedKey attributeKey = attributeRegistry.getKeyOrThrow(attribute);
             final NamespacedKey modifierKey =
-                    new NamespacedKey(LevelToolsPlugin.getInstance(), "reward/" + attributeKey.getKey());
+                    new NamespacedKey("leveltools", "reward/" + attributeKey.getKey());
 
             final Collection<AttributeModifier> existing = meta.getAttributeModifiers(attribute);
             if (existing != null) {

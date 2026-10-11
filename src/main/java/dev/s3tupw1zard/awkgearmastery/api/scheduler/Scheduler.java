@@ -1,4 +1,4 @@
-package me.byteful.plugin.leveltools.api.scheduler;
+package dev.s3tupw1zard.awkgearmastery.api.scheduler;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;

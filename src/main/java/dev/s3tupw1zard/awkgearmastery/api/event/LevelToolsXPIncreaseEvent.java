@@ -1,6 +1,6 @@
-package me.byteful.plugin.leveltools.api.event;
+package dev.s3tupw1zard.awkgearmastery.api.event;
 
-import me.byteful.plugin.leveltools.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;

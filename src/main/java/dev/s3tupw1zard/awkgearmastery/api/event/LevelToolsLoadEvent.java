@@ -1,8 +1,8 @@
-package me.byteful.plugin.leveltools.api.event;
+package dev.s3tupw1zard.awkgearmastery.api.event;
 
-import me.byteful.plugin.leveltools.LevelToolsPlugin;
-import me.byteful.plugin.leveltools.api.trigger.TriggerRegistry;
-import me.byteful.plugin.leveltools.profile.ProfileManager;
+import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.TriggerRegistry;
+import dev.s3tupw1zard.awkgearmastery.profile.ProfileManager;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;

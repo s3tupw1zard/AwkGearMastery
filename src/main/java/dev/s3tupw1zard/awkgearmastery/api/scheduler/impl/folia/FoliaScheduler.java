@@ -1,8 +1,8 @@
-package me.byteful.plugin.leveltools.api.scheduler.impl.folia;
+package dev.s3tupw1zard.awkgearmastery.api.scheduler.impl.folia;
 
-import me.byteful.plugin.leveltools.LevelToolsPlugin;
-import me.byteful.plugin.leveltools.api.scheduler.ScheduledTask;
-import me.byteful.plugin.leveltools.api.scheduler.Scheduler;
+import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.api.scheduler.ScheduledTask;
+import dev.s3tupw1zard.awkgearmastery.api.scheduler.Scheduler;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;

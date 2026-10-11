@@ -1,7 +1,7 @@
-package me.byteful.plugin.leveltools.api.scheduler.impl.folia;
+package dev.s3tupw1zard.awkgearmastery.api.scheduler.impl.folia;
 
 
-import me.byteful.plugin.leveltools.api.scheduler.ScheduledTask;
+import dev.s3tupw1zard.awkgearmastery.api.scheduler.ScheduledTask;
 
 public class FoliaScheduledTask implements ScheduledTask {
     private final io.papermc.paper.threadedregions.scheduler.ScheduledTask task;
