@@ -27,10 +27,10 @@ import java.util.UUID;
 public class PDCLevelToolsItem implements LevelToolsItem {
     @NotNull
     public static final NamespacedKey
-            LEVEL_KEY = new NamespacedKey("leveltools", "levelToolsLevel"),
-            XP_KEY = new NamespacedKey("leveltools", "levelToolsXp"),
-            LAST_REWARD_KEY = new NamespacedKey("leveltools", "levelToolsReward"),
-            ITEM_ID_KEY = new NamespacedKey("leveltools", "item_id");
+            LEVEL_KEY = Objects.requireNonNull(NamespacedKey.fromString("leveltools:leveltoolslevel")),
+            XP_KEY = Objects.requireNonNull(NamespacedKey.fromString("leveltools:leveltoolsxp")),
+            LAST_REWARD_KEY = Objects.requireNonNull(NamespacedKey.fromString("leveltools:leveltoolsreward")),
+            ITEM_ID_KEY = Objects.requireNonNull(NamespacedKey.fromString("leveltools:item_id"));
 
     @NotNull
     private ItemStack stack;
@@ -109,7 +109,7 @@ public class PDCLevelToolsItem implements LevelToolsItem {
             final Attribute attribute = resolveAttribute(attributeRegistry, name);
             final NamespacedKey attributeKey = attributeRegistry.getKeyOrThrow(attribute);
             final NamespacedKey modifierKey =
-                    new NamespacedKey("leveltools", "reward/" + attributeKey.getKey());
+                    Objects.requireNonNull(NamespacedKey.fromString("leveltools:reward/" + attributeKey.getKey()));
 
             final Collection<AttributeModifier> existing = meta.getAttributeModifiers(attribute);
             if (existing != null) {
