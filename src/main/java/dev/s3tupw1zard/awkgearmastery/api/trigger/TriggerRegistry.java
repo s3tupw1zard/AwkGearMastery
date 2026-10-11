@@ -1,13 +1,13 @@
-package me.byteful.plugin.leveltools.api.trigger;
+package dev.s3tupw1zard.awkgearmastery.api.trigger;
 
-import me.byteful.plugin.leveltools.api.trigger.impl.BlockBreakTrigger;
-import me.byteful.plugin.leveltools.api.trigger.impl.ConsumeTrigger;
-import me.byteful.plugin.leveltools.api.trigger.impl.EntityKillTrigger;
-import me.byteful.plugin.leveltools.api.trigger.impl.FarmingTrigger;
-import me.byteful.plugin.leveltools.api.trigger.impl.FishingTrigger;
-import me.byteful.plugin.leveltools.api.trigger.impl.ArmorDurabilityTrigger;
-import me.byteful.plugin.leveltools.api.trigger.impl.LeftClickTrigger;
-import me.byteful.plugin.leveltools.api.trigger.impl.RightClickTrigger;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.impl.BlockBreakTrigger;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.impl.ConsumeTrigger;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.impl.EntityKillTrigger;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.impl.FarmingTrigger;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.impl.FishingTrigger;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.impl.ArmorDurabilityTrigger;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.impl.LeftClickTrigger;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.impl.RightClickTrigger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

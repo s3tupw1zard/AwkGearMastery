@@ -1,7 +1,7 @@
-package me.byteful.plugin.leveltools.api.trigger;
+package dev.s3tupw1zard.awkgearmastery.api.trigger;
 
-import me.byteful.plugin.leveltools.profile.item.ItemProfile;
-import me.byteful.plugin.leveltools.profile.trigger.TriggerProfile;
+import dev.s3tupw1zard.awkgearmastery.profile.item.ItemProfile;
+import dev.s3tupw1zard.awkgearmastery.profile.trigger.TriggerProfile;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;

@@ -1,4 +1,4 @@
-package me.byteful.plugin.leveltools.api.trigger;
+package dev.s3tupw1zard.awkgearmastery.api.trigger;
 
 import org.jetbrains.annotations.NotNull;
 

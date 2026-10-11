@@ -1,10 +1,10 @@
-package me.byteful.plugin.leveltools.api.trigger.impl;
+package dev.s3tupw1zard.awkgearmastery.api.trigger.impl;
 
-import me.byteful.plugin.leveltools.api.trigger.Trigger;
-import me.byteful.plugin.leveltools.api.trigger.TriggerContext;
-import me.byteful.plugin.leveltools.api.trigger.TriggerIds;
-import me.byteful.plugin.leveltools.profile.trigger.TriggerProfile;
-import me.byteful.plugin.leveltools.profile.trigger.TriggerSettings;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.Trigger;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.TriggerContext;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.TriggerIds;
+import dev.s3tupw1zard.awkgearmastery.profile.trigger.TriggerProfile;
+import dev.s3tupw1zard.awkgearmastery.profile.trigger.TriggerSettings;
 import org.bukkit.block.Block;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.jetbrains.annotations.NotNull;
