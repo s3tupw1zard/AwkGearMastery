@@ -1,8 +1,8 @@
-package me.byteful.plugin.leveltools.config;
+package dev.s3tupw1zard.awkgearmastery.config;
 
-import me.byteful.plugin.leveltools.api.trigger.TriggerContext;
-import me.byteful.plugin.leveltools.api.trigger.TriggerIds;
-import me.byteful.plugin.leveltools.profile.trigger.XpModifierConfig;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.TriggerContext;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.TriggerIds;
+import dev.s3tupw1zard.awkgearmastery.profile.trigger.XpModifierConfig;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;

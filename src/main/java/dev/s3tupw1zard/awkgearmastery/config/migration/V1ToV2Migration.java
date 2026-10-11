@@ -1,4 +1,4 @@
-package me.byteful.plugin.leveltools.config.migration;
+package dev.s3tupw1zard.awkgearmastery.config.migration;
 
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;

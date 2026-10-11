@@ -1,4 +1,4 @@
-package me.byteful.plugin.leveltools.config;
+package dev.s3tupw1zard.awkgearmastery.config;
 
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;

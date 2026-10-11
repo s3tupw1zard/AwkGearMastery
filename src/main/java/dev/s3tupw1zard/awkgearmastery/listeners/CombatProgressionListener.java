@@ -1,14 +1,14 @@
-package me.byteful.plugin.leveltools.listeners;
+package dev.s3tupw1zard.awkgearmastery.listeners;
 
-import me.byteful.plugin.leveltools.LevelToolsPlugin;
-import me.byteful.plugin.leveltools.api.item.LevelToolsItem;
-import me.byteful.plugin.leveltools.api.trigger.TriggerIds;
-import me.byteful.plugin.leveltools.config.CombatXpConfig;
-import me.byteful.plugin.leveltools.profile.ProfileManager;
-import me.byteful.plugin.leveltools.profile.item.ItemProfile;
-import me.byteful.plugin.leveltools.profile.progression.ProgressionProfile;
-import me.byteful.plugin.leveltools.profile.stat.CalculatedStats;
-import me.byteful.plugin.leveltools.util.LevelToolsUtil;
+import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.TriggerIds;
+import dev.s3tupw1zard.awkgearmastery.config.CombatXpConfig;
+import dev.s3tupw1zard.awkgearmastery.profile.ProfileManager;
+import dev.s3tupw1zard.awkgearmastery.profile.item.ItemProfile;
+import dev.s3tupw1zard.awkgearmastery.profile.progression.ProgressionProfile;
+import dev.s3tupw1zard.awkgearmastery.profile.stat.CalculatedStats;
+import dev.s3tupw1zard.awkgearmastery.util.LevelToolsUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;

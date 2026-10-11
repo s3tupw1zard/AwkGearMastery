@@ -1,15 +1,15 @@
-package me.byteful.plugin.leveltools.listeners;
+package dev.s3tupw1zard.awkgearmastery.listeners;
 
-import me.byteful.plugin.leveltools.LevelToolsPlugin;
-import me.byteful.plugin.leveltools.api.block.BlockPosition;
-import me.byteful.plugin.leveltools.api.item.LevelToolsItem;
-import me.byteful.plugin.leveltools.api.trigger.*;
-import me.byteful.plugin.leveltools.api.trigger.impl.FarmingTrigger;
-import me.byteful.plugin.leveltools.config.ConfigManager;
-import me.byteful.plugin.leveltools.profile.ProfileManager;
-import me.byteful.plugin.leveltools.profile.item.ItemProfile;
-import me.byteful.plugin.leveltools.profile.trigger.TriggerProfile;
-import me.byteful.plugin.leveltools.util.LevelToolsUtil;
+import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.api.block.BlockPosition;
+import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.*;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.impl.FarmingTrigger;
+import dev.s3tupw1zard.awkgearmastery.config.ConfigManager;
+import dev.s3tupw1zard.awkgearmastery.profile.ProfileManager;
+import dev.s3tupw1zard.awkgearmastery.profile.item.ItemProfile;
+import dev.s3tupw1zard.awkgearmastery.profile.trigger.TriggerProfile;
+import dev.s3tupw1zard.awkgearmastery.util.LevelToolsUtil;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;

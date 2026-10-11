@@ -1,6 +1,6 @@
-package me.byteful.plugin.leveltools.config.migration;
+package dev.s3tupw1zard.awkgearmastery.config.migration;
 
-import me.byteful.plugin.leveltools.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
 

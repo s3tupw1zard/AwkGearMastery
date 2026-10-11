@@ -1,18 +1,18 @@
-package me.byteful.plugin.leveltools.listeners;
+package dev.s3tupw1zard.awkgearmastery.listeners;
 
-import me.byteful.plugin.leveltools.LevelToolsPlugin;
-import me.byteful.plugin.leveltools.api.event.LevelToolsLevelIncreaseEvent;
-import me.byteful.plugin.leveltools.api.event.LevelToolsXPIncreaseEvent;
-import me.byteful.plugin.leveltools.api.item.LevelToolsItem;
-import me.byteful.plugin.leveltools.api.trigger.TriggerSlot;
-import me.byteful.plugin.leveltools.config.ConfigManager;
-import me.byteful.plugin.leveltools.profile.ProfileManager;
-import me.byteful.plugin.leveltools.profile.display.DisplayProfile;
-import me.byteful.plugin.leveltools.profile.item.ItemProfile;
-import me.byteful.plugin.leveltools.profile.reward.RewardProfile;
-import me.byteful.plugin.leveltools.util.LevelToolsUtil;
-import me.byteful.plugin.leveltools.util.Text;
-import me.byteful.plugin.leveltools.util.XPBooster;
+import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.api.event.LevelToolsLevelIncreaseEvent;
+import dev.s3tupw1zard.awkgearmastery.api.event.LevelToolsXPIncreaseEvent;
+import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.TriggerSlot;
+import dev.s3tupw1zard.awkgearmastery.config.ConfigManager;
+import dev.s3tupw1zard.awkgearmastery.profile.ProfileManager;
+import dev.s3tupw1zard.awkgearmastery.profile.display.DisplayProfile;
+import dev.s3tupw1zard.awkgearmastery.profile.item.ItemProfile;
+import dev.s3tupw1zard.awkgearmastery.profile.reward.RewardProfile;
+import dev.s3tupw1zard.awkgearmastery.util.LevelToolsUtil;
+import dev.s3tupw1zard.awkgearmastery.util.Text;
+import dev.s3tupw1zard.awkgearmastery.util.XPBooster;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
-import static me.byteful.plugin.leveltools.util.Text.formatMoney;
+import static dev.s3tupw1zard.awkgearmastery.util.Text.formatMoney;
 
 public final class XPHandler {
     private final ProfileManager profileManager;

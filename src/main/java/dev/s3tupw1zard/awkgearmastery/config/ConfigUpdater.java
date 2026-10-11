@@ -1,4 +1,4 @@
-package me.byteful.plugin.leveltools.config;
+package dev.s3tupw1zard.awkgearmastery.config;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;

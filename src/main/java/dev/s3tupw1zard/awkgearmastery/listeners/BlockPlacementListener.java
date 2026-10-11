@@ -1,8 +1,8 @@
-package me.byteful.plugin.leveltools.listeners;
+package dev.s3tupw1zard.awkgearmastery.listeners;
 
-import me.byteful.plugin.leveltools.LevelToolsPlugin;
-import me.byteful.plugin.leveltools.api.block.BlockPosition;
-import me.byteful.plugin.leveltools.api.scheduler.Scheduler;
+import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.api.block.BlockPosition;
+import dev.s3tupw1zard.awkgearmastery.api.scheduler.Scheduler;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
