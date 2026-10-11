@@ -1,10 +1,10 @@
-name: "LevelTools"
+name: "AwkGearMastery"
 version: "${version}"
-main: "me.byteful.plugin.leveltools.LevelToolsPlugin"
+main: "dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin"
 authors:
   - byteful
   - s3tupw1zard
-description: "LevelTools, originally created by byteful and extended by s3tupw1zard."
+description: "Configurable RPG-style equipment progression for Paper and Purpur with formula-based leveling and combat XP sharing. Based on LevelTools by byteful."
 website: "https://github.com/s3tupw1zard/LevelTools"
 api-version: "26.2"
 folia-supported: true

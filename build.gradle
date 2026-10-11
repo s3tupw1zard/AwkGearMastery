@@ -52,9 +52,9 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.4'
 }
 
-group = 'me.byteful.plugin'
+group = 'dev.s3tupw1zard'
 version = '2026.1.0-SNAPSHOT'
-description = 'LevelTools'
+description = 'AwkGearMastery - configurable RPG-style equipment progression for Paper and Purpur'
 
 java {
     toolchain {
@@ -76,15 +76,15 @@ shadowJar {
     minimize {
         exclude(dependency('io.github.revxrsal:.*:.*'))
     }
-    archiveBaseName.set("LevelTools")
+    archiveBaseName.set("AwkGearMastery")
     archiveClassifier.set("")
 
-    relocate "de.tr7zw.changeme.nbtapi", "me.byteful.plugin.leveltools.libs.nbtapi"
-    relocate "com.cryptomorin.xseries", "me.byteful.plugin.leveltools.libs.xseries"
-    relocate "redempt.crunch", "me.byteful.plugin.leveltools.libs.crunch"
-    relocate 'revxrsal.commands', 'me.byteful.plugin.leveltools.libs.lamp'
-    relocate 'org.bstats', 'me.byteful.plugin.leveltools.libs.bstats'
-    relocate 'com.jeff-media.morepersistentdatatypes', 'me.byteful.plugin.leveltools.libs.morepersistentdatatypes'
+    relocate "de.tr7zw.changeme.nbtapi", "dev.s3tupw1zard.awkgearmastery.libs.nbtapi"
+    relocate "com.cryptomorin.xseries", "dev.s3tupw1zard.awkgearmastery.libs.xseries"
+    relocate "redempt.crunch", "dev.s3tupw1zard.awkgearmastery.libs.crunch"
+    relocate 'revxrsal.commands', 'dev.s3tupw1zard.awkgearmastery.libs.lamp'
+    relocate 'org.bstats', 'dev.s3tupw1zard.awkgearmastery.libs.bstats'
+    relocate 'com.jeff-media.morepersistentdatatypes', 'dev.s3tupw1zard.awkgearmastery.libs.morepersistentdatatypes'
 }
 
 tasks.withType(JavaCompile).configureEach {

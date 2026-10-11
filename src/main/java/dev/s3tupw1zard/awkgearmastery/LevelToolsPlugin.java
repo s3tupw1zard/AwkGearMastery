@@ -32,6 +32,10 @@ import revxrsal.commands.bukkit.BukkitLamp;
 import revxrsal.commands.bukkit.actor.BukkitCommandActor;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.util.stream.Stream;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -70,6 +74,7 @@ public final class LevelToolsPlugin extends JavaPlugin {
         scheduler = LevelToolsUtil.createScheduler(this);
         updateChecker = new UpdateChecker(this, scheduler);
 
+        migrateLegacyDataFolder();
         configManager = new ConfigManager(this);
         configManager.loadAll();
         reloadConfig();
@@ -158,6 +163,30 @@ public final class LevelToolsPlugin extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(colorize(
                 " &d|_____     &b|     &8Project: &9&nhttps://github.com/s3tupw1zard/LevelTools"));
         Bukkit.getConsoleSender().sendMessage("");
+    }
+
+    private void migrateLegacyDataFolder() {
+        final Path target = getDataFolder().toPath();
+        final Path legacy = target.resolveSibling("LevelTools");
+        if (!Files.isDirectory(legacy) || Files.exists(target)) {
+            return;
+        }
+        try {
+            Files.createDirectories(target);
+            try (Stream<Path> entries = Files.walk(legacy)) {
+                for (Path source : entries.toList()) {
+                    final Path destination = target.resolve(legacy.relativize(source));
+                    if (Files.isDirectory(source)) {
+                        Files.createDirectories(destination);
+                    } else if (Files.isRegularFile(source)) {
+                        Files.copy(source, destination, StandardCopyOption.COPY_ATTRIBUTES);
+                    }
+                }
+            }
+            getLogger().info("Copied existing LevelTools data; the original data directory was preserved.");
+        } catch (IOException e) {
+            throw new IllegalStateException("Could not migrate LevelTools data to AwkGearMastery", e);
+        }
     }
 
     private void loadProfiles() {
