@@ -1,6 +1,6 @@
 package dev.s3tupw1zard.awkgearmastery.util;
 
-import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.AwkGearMasteryPlugin;
 import dev.s3tupw1zard.awkgearmastery.api.scheduler.Scheduler;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,21 +16,21 @@ import java.util.regex.Pattern;
 
 public class UpdateChecker {
     private static final URI LATEST_RELEASE_API =
-            URI.create("https://api.github.com/repos/s3tupw1zard/LevelTools/releases/latest");
+            URI.create("https://api.github.com/repos/s3tupw1zard/AwkGearMastery/releases/latest");
     private static final String RELEASES_URL =
-            "https://github.com/s3tupw1zard/LevelTools/releases";
+            "https://github.com/s3tupw1zard/AwkGearMastery/releases";
     private static final Pattern TAG_NAME_PATTERN =
             Pattern.compile("\\\"tag_name\\\"\\s*:\\s*\\\"v?([^\\\"]+)\\\"");
     private static final Pattern STABLE_VERSION_PATTERN =
             Pattern.compile("^(\\d+)\\.(\\d+)\\.(\\d+)$");
 
     @NotNull
-    private final LevelToolsPlugin plugin;
+    private final AwkGearMasteryPlugin plugin;
     private final Scheduler scheduler;
     private final HttpClient httpClient;
     private String lastCheckedVersion;
 
-    public UpdateChecker(@NotNull LevelToolsPlugin plugin, Scheduler scheduler) {
+    public UpdateChecker(@NotNull AwkGearMasteryPlugin plugin, Scheduler scheduler) {
         this.plugin = plugin;
         this.scheduler = scheduler;
         this.httpClient = HttpClient.newBuilder()
@@ -59,7 +59,7 @@ public class UpdateChecker {
         final HttpRequest request = HttpRequest.newBuilder(LATEST_RELEASE_API)
                 .timeout(Duration.ofSeconds(15))
                 .header("Accept", "application/vnd.github+json")
-                .header("User-Agent", "LevelTools/" + currentVersion)
+                .header("User-Agent", "AwkGearMastery/" + currentVersion)
                 .GET()
                 .build();
 
@@ -104,7 +104,7 @@ public class UpdateChecker {
 
             if (latest.get().compareTo(current.get()) > 0) {
                 plugin.getLogger().info(
-                        "A new LevelTools release is available: "
+                        "A new AwkGearMastery release is available: "
                                 + latestVersion
                                 + " (running "
                                 + currentVersion

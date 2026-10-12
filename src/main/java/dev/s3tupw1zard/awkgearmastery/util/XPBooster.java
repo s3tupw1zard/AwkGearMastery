@@ -1,6 +1,6 @@
 package dev.s3tupw1zard.awkgearmastery.util;
 
-import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.AwkGearMasteryPlugin;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,7 +13,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public final class XPBooster implements Listener {
-    private static final String PERMISSION_PREFIX = "leveltools.booster.";
+    private static final String PERMISSION_PREFIX = "awkgearmastery.booster.";
     private static final long CACHE_TTL_MILLIS = 5000L;
 
     private static final Map<UUID, CachedMultiplier> MULTIPLIER_CACHE = new ConcurrentHashMap<>();
@@ -56,9 +56,9 @@ public final class XPBooster implements Listener {
                 multiplier *= Double.parseDouble(node.substring(PERMISSION_PREFIX.length()));
             } catch (NumberFormatException e) {
                 if (REPORTED_BAD_NODES.add(node)) {
-                    LevelToolsPlugin.getInstance()
+                    AwkGearMasteryPlugin.getInstance()
                             .getLogger()
-                            .warning("Failed to parse LevelTools XPBooster permission: " + node);
+                            .warning("Failed to parse AwkGearMastery XPBooster permission: " + node);
                 }
             }
         }

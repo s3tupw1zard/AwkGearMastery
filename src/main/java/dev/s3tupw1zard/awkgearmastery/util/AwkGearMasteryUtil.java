@@ -1,12 +1,10 @@
 package dev.s3tupw1zard.awkgearmastery.util;
 
-import de.tr7zw.changeme.nbtapi.NBT;
-import de.tr7zw.changeme.nbtapi.iface.ReadableItemNBT;
-import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.AwkGearMasteryPlugin;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
-import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
-import dev.s3tupw1zard.awkgearmastery.api.item.impl.PDCLevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.api.item.AwkGearMasteryItem;
+import dev.s3tupw1zard.awkgearmastery.api.item.impl.PDCAwkGearMasteryItem;
 import dev.s3tupw1zard.awkgearmastery.api.scheduler.Scheduler;
 import dev.s3tupw1zard.awkgearmastery.api.scheduler.impl.bukkit.BukkitScheduler;
 import dev.s3tupw1zard.awkgearmastery.api.scheduler.impl.folia.FoliaScheduler;
@@ -49,7 +47,7 @@ import java.util.stream.Collectors;
 
 import static dev.s3tupw1zard.awkgearmastery.util.Text.*;
 
-public final class LevelToolsUtil {
+public final class AwkGearMasteryUtil {
     public static final int MID_VERSION;
     private static final Pattern MINECRAFT_VERSION_PATTERN =
             Pattern.compile("^(\\d+)(?:\\.(\\d+))?(?:\\.(\\d+))?(?:[-+].*|\\.(?!\\d).*)?$");
@@ -58,9 +56,6 @@ public final class LevelToolsUtil {
     private static final String LORE_PREFIX = "§§";
     private static final LegacyComponentSerializer LEGACY_SERIALIZER =
             LegacyComponentSerializer.legacySection();
-    private static final String LEGACY_LEVEL_KEY = "levelToolsLevel";
-    private static final String LEGACY_XP_KEY = "levelToolsXp";
-    private static final String LEGACY_REWARD_KEY = "levelToolsReward";
     public static final boolean IS_PAPER = hasClass("com.destroystokyo.paper.PaperConfig") || hasClass("io.papermc.paper.configuration.Configuration");
     private static final MinecraftVersion MINECRAFT_VERSION;
     private static final boolean REQUIRES_LEGACY_ANVIL_LISTENER;
@@ -91,7 +86,7 @@ public final class LevelToolsUtil {
     }
 
     public static boolean isSupportedTool(Material material) {
-        LevelToolsPlugin instance = LevelToolsPlugin.getInstance();
+        AwkGearMasteryPlugin instance = AwkGearMasteryPlugin.getInstance();
         if (instance == null) {
             return false;
         }
@@ -104,7 +99,7 @@ public final class LevelToolsUtil {
 
     @Nullable
     public static ItemProfile getItemProfile(Material material) {
-        LevelToolsPlugin instance = LevelToolsPlugin.getInstance();
+        AwkGearMasteryPlugin instance = AwkGearMasteryPlugin.getInstance();
         if (instance == null) {
             return null;
         }
@@ -234,14 +229,14 @@ public final class LevelToolsUtil {
     public static double getMaxXp(
             @Nullable Player player,
             @Nullable ItemProfile itemProfile,
-            @NotNull LevelToolsItem tool
+            @NotNull AwkGearMasteryItem tool
     ) {
         final ProgressionProfile progression = getProgressionProfile(itemProfile);
         if (progression != null) {
             return progression.xpRequiredForLevel(tool.getLevel());
         }
 
-        final LevelToolsPlugin instance = LevelToolsPlugin.getInstance();
+        final AwkGearMasteryPlugin instance = AwkGearMasteryPlugin.getInstance();
         if (instance == null || instance.getXpFormulaRegistry() == null) {
             return tool.getMaxXp();
         }
@@ -256,7 +251,7 @@ public final class LevelToolsUtil {
 
     @Nullable
     public static ProgressionProfile getProgressionProfile(@Nullable ItemProfile itemProfile) {
-        final LevelToolsPlugin instance = LevelToolsPlugin.getInstance();
+        final AwkGearMasteryPlugin instance = AwkGearMasteryPlugin.getInstance();
         if (instance == null || itemProfile == null || instance.getProfileManager() == null) {
             return null;
         }
@@ -269,7 +264,7 @@ public final class LevelToolsUtil {
             @Nullable ItemProfile itemProfile,
             int level
     ) {
-        final LevelToolsPlugin instance = LevelToolsPlugin.getInstance();
+        final AwkGearMasteryPlugin instance = AwkGearMasteryPlugin.getInstance();
         if (instance == null || instance.getStatCalculator() == null) {
             return CalculatedStats.empty();
         }
@@ -278,7 +273,7 @@ public final class LevelToolsUtil {
 
     @NotNull
     public static ItemStack getItemStack(
-            @NotNull LevelToolsItem tool,
+            @NotNull AwkGearMasteryItem tool,
             @Nullable Player player,
             @Nullable ItemProfile itemProfile
     ) {
@@ -286,14 +281,14 @@ public final class LevelToolsUtil {
     }
 
     @Nullable
-    public static ItemStack getBackingItemStack(@NotNull LevelToolsItem tool) {
-        return tool instanceof PDCLevelToolsItem
-                ? ((PDCLevelToolsItem) tool).getStack()
+    public static ItemStack getBackingItemStack(@NotNull AwkGearMasteryItem tool) {
+        return tool instanceof PDCAwkGearMasteryItem
+                ? ((PDCAwkGearMasteryItem) tool).getStack()
                 : null;
     }
 
-    public static boolean rebindLevelToolsItem(@NotNull LevelToolsItem tool, @NotNull ItemStack stack) {
-        if (!(tool instanceof PDCLevelToolsItem pdcItem)) {
+    public static boolean rebindAwkGearMasteryItem(@NotNull AwkGearMasteryItem tool, @NotNull ItemStack stack) {
+        if (!(tool instanceof PDCAwkGearMasteryItem pdcItem)) {
             return false;
         }
 
@@ -318,53 +313,11 @@ public final class LevelToolsUtil {
         }
 
         return meta.getPersistentDataContainer()
-                .get(PDCLevelToolsItem.ITEM_ID_KEY, PersistentDataType.STRING);
+                .get(PDCAwkGearMasteryItem.ITEM_ID_KEY, PersistentDataType.STRING);
     }
 
-    public static LevelToolsItem createLevelToolsItem(@NotNull ItemStack stack) {
-        return createPdcItem(stack);
-    }
-
-    private static LevelToolsItem createPdcItem(@NotNull ItemStack stack) {
-        final ItemMeta meta = stack.getItemMeta();
-        if (meta == null) {
-            return new PDCLevelToolsItem(stack, null);
-        }
-
-        final PersistentDataContainer pdc = meta.getPersistentDataContainer();
-        if (pdc.has(PDCLevelToolsItem.LEVEL_KEY, PersistentDataType.INTEGER)
-                || pdc.has(PDCLevelToolsItem.XP_KEY, PersistentDataType.DOUBLE)
-                || pdc.has(PDCLevelToolsItem.LAST_REWARD_KEY, PersistentDataType.INTEGER)) {
-            return new PDCLevelToolsItem(stack, meta);
-        }
-
-        final LegacyLevelData legacy = NBT.get(stack, (ReadableItemNBT nbt) -> new LegacyLevelData(
-                nbt.hasTag(LEGACY_LEVEL_KEY) ? nbt.getInteger(LEGACY_LEVEL_KEY) : null,
-                nbt.hasTag(LEGACY_XP_KEY) ? nbt.getDouble(LEGACY_XP_KEY) : null,
-                nbt.hasTag(LEGACY_REWARD_KEY) ? nbt.getInteger(LEGACY_REWARD_KEY) : null));
-
-        if (!legacy.hasAnyValue()) {
-            return new PDCLevelToolsItem(stack, meta);
-        }
-
-        final ItemStack migrated = stack.clone();
-        NBT.modify(migrated, nbt -> {
-            nbt.removeKey(LEGACY_LEVEL_KEY);
-            nbt.removeKey(LEGACY_XP_KEY);
-            nbt.removeKey(LEGACY_REWARD_KEY);
-        });
-
-        final PDCLevelToolsItem item = new PDCLevelToolsItem(migrated);
-        if (legacy.level() != null) {
-            item.setLevel(legacy.level());
-        }
-        if (legacy.xp() != null) {
-            item.setXp(legacy.xp());
-        }
-        if (legacy.lastReward() != null) {
-            item.setLastHandledReward(legacy.lastReward());
-        }
-        return item;
+    public static AwkGearMasteryItem createAwkGearMasteryItem(@NotNull ItemStack stack) {
+        return new PDCAwkGearMasteryItem(stack);
     }
 
     public static String getServerVersion() {
@@ -537,7 +490,7 @@ public final class LevelToolsUtil {
         for (Map.Entry<Enchantment, Integer> entry : enchantments.entrySet()) {
             meta.addEnchant(entry.getKey(), entry.getValue(), true);
         }
-        if (LevelToolsPlugin.getInstance().getConfigManager().getSettings().isHideAttributes()) {
+        if (AwkGearMasteryPlugin.getInstance().getConfigManager().getSettings().isHideAttributes()) {
             meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         }
     }
@@ -646,7 +599,7 @@ public final class LevelToolsUtil {
         if (itemProfile == null) {
             return null;
         }
-        LevelToolsPlugin instance = LevelToolsPlugin.getInstance();
+        AwkGearMasteryPlugin instance = AwkGearMasteryPlugin.getInstance();
         if (instance == null) {
             return null;
         }
@@ -724,14 +677,14 @@ public final class LevelToolsUtil {
         return bounds;
     }
 
-    public static void handleReward(LevelToolsItem tool, Player player) {
+    public static void handleReward(AwkGearMasteryItem tool, Player player) {
         Material material = tool.getItemStack().getType();
         ItemProfile itemProfile = getItemProfile(material);
         if (itemProfile == null) {
             return;
         }
 
-        LevelToolsPlugin instance = LevelToolsPlugin.getInstance();
+        AwkGearMasteryPlugin instance = AwkGearMasteryPlugin.getInstance();
         if (instance == null) {
             return;
         }
@@ -752,7 +705,7 @@ public final class LevelToolsUtil {
     }
 
     public static boolean applyRewards(
-            @NotNull LevelToolsItem tool, @NotNull Player player, @NotNull RewardProfile rewardProfile) {
+            @NotNull AwkGearMasteryItem tool, @NotNull Player player, @NotNull RewardProfile rewardProfile) {
         final int currentLevel = tool.getLevel();
         final int lastHandledReward = tool.getLastHandledReward();
         if (currentLevel <= lastHandledReward) {
@@ -788,7 +741,7 @@ public final class LevelToolsUtil {
         player.sendActionBar(LEGACY_SERIALIZER.deserialize(msg));
     }
 
-    public static Scheduler createScheduler(LevelToolsPlugin plugin) {
+    public static Scheduler createScheduler(AwkGearMasteryPlugin plugin) {
         if (isFolia()) {
             return new FoliaScheduler(plugin);
         }
@@ -802,12 +755,6 @@ public final class LevelToolsUtil {
             return true;
         } catch (ClassNotFoundException e) {
             return false;
-        }
-    }
-
-    private record LegacyLevelData(Integer level, Double xp, Integer lastReward) {
-        private boolean hasAnyValue() {
-            return level != null || xp != null || lastReward != null;
         }
     }
 
