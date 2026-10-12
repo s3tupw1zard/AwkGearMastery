@@ -1,8 +1,7 @@
 **Support/Help Server:** https://discord.gg/G8BDgqsuyw
 
-**Wiki:** https://github.com/byteful/LevelTools/wiki
+**Wiki:** https://github.com/s3tupw1zard/AwkGearMastery/wiki
 
-![Logo](https://github.com/byteful/LevelTools/blob/main/LevelTools%20Large%20Logo.png?raw=true)
 
 ## A plugin that adds a leveling system to any item.
 
@@ -18,21 +17,21 @@
 - Supports blacklisting/whitelisting for blocks, entities, and items.
 - ActionBar notifications.
 - Item lore modification.
-- Optional enchanted-book blocking for LevelTools items.
+- Optional enchanted-book blocking for AwkGearMastery items.
 - Farming trigger support for fully grown player-planted crops.
 
-## What's New in 2.2
+## AwkGearMastery 2026.1
 
 - `ARMOR_DURABILITY` trigger awards XP when armor takes damage.
-- Configurable XP formulas under `xp_formulas`, selectable per player via `leveltools.formula.<id>`.
-- Toggle to block enchanted books from being applied to LevelTools items.
+- Configurable XP formulas under `xp_formulas`, selectable per player via `awkgearmastery.formula.<id>`.
+- Toggle to block enchanted books from being applied to AwkGearMastery items.
 - `block_data_storage` option (`SQLITE`) for persisting per-block placement data.
 - Farming trigger gains `ignore_player_placed_blocks_for_fully_grown_crops` for fully-grown crop handling.
 - Automatic config migration from v1.x and earlier v2.x layouts.
 
 ## Profile System
 
-LevelTools uses a modular profile-based configuration system. Any item can be configured to level up.
+AwkGearMastery uses a modular profile-based configuration system. Any item can be configured to level up.
 
 ### Profile Types
 
@@ -55,7 +54,7 @@ LevelTools uses a modular profile-based configuration system. Any item can be co
 
 ### Default Supported Items
 
-Out of the box, LevelTools ships profiles for:
+Out of the box, AwkGearMastery ships profiles for:
 - Pickaxes, Axes, Shovels (block mining)
 - Swords (combat)
 - Bows, Crossbows (ranged)
@@ -63,57 +62,51 @@ Out of the box, LevelTools ships profiles for:
 - Tridents (combat / ranged)
 - Hoes (farming)
 
-Add any item by creating custom profiles. See the [Wiki](https://github.com/byteful/LevelTools/wiki) for details.
+Add any item by creating custom profiles. See the [Wiki](https://github.com/s3tupw1zard/AwkGearMastery/wiki) for details.
 
-### Migration from v1.x
-
-Your old config will be automatically backed up to `old_config.yml` and migrated to the new profile system.
-
-Earlier v2.x configs are also updated automatically: `level_xp_formula` is moved to `xp_formulas.global`.
 
 ## Commands
 
 | Command | Description | Permission |
 |---------|-------------|------------|
-| `/leveltools help [page]` | Paginated command help | None |
-| `/leveltools reload` | Reloads configuration | `leveltools.admin` |
-| `/leveltools reset <player>` | Reset hand item for player | `leveltools.admin` |
-| `/leveltools reset <player> --all` | Reset all items for player | `leveltools.admin` |
-| `/leveltools xp <amount>` | Set hand item XP | `leveltools.admin` |
-| `/leveltools level <level>` | Set hand item level | `leveltools.admin` |
-| `/leveltools levelup` | Increase hand item level by 1 | `leveltools.admin` |
-| `/leveltools debug` | Show debug information | `leveltools.admin` |
+| `/awkgearmastery help [page]` | Paginated command help | None |
+| `/awkgearmastery reload` | Reloads configuration | `awkgearmastery.admin` |
+| `/awkgearmastery reset <player>` | Reset hand item for player | `awkgearmastery.admin` |
+| `/awkgearmastery reset <player> --all` | Reset all items for player | `awkgearmastery.admin` |
+| `/awkgearmastery xp <amount>` | Set hand item XP | `awkgearmastery.admin` |
+| `/awkgearmastery level <level>` | Set hand item level | `awkgearmastery.admin` |
+| `/awkgearmastery levelup` | Increase hand item level by 1 | `awkgearmastery.admin` |
+| `/awkgearmastery debug` | Show debug information | `awkgearmastery.admin` |
 
 ## Permissions
 
 | Permission | Description | Default |
 |------------|-------------|---------|
-| `leveltools.admin` | Access to admin commands | op |
-| `leveltools.enabled` | Allow leveling for this player | true |
-| `leveltools.formula.<id>` | Selects an XP formula defined under `xp_formulas` | false |
+| `awkgearmastery.admin` | Access to admin commands | op |
+| `awkgearmastery.enabled` | Allow leveling for this player | true |
+| `awkgearmastery.formula.<id>` | Selects an XP formula defined under `xp_formulas` | false |
 
 ## Developer API
 
-**View detailed API usage [here](https://github.com/byteful/LevelTools/wiki/Developer-API).**
+**View detailed API usage [here](https://github.com/s3tupw1zard/AwkGearMastery/wiki/Developer-API).**
 
 ## PlaceholderAPI
 
 | Placeholder | Description |
 |-------------|-------------|
-| `%leveltools_level%` | Current item level (main hand) |
-| `%leveltools_xp%` | Current XP (main hand) |
-| `%leveltools_max_xp%` | XP required for the next level |
-| `%leveltools_progress%` | Progress percentage (0-100, 1 decimal) |
-| `%leveltools_progress_bar%` | Rendered progress bar |
-| `%leveltools_item_profile%` | Item profile id for the hand item |
-| `%leveltools_max_level%` | Max level for the current item profile |
+| `%awkgearmastery_level%` | Current item level (main hand) |
+| `%awkgearmastery_xp%` | Current XP (main hand) |
+| `%awkgearmastery_max_xp%` | XP required for the next level |
+| `%awkgearmastery_progress%` | Progress percentage (0-100, 1 decimal) |
+| `%awkgearmastery_progress_bar%` | Rendered progress bar |
+| `%awkgearmastery_item_profile%` | Item profile id for the hand item |
+| `%awkgearmastery_max_level%` | Max level for the current item profile |
 
 ## Documentation
 
-- [Configuration](https://github.com/byteful/LevelTools/wiki/Configuration)
-- [Trigger Profiles](https://github.com/byteful/LevelTools/wiki/Trigger-Profiles)
-- [Reward Profiles](https://github.com/byteful/LevelTools/wiki/Reward-Profiles)
-- [Display Profiles](https://github.com/byteful/LevelTools/wiki/Display-Profiles)
-- [Item Profiles](https://github.com/byteful/LevelTools/wiki/Item-Profiles)
+- [Configuration](https://github.com/s3tupw1zard/AwkGearMastery/wiki/Configuration)
+- [Trigger Profiles](https://github.com/s3tupw1zard/AwkGearMastery/wiki/Trigger-Profiles)
+- [Reward Profiles](https://github.com/s3tupw1zard/AwkGearMastery/wiki/Reward-Profiles)
+- [Display Profiles](https://github.com/s3tupw1zard/AwkGearMastery/wiki/Display-Profiles)
+- [Item Profiles](https://github.com/s3tupw1zard/AwkGearMastery/wiki/Item-Profiles)
 
-![bStats Graph](https://bstats.org/signatures/bukkit/LevelTools%20-%20RPG%20Item%20Leveling.svg)

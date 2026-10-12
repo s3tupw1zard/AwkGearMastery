@@ -34,12 +34,10 @@ repositories {
 }
 
 dependencies {
-    implementation 'de.tr7zw:item-nbt-api:2.16.1'
     implementation 'com.github.Redempt:Crunch:2.0.3'
     implementation 'com.github.cryptomorin:XSeries:13.7.1'
     implementation 'io.github.revxrsal:lamp.common:4.0.0-rc.17'
     implementation 'io.github.revxrsal:lamp.bukkit:4.0.0-rc.17'
-    implementation 'org.bstats:bstats-bukkit:3.2.1'
     implementation 'com.jeff-media:MorePersistentDataTypes:2.4.0'
 
     compileOnly 'io.papermc.paper:paper-api:26.2.build.+'
@@ -79,11 +77,9 @@ shadowJar {
     archiveBaseName.set("AwkGearMastery")
     archiveClassifier.set("")
 
-    relocate "de.tr7zw.changeme.nbtapi", "dev.s3tupw1zard.awkgearmastery.libs.nbtapi"
     relocate "com.cryptomorin.xseries", "dev.s3tupw1zard.awkgearmastery.libs.xseries"
     relocate "redempt.crunch", "dev.s3tupw1zard.awkgearmastery.libs.crunch"
     relocate 'revxrsal.commands', 'dev.s3tupw1zard.awkgearmastery.libs.lamp'
-    relocate 'org.bstats', 'dev.s3tupw1zard.awkgearmastery.libs.bstats'
     relocate 'com.jeff-media.morepersistentdatatypes', 'dev.s3tupw1zard.awkgearmastery.libs.morepersistentdatatypes'
 }
 

@@ -1,14 +1,13 @@
-[![Java CI with Gradle](https://github.com/s3tupw1zard/LevelTools/actions/workflows/gradle.yml/badge.svg?branch=main)](https://github.com/s3tupw1zard/LevelTools/actions/workflows/gradle.yml)
+[![Java CI with Gradle](https://github.com/s3tupw1zard/AwkGearMastery/actions/workflows/gradle.yml/badge.svg?branch=main)](https://github.com/s3tupw1zard/AwkGearMastery/actions/workflows/gradle.yml)
 
-<h5 align="center">Maintained fork: https://github.com/s3tupw1zard/LevelTools</h5>
-<h5 align="center">Issues / support: https://github.com/s3tupw1zard/LevelTools/issues</h5>
-<h5 align="center">Original project by byteful: https://github.com/byteful/LevelTools</h5>
+<h5 align="center">Maintained fork: https://github.com/s3tupw1zard/AwkGearMastery</h5>
+<h5 align="center">Issues / support: https://github.com/s3tupw1zard/AwkGearMastery/issues</h5>
+<h5 align="center">Originally developed by byteful (AGPL-3.0)</h5>
 
-![Logo](https://github.com/byteful/LevelTools/blob/main/LevelTools%20Large%20Logo.png?raw=true)
 
 <h3 align="center">AwkGearMastery — configurable RPG-style equipment progression for Paper and Purpur.</h3>
 
-AwkGearMastery is based on LevelTools by byteful. Original authorship and licensing are preserved.
+AwkGearMastery is based on open-source code originally authored by byteful; the original copyright notices and AGPL-3.0 licensing are retained.
 
 ## AwkGearMastery 2026.1 Direction
 
@@ -22,8 +21,8 @@ The 2026.1 progression model deliberately separates item levels from enchantment
 - Every level improves formula-derived stats; there are no hardcoded per-level stat tables.
 - Default max level is 100 but the curve supports other caps without making large caps exponentially impractical.
 - Leveling does **not** add enchantments automatically.
-- Player-applied enchantments keep their vanilla behavior and can add small configurable LevelTools stat bonuses.
-- Item state is stored in PDC; legacy LevelTools NBT data is migrated one-way.
+- Player-applied enchantments keep their vanilla behavior and can add small configurable AwkGearMastery stat bonuses.
+- Item progression is stored directly in PersistentDataContainer using the `awkgearmastery` namespace.
 - Java compilation is enforced with `-Xlint:all -Werror`.
 
 ## Formula-Based Stats
@@ -45,9 +44,9 @@ Default stat types:
 - Critical defense
 - Max durability
 
-Melee weapons currently default to a maximum **+300% LevelTools damage bonus**
-(4x the baseline before vanilla enchantment effects), 15% LevelTools critical
-chance and +75% LevelTools critical damage at max level.
+Melee weapons currently default to a maximum **+300% AwkGearMastery damage bonus**
+(4x the baseline before vanilla enchantment effects), 15% AwkGearMastery critical
+chance and +75% AwkGearMastery critical damage at max level.
 
 Armor defense is combined multiplicatively across pieces, avoiding accidental
 100%+ damage reduction.
@@ -79,17 +78,13 @@ When multiple players/items contribute damage:
 - Overkill is ignored by default.
 - Contributions below 2% are ignored by default.
 - The XP pool is not duplicated for every player.
-- Contributions are tracked per player **and per LevelTools item**, so switching
+- Contributions are tracked per player **and per AwkGearMastery item**, so switching
   weapons does not move all XP to the item held at death.
 - Optional group scaling exists but is disabled by default.
 
 Configured boss mobs can also grant a level-based bonus. This bonus can require
-one or more LevelTools critical hits and is protected by a persistent per-player,
+one or more AwkGearMastery critical hits and is protected by a persistent per-player,
 per-mob claim interval.
-
-## Upgrade from LevelTools
-
-Remove the old LevelTools JAR before installing AwkGearMastery. The plugin copies the old `plugins/LevelTools/` data directory into `plugins/AwkGearMastery/` on its first start if the new directory does not already exist; keep a server backup before upgrading. Existing item progression keeps the legacy `leveltools` PDC namespace for compatibility. Legacy commands, permissions and `%leveltools_*%` placeholders are retained for the first release candidate.
 
 ## Configuration Layout
 
@@ -100,13 +95,11 @@ Remove the old LevelTools JAR before installing AwkGearMastery. The plugin copie
 | `progression_profiles.yml` | Level cap and non-linear required-XP curves |
 | `stat_profiles.yml` | Damage, crit, defense and durability curves |
 | `xp_sources.yml` | Mining, farming, fishing, armor and combat XP values |
-| `enchantment_modifiers.yml` | Optional enchantment -> LevelTools stat contributions |
+| `enchantment_modifiers.yml` | Optional enchantment -> AwkGearMastery stat contributions |
 | `trigger_profiles.yml` | When/where a trigger may fire; filters and slots |
 | `display_profiles.yml` | Compact item lore, action bar and progress display |
 | `reward_profiles.yml` | Optional milestone commands/cosmetics; no default auto-enchants |
 
-Existing 2026.1-pre-progression profile files are backed up and migrated. Custom
-legacy `max_level` values are converted to dedicated progression profiles.
 
 ## Default Supported Items
 
@@ -142,30 +135,30 @@ GUI is intentionally left for a later feature.
 
 | Command | Description | Permission |
 | --- | --- | --- |
-| `/leveltools help [page]` | Paginated command help | None |
-| `/leveltools reload` | Reload configuration | `leveltools.admin` |
-| `/leveltools reset <player>` | Reset hand item for player | `leveltools.admin` |
-| `/leveltools reset <player> --all` | Reset all LevelTools items for player | `leveltools.admin` |
-| `/leveltools xp <amount>` | Set hand item XP | `leveltools.admin` |
-| `/leveltools level <level>` | Set hand item level within its progression cap | `leveltools.admin` |
-| `/leveltools levelup` | Increase hand item level by one | `leveltools.admin` |
-| `/leveltools debug` | Show debug information | `leveltools.admin` |
+| `/awkgearmastery help [page]` | Paginated command help | None |
+| `/awkgearmastery reload` | Reload configuration | `awkgearmastery.admin` |
+| `/awkgearmastery reset <player>` | Reset hand item for player | `awkgearmastery.admin` |
+| `/awkgearmastery reset <player> --all` | Reset all AwkGearMastery items for player | `awkgearmastery.admin` |
+| `/awkgearmastery xp <amount>` | Set hand item XP | `awkgearmastery.admin` |
+| `/awkgearmastery level <level>` | Set hand item level within its progression cap | `awkgearmastery.admin` |
+| `/awkgearmastery levelup` | Increase hand item level by one | `awkgearmastery.admin` |
+| `/awkgearmastery debug` | Show debug information | `awkgearmastery.admin` |
 
 ## PlaceholderAPI
 
 | Placeholder | Description |
 | --- | --- |
-| `%leveltools_level%` | Current item level |
-| `%leveltools_xp%` | Current item XP |
-| `%leveltools_max_xp%` | XP threshold for the current level |
-| `%leveltools_progress%` | Progress percentage |
-| `%leveltools_progress_bar%` | Rendered progress bar |
-| `%leveltools_item_profile%` | Current item profile |
-| `%leveltools_max_level%` | Max level from the progression profile |
+| `%awkgearmastery_level%` | Current item level |
+| `%awkgearmastery_xp%` | Current item XP |
+| `%awkgearmastery_max_xp%` | XP threshold for the current level |
+| `%awkgearmastery_progress%` | Progress percentage |
+| `%awkgearmastery_progress_bar%` | Rendered progress bar |
+| `%awkgearmastery_item_profile%` | Current item profile |
+| `%awkgearmastery_max_level%` | Max level from the progression profile |
 
 ## Attribution
 
-This repository is a maintained fork of byteful's LevelTools and remains licensed
-under the GNU Affero General Public License v3.0. The original LevelTools codebase
+This repository is a maintained fork of byteful's AwkGearMastery and remains licensed
+under the GNU Affero General Public License v3.0. The original AwkGearMastery codebase
 was created by byteful; the 2026.1 modernization and extended progression work is
 maintained by s3tupw1zard.
