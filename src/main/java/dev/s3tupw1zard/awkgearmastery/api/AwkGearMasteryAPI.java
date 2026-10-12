@@ -1,6 +1,6 @@
 package dev.s3tupw1zard.awkgearmastery.api;
 
-import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.AwkGearMasteryPlugin;
 import dev.s3tupw1zard.awkgearmastery.api.trigger.Trigger;
 import dev.s3tupw1zard.awkgearmastery.api.trigger.TriggerRegistry;
 import dev.s3tupw1zard.awkgearmastery.profile.ProfileManager;
@@ -16,21 +16,21 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
-public final class LevelToolsAPI {
+public final class AwkGearMasteryAPI {
 
-    private LevelToolsAPI() {}
+    private AwkGearMasteryAPI() {}
 
     @NotNull
-    public static LevelToolsPlugin getPlugin() {
-        LevelToolsPlugin instance = LevelToolsPlugin.getInstance();
+    public static AwkGearMasteryPlugin getPlugin() {
+        AwkGearMasteryPlugin instance = AwkGearMasteryPlugin.getInstance();
         if (instance == null) {
-            throw new IllegalStateException("LevelTools is not enabled");
+            throw new IllegalStateException("AwkGearMastery is not enabled");
         }
         return instance;
     }
 
     public static boolean isEnabled() {
-        return LevelToolsPlugin.getInstance() != null;
+        return AwkGearMasteryPlugin.getInstance() != null;
     }
 
     public static void registerTrigger(@NotNull Trigger trigger) {

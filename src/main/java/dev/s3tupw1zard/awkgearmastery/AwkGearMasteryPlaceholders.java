@@ -1,10 +1,10 @@
 package dev.s3tupw1zard.awkgearmastery;
 
-import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.api.item.AwkGearMasteryItem;
 import dev.s3tupw1zard.awkgearmastery.profile.ProfileManager;
 import dev.s3tupw1zard.awkgearmastery.profile.display.DisplayProfile;
 import dev.s3tupw1zard.awkgearmastery.profile.item.ItemProfile;
-import dev.s3tupw1zard.awkgearmastery.util.LevelToolsUtil;
+import dev.s3tupw1zard.awkgearmastery.util.AwkGearMasteryUtil;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -13,10 +13,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
 
-public class LevelToolsPlaceholders extends PlaceholderExpansion {
+public class AwkGearMasteryPlaceholders extends PlaceholderExpansion {
     @Override
     public @NotNull String getIdentifier() {
-        return "leveltools";
+        return "awkgearmastery";
     }
 
     @Override
@@ -26,7 +26,7 @@ public class LevelToolsPlaceholders extends PlaceholderExpansion {
 
     @Override
     public @NotNull String getVersion() {
-        return LevelToolsPlugin.getInstance().getPluginMeta().getVersion();
+        return AwkGearMasteryPlugin.getInstance().getPluginMeta().getVersion();
     }
 
     @Override
@@ -45,35 +45,35 @@ public class LevelToolsPlaceholders extends PlaceholderExpansion {
             return null;
         }
 
-        final ItemStack hand = LevelToolsUtil.getHand(player);
+        final ItemStack hand = AwkGearMasteryUtil.getHand(player);
 
-        if (!LevelToolsUtil.isSupportedTool(hand.getType())) {
+        if (!AwkGearMasteryUtil.isSupportedTool(hand.getType())) {
             return "N/A";
         }
 
         switch (params.toLowerCase(Locale.ROOT).replace(" ", "_")) {
             case "level": {
-                return "" + LevelToolsUtil.createLevelToolsItem(hand).getLevel();
+                return "" + AwkGearMasteryUtil.createAwkGearMasteryItem(hand).getLevel();
             }
 
             case "xp": {
-                return "" + LevelToolsUtil.createLevelToolsItem(hand).getXp();
+                return "" + AwkGearMasteryUtil.createAwkGearMasteryItem(hand).getXp();
             }
 
             case "max_xp": {
-                LevelToolsItem item = LevelToolsUtil.createLevelToolsItem(hand);
-                ItemProfile itemProfile = LevelToolsUtil.getItemProfile(hand.getType());
-                return "" + LevelToolsUtil.getMaxXp(player, itemProfile, item);
+                AwkGearMasteryItem item = AwkGearMasteryUtil.createAwkGearMasteryItem(hand);
+                ItemProfile itemProfile = AwkGearMasteryUtil.getItemProfile(hand.getType());
+                return "" + AwkGearMasteryUtil.getMaxXp(player, itemProfile, item);
             }
 
             case "progress_bar": {
-                LevelToolsItem item = LevelToolsUtil.createLevelToolsItem(hand);
-                ItemProfile itemProfile = LevelToolsUtil.getItemProfile(hand.getType());
-                if (item.getLevel() >= LevelToolsUtil.getMaxLevel(itemProfile)) {
+                AwkGearMasteryItem item = AwkGearMasteryUtil.createAwkGearMasteryItem(hand);
+                ItemProfile itemProfile = AwkGearMasteryUtil.getItemProfile(hand.getType());
+                if (item.getLevel() >= AwkGearMasteryUtil.getMaxLevel(itemProfile)) {
                     return "";
                 }
-                double maxXp = LevelToolsUtil.getMaxXp(player, itemProfile, item);
-                return LevelToolsUtil.createProgressBar(
+                double maxXp = AwkGearMasteryUtil.getMaxXp(player, itemProfile, item);
+                return AwkGearMasteryUtil.createProgressBar(
                         item.getXp(),
                         maxXp,
                         getDisplayProfile(itemProfile)
@@ -81,25 +81,25 @@ public class LevelToolsPlaceholders extends PlaceholderExpansion {
             }
 
             case "progress": {
-                LevelToolsItem item = LevelToolsUtil.createLevelToolsItem(hand);
-                ItemProfile itemProfile = LevelToolsUtil.getItemProfile(hand.getType());
-                double maxXp = LevelToolsUtil.getMaxXp(player, itemProfile, item);
+                AwkGearMasteryItem item = AwkGearMasteryUtil.createAwkGearMasteryItem(hand);
+                ItemProfile itemProfile = AwkGearMasteryUtil.getItemProfile(hand.getType());
+                double maxXp = AwkGearMasteryUtil.getMaxXp(player, itemProfile, item);
                 if (maxXp <= 0.0) {
                     return "0";
                 }
                 final double displayXp =
-                        item.getLevel() >= LevelToolsUtil.getMaxLevel(itemProfile) ? maxXp : item.getXp();
-                return "" + LevelToolsUtil.round((displayXp / maxXp) * 100.0, 1);
+                        item.getLevel() >= AwkGearMasteryUtil.getMaxLevel(itemProfile) ? maxXp : item.getXp();
+                return "" + AwkGearMasteryUtil.round((displayXp / maxXp) * 100.0, 1);
             }
 
             case "item_profile": {
-                ItemProfile itemProfile = LevelToolsUtil.getItemProfile(hand.getType());
+                ItemProfile itemProfile = AwkGearMasteryUtil.getItemProfile(hand.getType());
                 return itemProfile != null ? itemProfile.getId() : "N/A";
             }
 
             case "max_level": {
-                ItemProfile itemProfile = LevelToolsUtil.getItemProfile(hand.getType());
-                return itemProfile != null ? String.valueOf(LevelToolsUtil.getMaxLevel(itemProfile)) : "N/A";
+                ItemProfile itemProfile = AwkGearMasteryUtil.getItemProfile(hand.getType());
+                return itemProfile != null ? String.valueOf(AwkGearMasteryUtil.getMaxLevel(itemProfile)) : "N/A";
             }
 
             default: {
@@ -113,7 +113,7 @@ public class LevelToolsPlaceholders extends PlaceholderExpansion {
         if (itemProfile == null) {
             return null;
         }
-        ProfileManager profileManager = LevelToolsPlugin.getInstance().getProfileManager();
+        ProfileManager profileManager = AwkGearMasteryPlugin.getInstance().getProfileManager();
         if (profileManager == null) {
             return null;
         }

@@ -2,7 +2,7 @@ package dev.s3tupw1zard.awkgearmastery.api;
 
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
-import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.api.item.AwkGearMasteryItem;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -18,7 +18,7 @@ public enum RewardType {
     COMMAND("command", false) {
         @Override
         public void apply(
-                @NotNull LevelToolsItem tool, @NotNull String[] split, @NotNull Player player) {
+                @NotNull AwkGearMasteryItem tool, @NotNull String[] split, @NotNull Player player) {
             Bukkit.dispatchCommand(
                     Bukkit.getConsoleSender(),
                     String.join(" ", Arrays.copyOfRange(split, 1, split.length))
@@ -29,7 +29,7 @@ public enum RewardType {
     PLAYER_COMMAND("player-command", false) {
         @Override
         public void apply(
-                @NotNull LevelToolsItem tool, @NotNull String[] split, @NotNull Player player) {
+                @NotNull AwkGearMasteryItem tool, @NotNull String[] split, @NotNull Player player) {
             player.performCommand(
                     String.join(" ", Arrays.copyOfRange(split, 1, split.length))
                             .replace("{player}", player.getName())
@@ -39,7 +39,7 @@ public enum RewardType {
     PLAYER_OPCOMMAND("player-opcommand", false) {
         @Override
         public void apply(
-                @NotNull LevelToolsItem tool, @NotNull String[] split, @NotNull Player player) {
+                @NotNull AwkGearMasteryItem tool, @NotNull String[] split, @NotNull Player player) {
             final boolean wasOp = player.isOp();
 
             try {
@@ -55,7 +55,7 @@ public enum RewardType {
     ENCHANT("enchant") {
         @Override
         public void apply(
-                @NotNull LevelToolsItem tool, @NotNull String[] split, @NotNull Player player) {
+                @NotNull AwkGearMasteryItem tool, @NotNull String[] split, @NotNull Player player) {
             if (split.length < 3 || !isInteger(split[2])) {
                 return;
             }
@@ -67,7 +67,7 @@ public enum RewardType {
     ENCHANT_2("enchant2") {
         @Override
         public void apply(
-                @NotNull LevelToolsItem tool, @NotNull String[] split, @NotNull Player player) {
+                @NotNull AwkGearMasteryItem tool, @NotNull String[] split, @NotNull Player player) {
             if (split.length < 3 || !isInteger(split[2])) {
                 return;
             }
@@ -83,7 +83,7 @@ public enum RewardType {
     ENCHANT_3("enchant3") {
         @Override
         public void apply(
-                @NotNull LevelToolsItem tool, @NotNull String[] split, @NotNull Player player) {
+                @NotNull AwkGearMasteryItem tool, @NotNull String[] split, @NotNull Player player) {
             if (split.length < 3 || !isInteger(split[2])) {
                 return;
             }
@@ -98,7 +98,7 @@ public enum RewardType {
     ATTRIBUTE("attribute") {
         @Override
         public void apply(
-                @NotNull LevelToolsItem tool, @NotNull String[] split, @NotNull Player player) {
+                @NotNull AwkGearMasteryItem tool, @NotNull String[] split, @NotNull Player player) {
             if (split.length < 3 || !isDouble(split[2])) {
                 return;
             }
@@ -169,7 +169,7 @@ public enum RewardType {
     }
 
     public abstract void apply(
-            @NotNull LevelToolsItem tool, @NotNull String[] split, @NotNull Player player);
+            @NotNull AwkGearMasteryItem tool, @NotNull String[] split, @NotNull Player player);
 
     @NotNull
     public String getConfigKey() {

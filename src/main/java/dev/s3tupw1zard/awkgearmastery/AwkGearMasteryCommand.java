@@ -1,8 +1,8 @@
 package dev.s3tupw1zard.awkgearmastery;
 
-import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.api.item.AwkGearMasteryItem;
 import dev.s3tupw1zard.awkgearmastery.profile.item.ItemProfile;
-import dev.s3tupw1zard.awkgearmastery.util.LevelToolsUtil;
+import dev.s3tupw1zard.awkgearmastery.util.AwkGearMasteryUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -21,10 +21,10 @@ import java.util.Objects;
 import static java.lang.String.format;
 import static dev.s3tupw1zard.awkgearmastery.util.Text.colorize;
 
-@Command("leveltools")
-public class LevelToolsCommand {
+@Command("awkgearmastery")
+public class AwkGearMasteryCommand {
     @Dependency
-    private LevelToolsPlugin plugin;
+    private AwkGearMasteryPlugin plugin;
 
     @CommandPlaceholder
     public void onDefaultHelp(CommandSender sender, Help.RelatedCommands<BukkitCommandActor> help) {
@@ -32,7 +32,7 @@ public class LevelToolsCommand {
     }
 
     @Subcommand("help")
-    @Description("Shows the list of LevelTools commands.")
+    @Description("Shows the list of AwkGearMastery commands.")
     public void onHelp(CommandSender sender, Help.RelatedCommands<BukkitCommandActor> help, @Default("1") int page) {
         sendHelp(sender, help, page);
     }
@@ -44,14 +44,14 @@ public class LevelToolsCommand {
                 entries.add(entry);
             }
         }
-        sender.sendMessage(colorize("&6&lLevelTools Command Help:"));
+        sender.sendMessage(colorize("&6&lAwkGearMastery Command Help:"));
         for (ExecutableCommand<BukkitCommandActor> entry : Help.paginate(entries, page, 7)) {
             sender.sendMessage(colorize(format("&7- &b/%s&7: &e%s", entry.usage(), entry.description())));
         }
     }
 
     @Subcommand("reload")
-    @Description("Reloads LevelTools' plugin configuration.")
+    @Description("Reloads AwkGearMastery' plugin configuration.")
     public void onReload(CommandSender sender) {
         if (!checkPerm(sender)) {
             return;
@@ -70,24 +70,24 @@ public class LevelToolsCommand {
             return;
         }
 
-        final ItemStack hand = LevelToolsUtil.getHand(target);
+        final ItemStack hand = AwkGearMasteryUtil.getHand(target);
         if (!all) {
-            if (!LevelToolsUtil.isSupportedTool(hand.getType())) {
+            if (!AwkGearMasteryUtil.isSupportedTool(hand.getType())) {
                 sender.sendMessage(colorize(plugin.getConfig().getString("messages.item_not_tool")));
 
                 return;
             }
 
-            final LevelToolsItem tool = LevelToolsUtil.createLevelToolsItem(hand);
-            final ItemProfile itemProfile = LevelToolsUtil.getItemProfile(hand.getType());
+            final AwkGearMasteryItem tool = AwkGearMasteryUtil.createAwkGearMasteryItem(hand);
+            final ItemProfile itemProfile = AwkGearMasteryUtil.getItemProfile(hand.getType());
             tool.setLevel(1);
             tool.setXp(0);
-            LevelToolsUtil.setHand(target, LevelToolsUtil.getItemStack(tool, target, itemProfile));
+            AwkGearMasteryUtil.setHand(target, AwkGearMasteryUtil.getItemStack(tool, target, itemProfile));
             sender.sendMessage(colorize(message(
                     "messages.successfully_reset_hand_tool",
                     "&aReset {item} for {player} to level 1 with 0 XP."
             )
-                    .replace("{item}", LevelToolsUtil.getReadableItemName(hand))
+                    .replace("{item}", AwkGearMasteryUtil.getReadableItemName(hand))
                     .replace("{player}", target.getName())));
 
             return;
@@ -98,19 +98,19 @@ public class LevelToolsCommand {
         int resetCount = 0;
         for (int i = 0; i < contents.length; i++) {
             final ItemStack item = contents[i];
-            if (item == null || !LevelToolsUtil.isSupportedTool(item.getType())) {
+            if (item == null || !AwkGearMasteryUtil.isSupportedTool(item.getType())) {
                 continue;
             }
-            final LevelToolsItem tool = LevelToolsUtil.createLevelToolsItem(item);
-            final ItemProfile itemProfile = LevelToolsUtil.getItemProfile(item.getType());
+            final AwkGearMasteryItem tool = AwkGearMasteryUtil.createAwkGearMasteryItem(item);
+            final ItemProfile itemProfile = AwkGearMasteryUtil.getItemProfile(item.getType());
             tool.setLevel(1);
             tool.setXp(0);
-            inv.setItem(i, LevelToolsUtil.getItemStack(tool, target, itemProfile));
+            inv.setItem(i, AwkGearMasteryUtil.getItemStack(tool, target, itemProfile));
             resetCount++;
         }
         sender.sendMessage(colorize(message(
                 "messages.successfully_reset_tools",
-                "&aReset {count} LevelTools item(s) for {player} to level 1 with 0 XP."
+                "&aReset {count} AwkGearMastery item(s) for {player} to level 1 with 0 XP."
         )
                 .replace("{count}", String.valueOf(resetCount))
                 .replace("{player}", target.getName())));
@@ -123,18 +123,18 @@ public class LevelToolsCommand {
             return;
         }
 
-        final ItemStack item = LevelToolsUtil.getHand(player);
+        final ItemStack item = AwkGearMasteryUtil.getHand(player);
 
-        if (LevelToolsUtil.isSupportedTool(item.getType())) {
-            final LevelToolsItem tool = LevelToolsUtil.createLevelToolsItem(item);
-            final ItemProfile itemProfile = LevelToolsUtil.getItemProfile(item.getType());
+        if (AwkGearMasteryUtil.isSupportedTool(item.getType())) {
+            final AwkGearMasteryItem tool = AwkGearMasteryUtil.createAwkGearMasteryItem(item);
+            final ItemProfile itemProfile = AwkGearMasteryUtil.getItemProfile(item.getType());
             tool.setXp(xp);
-            LevelToolsUtil.setHand(player, LevelToolsUtil.getItemStack(tool, player, itemProfile));
+            AwkGearMasteryUtil.setHand(player, AwkGearMasteryUtil.getItemStack(tool, player, itemProfile));
             player.sendMessage(colorize(message(
                     "messages.successfully_set_xp",
                     "&aSet {item} XP to {xp}."
             )
-                    .replace("{item}", LevelToolsUtil.getReadableItemName(item))
+                    .replace("{item}", AwkGearMasteryUtil.getReadableItemName(item))
                     .replace("{xp}", String.valueOf(tool.getXp()))));
         } else {
             player.sendMessage(
@@ -149,27 +149,27 @@ public class LevelToolsCommand {
             return;
         }
 
-        final ItemStack item = LevelToolsUtil.getHand(player);
+        final ItemStack item = AwkGearMasteryUtil.getHand(player);
 
-        if (LevelToolsUtil.isSupportedTool(item.getType())) {
-            final LevelToolsItem tool = LevelToolsUtil.createLevelToolsItem(item);
-            final ItemProfile itemProfile = LevelToolsUtil.getItemProfile(item.getType());
+        if (AwkGearMasteryUtil.isSupportedTool(item.getType())) {
+            final AwkGearMasteryItem tool = AwkGearMasteryUtil.createAwkGearMasteryItem(item);
+            final ItemProfile itemProfile = AwkGearMasteryUtil.getItemProfile(item.getType());
             final int initial = tool.getLevel();
-            final int maxLevel = LevelToolsUtil.getMaxLevel(itemProfile);
+            final int maxLevel = AwkGearMasteryUtil.getMaxLevel(itemProfile);
             final int targetLevel = Math.max(1, Math.min(level, maxLevel));
             tool.setLevel(targetLevel);
             if (targetLevel >= maxLevel) {
                 tool.setXp(0.0);
             }
-            LevelToolsUtil.setHand(player, LevelToolsUtil.getItemStack(tool, player, itemProfile));
+            AwkGearMasteryUtil.setHand(player, AwkGearMasteryUtil.getItemStack(tool, player, itemProfile));
             if (initial != tool.getLevel()) {
-                LevelToolsUtil.handleReward(tool, player);
+                AwkGearMasteryUtil.handleReward(tool, player);
             }
             player.sendMessage(colorize(message(
                     "messages.successfully_set_level",
                     "&aSet {item} to level {level}."
             )
-                    .replace("{item}", LevelToolsUtil.getReadableItemName(item))
+                    .replace("{item}", AwkGearMasteryUtil.getReadableItemName(item))
                     .replace("{level}", String.valueOf(tool.getLevel()))));
         } else {
             player.sendMessage(
@@ -184,19 +184,19 @@ public class LevelToolsCommand {
             return;
         }
 
-        final ItemStack item = LevelToolsUtil.getHand(player);
+        final ItemStack item = AwkGearMasteryUtil.getHand(player);
 
-        if (LevelToolsUtil.isSupportedTool(item.getType())) {
-            final LevelToolsItem tool = LevelToolsUtil.createLevelToolsItem(item);
-            final ItemProfile itemProfile = LevelToolsUtil.getItemProfile(item.getType());
+        if (AwkGearMasteryUtil.isSupportedTool(item.getType())) {
+            final AwkGearMasteryItem tool = AwkGearMasteryUtil.createAwkGearMasteryItem(item);
+            final ItemProfile itemProfile = AwkGearMasteryUtil.getItemProfile(item.getType());
             final int initial = tool.getLevel();
-            final int maxLevel = LevelToolsUtil.getMaxLevel(itemProfile);
+            final int maxLevel = AwkGearMasteryUtil.getMaxLevel(itemProfile);
             if (initial >= maxLevel) {
                 player.sendMessage(colorize(message(
                         "messages.already_max_level",
                         "&e{item} is already at the maximum level ({level})."
                 )
-                        .replace("{item}", LevelToolsUtil.getReadableItemName(item))
+                        .replace("{item}", AwkGearMasteryUtil.getReadableItemName(item))
                         .replace("{level}", String.valueOf(maxLevel))));
                 return;
             }
@@ -205,13 +205,13 @@ public class LevelToolsCommand {
             if (tool.getLevel() >= maxLevel) {
                 tool.setXp(0.0);
             }
-            LevelToolsUtil.setHand(player, LevelToolsUtil.getItemStack(tool, player, itemProfile));
-            LevelToolsUtil.handleReward(tool, player);
+            AwkGearMasteryUtil.setHand(player, AwkGearMasteryUtil.getItemStack(tool, player, itemProfile));
+            AwkGearMasteryUtil.handleReward(tool, player);
             player.sendMessage(colorize(message(
                     "messages.successfully_level_up",
                     "&aIncreased {item} to level {level}."
             )
-                    .replace("{item}", LevelToolsUtil.getReadableItemName(item))
+                    .replace("{item}", AwkGearMasteryUtil.getReadableItemName(item))
                     .replace("{level}", String.valueOf(tool.getLevel()))));
         } else {
             player.sendMessage(
@@ -227,12 +227,12 @@ public class LevelToolsCommand {
         }
 
         plugin.getUpdateChecker().check();
-        sender.sendMessage("LevelTools Debug Information:");
+        sender.sendMessage("AwkGearMastery Debug Information:");
         sender.sendMessage("- Server Version: " + Bukkit.getVersion());
         sender.sendMessage("- Server Type: " + Bukkit.getBukkitVersion());
         sender.sendMessage("- Plugin Version: " + plugin.getPluginMeta().getVersion());
         sender.sendMessage("- Latest Version: " + plugin.getUpdateChecker().getLastCheckedVersion());
-        sender.sendMessage("{!} Please include your configuration when opening an issue at https://github.com/s3tupw1zard/LevelTools/issues. {!}");
+        sender.sendMessage("{!} Please include your configuration when opening an issue at https://github.com/s3tupw1zard/AwkGearMastery/issues. {!}");
     }
 
     private String message(@NotNull String path, @NotNull String fallback) {
@@ -240,7 +240,7 @@ public class LevelToolsCommand {
     }
 
     private boolean checkPerm(CommandSender sender) {
-        if (!sender.hasPermission("leveltools.admin")) {
+        if (!sender.hasPermission("awkgearmastery.admin")) {
             sender.sendMessage(
                     colorize(Objects.requireNonNull(plugin.getConfig().getString("messages.no_permission"))));
 

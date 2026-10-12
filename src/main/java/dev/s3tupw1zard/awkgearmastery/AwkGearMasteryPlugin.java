@@ -3,7 +3,7 @@ package dev.s3tupw1zard.awkgearmastery;
 import dev.s3tupw1zard.awkgearmastery.api.AnvilCombineMode;
 import dev.s3tupw1zard.awkgearmastery.api.block.BlockDataManager;
 import dev.s3tupw1zard.awkgearmastery.api.block.BlockDataManagerFactory;
-import dev.s3tupw1zard.awkgearmastery.api.event.LevelToolsLoadEvent;
+import dev.s3tupw1zard.awkgearmastery.api.event.AwkGearMasteryLoadEvent;
 import dev.s3tupw1zard.awkgearmastery.api.scheduler.Scheduler;
 import dev.s3tupw1zard.awkgearmastery.api.trigger.TriggerRegistry;
 import dev.s3tupw1zard.awkgearmastery.config.CombatXpConfig;
@@ -19,10 +19,9 @@ import dev.s3tupw1zard.awkgearmastery.listeners.TriggerListener;
 import dev.s3tupw1zard.awkgearmastery.listeners.anvil.LegacyAnvilListener;
 import dev.s3tupw1zard.awkgearmastery.profile.ProfileManager;
 import dev.s3tupw1zard.awkgearmastery.profile.stat.StatCalculator;
-import dev.s3tupw1zard.awkgearmastery.util.LevelToolsUtil;
+import dev.s3tupw1zard.awkgearmastery.util.AwkGearMasteryUtil;
 import dev.s3tupw1zard.awkgearmastery.util.UpdateChecker;
 import dev.s3tupw1zard.awkgearmastery.util.XPBooster;
-import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -32,24 +31,19 @@ import revxrsal.commands.bukkit.BukkitLamp;
 import revxrsal.commands.bukkit.actor.BukkitCommandActor;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
-import java.util.stream.Stream;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import static java.lang.String.format;
 import static dev.s3tupw1zard.awkgearmastery.util.Text.colorize;
 
-public final class LevelToolsPlugin extends JavaPlugin {
-    private static LevelToolsPlugin instance;
+public final class AwkGearMasteryPlugin extends JavaPlugin {
+    private static AwkGearMasteryPlugin instance;
 
     private Lamp<BukkitCommandActor> commandManager;
     private AnvilCombineMode anvilCombineMode;
     private UpdateChecker updateChecker;
     private volatile XpFormulaRegistry xpFormulaRegistry;
-    private Metrics metrics;
     private BlockDataManager blockDataManager;
     private String blockDataStorageType;
     private Scheduler scheduler;
@@ -62,7 +56,7 @@ public final class LevelToolsPlugin extends JavaPlugin {
     private CombatXpConfig combatXpConfig;
     private XpSourceRegistry xpSourceRegistry;
 
-    public static LevelToolsPlugin getInstance() {
+    public static AwkGearMasteryPlugin getInstance() {
         return instance;
     }
 
@@ -71,10 +65,9 @@ public final class LevelToolsPlugin extends JavaPlugin {
         sendStartupBanner();
         instance = this;
 
-        scheduler = LevelToolsUtil.createScheduler(this);
+        scheduler = AwkGearMasteryUtil.createScheduler(this);
         updateChecker = new UpdateChecker(this, scheduler);
 
-        migrateLegacyDataFolder();
         configManager = new ConfigManager(this);
         configManager.loadAll();
         reloadConfig();
@@ -86,12 +79,12 @@ public final class LevelToolsPlugin extends JavaPlugin {
         profileManager = new ProfileManager(getLogger());
         triggerRegistry = new TriggerRegistry();
 
-        Bukkit.getPluginManager().callEvent(new LevelToolsLoadEvent(this, LevelToolsLoadEvent.LoadPhase.PRE_LOAD));
+        Bukkit.getPluginManager().callEvent(new AwkGearMasteryLoadEvent(this, AwkGearMasteryLoadEvent.LoadPhase.PRE_LOAD));
 
         triggerRegistry.registerDefaults();
         getLogger().info("Registered triggers...");
 
-        Bukkit.getPluginManager().callEvent(new LevelToolsLoadEvent(this, LevelToolsLoadEvent.LoadPhase.POST_TRIGGERS));
+        Bukkit.getPluginManager().callEvent(new AwkGearMasteryLoadEvent(this, AwkGearMasteryLoadEvent.LoadPhase.POST_TRIGGERS));
 
         loadProfiles();
         enchantmentModifierRegistry =
@@ -101,7 +94,7 @@ public final class LevelToolsPlugin extends JavaPlugin {
         xpSourceRegistry = XpSourceRegistry.load(configManager.getXpSourcesConfig());
         getLogger().info("Loaded profiles...");
 
-        Bukkit.getPluginManager().callEvent(new LevelToolsLoadEvent(this, LevelToolsLoadEvent.LoadPhase.POST_PROFILES));
+        Bukkit.getPluginManager().callEvent(new AwkGearMasteryLoadEvent(this, AwkGearMasteryLoadEvent.LoadPhase.POST_PROFILES));
 
         blockDataManager = BlockDataManagerFactory.createBlockDataManager(
                 getDataFolder().toPath(),
@@ -125,26 +118,20 @@ public final class LevelToolsPlugin extends JavaPlugin {
         getLogger().info("Registered listeners...");
 
         commandManager = BukkitLamp.builder(this).build();
-        commandManager.register(new LevelToolsCommand());
+        commandManager.register(new AwkGearMasteryCommand());
         getLogger().info("Registered commands...");
 
         if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-            new LevelToolsPlaceholders().register();
+            new AwkGearMasteryPlaceholders().register();
         }
 
-        metrics = new Metrics(this, 21451);
-
-        Bukkit.getPluginManager().callEvent(new LevelToolsLoadEvent(this, LevelToolsLoadEvent.LoadPhase.COMPLETE));
+        Bukkit.getPluginManager().callEvent(new AwkGearMasteryLoadEvent(this, AwkGearMasteryLoadEvent.LoadPhase.COMPLETE));
 
         getLogger().info("Successfully started " + getPluginMeta().getName() + " v" + getPluginMeta().getVersion() + "!");
     }
 
     @Override
     public void onDisable() {
-        if (metrics != null) {
-            metrics.shutdown();
-        }
-
         closeBlockDataManager(blockDataManager);
 
         instance = null;
@@ -154,39 +141,15 @@ public final class LevelToolsPlugin extends JavaPlugin {
 
     private void sendStartupBanner() {
         Bukkit.getConsoleSender().sendMessage(colorize(" &b         _____"));
-        Bukkit.getConsoleSender().sendMessage(colorize(" &d|          &b|     &8Based on LevelTools by &2byteful"));
+        Bukkit.getConsoleSender().sendMessage(colorize(" &d|          &b|     &8Based on AwkGearMastery by &2byteful"));
         Bukkit.getConsoleSender().sendMessage(colorize(" &d|          &b|     &8Extended by &2s3tupw1zard"));
         Bukkit.getConsoleSender().sendMessage(colorize(format(
                 " &d|          &b|     &8Running &6%s &8on &6MC %s",
                 getPluginMeta().getName() + " v" + getPluginMeta().getVersion(),
-                LevelToolsUtil.getServerVersion())));
+                AwkGearMasteryUtil.getServerVersion())));
         Bukkit.getConsoleSender().sendMessage(colorize(
-                " &d|_____     &b|     &8Project: &9&nhttps://github.com/s3tupw1zard/LevelTools"));
+                " &d|_____     &b|     &8Project: &9&nhttps://github.com/s3tupw1zard/AwkGearMastery"));
         Bukkit.getConsoleSender().sendMessage("");
-    }
-
-    private void migrateLegacyDataFolder() {
-        final Path target = getDataFolder().toPath();
-        final Path legacy = target.resolveSibling("LevelTools");
-        if (!Files.isDirectory(legacy) || Files.exists(target)) {
-            return;
-        }
-        try {
-            Files.createDirectories(target);
-            try (Stream<Path> entries = Files.walk(legacy)) {
-                for (Path source : entries.toList()) {
-                    final Path destination = target.resolve(legacy.relativize(source));
-                    if (Files.isDirectory(source)) {
-                        Files.createDirectories(destination);
-                    } else if (Files.isRegularFile(source)) {
-                        Files.copy(source, destination, StandardCopyOption.COPY_ATTRIBUTES);
-                    }
-                }
-            }
-            getLogger().info("Copied existing LevelTools data; the original data directory was preserved.");
-        } catch (IOException e) {
-            throw new IllegalStateException("Could not migrate LevelTools data to AwkGearMastery", e);
-        }
     }
 
     private void loadProfiles() {
@@ -207,7 +170,7 @@ public final class LevelToolsPlugin extends JavaPlugin {
         pm.registerEvents(new CombatProgressionListener(profileManager), this);
         pm.registerEvents(new DefenseListener(profileManager), this);
         pm.registerEvents(new XPBooster(), this);
-        if (LevelToolsUtil.requiresLegacyAnvilListener()) {
+        if (AwkGearMasteryUtil.requiresLegacyAnvilListener()) {
             pm.registerEvents(new LegacyAnvilListener(), this);
         } else {
             pm.registerEvents(new AnvilListener(), this);
@@ -215,7 +178,7 @@ public final class LevelToolsPlugin extends JavaPlugin {
     }
 
     public void reloadPlugin() {
-        Bukkit.getPluginManager().callEvent(new LevelToolsLoadEvent(this, LevelToolsLoadEvent.LoadPhase.PRE_LOAD));
+        Bukkit.getPluginManager().callEvent(new AwkGearMasteryLoadEvent(this, AwkGearMasteryLoadEvent.LoadPhase.PRE_LOAD));
 
         configManager.reload();
         reloadConfig();
@@ -235,7 +198,7 @@ public final class LevelToolsPlugin extends JavaPlugin {
             newBlockDataManager.load();
         }
 
-        Bukkit.getPluginManager().callEvent(new LevelToolsLoadEvent(this, LevelToolsLoadEvent.LoadPhase.POST_TRIGGERS));
+        Bukkit.getPluginManager().callEvent(new AwkGearMasteryLoadEvent(this, AwkGearMasteryLoadEvent.LoadPhase.POST_TRIGGERS));
 
         try {
             loadProfiles();
@@ -258,10 +221,10 @@ public final class LevelToolsPlugin extends JavaPlugin {
             closeBlockDataManager(oldBlockDataManager);
         }
 
-        Bukkit.getPluginManager().callEvent(new LevelToolsLoadEvent(this, LevelToolsLoadEvent.LoadPhase.POST_PROFILES));
-        Bukkit.getPluginManager().callEvent(new LevelToolsLoadEvent(this, LevelToolsLoadEvent.LoadPhase.COMPLETE));
+        Bukkit.getPluginManager().callEvent(new AwkGearMasteryLoadEvent(this, AwkGearMasteryLoadEvent.LoadPhase.POST_PROFILES));
+        Bukkit.getPluginManager().callEvent(new AwkGearMasteryLoadEvent(this, AwkGearMasteryLoadEvent.LoadPhase.COMPLETE));
 
-        getLogger().info("Reloaded LevelTools!");
+        getLogger().info("Reloaded AwkGearMastery!");
     }
 
     public void setAnvilCombineMode() {
