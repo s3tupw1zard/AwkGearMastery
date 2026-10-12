@@ -16,7 +16,6 @@ import dev.s3tupw1zard.awkgearmastery.listeners.BlockPlacementListener;
 import dev.s3tupw1zard.awkgearmastery.listeners.CombatProgressionListener;
 import dev.s3tupw1zard.awkgearmastery.listeners.DefenseListener;
 import dev.s3tupw1zard.awkgearmastery.listeners.TriggerListener;
-import dev.s3tupw1zard.awkgearmastery.listeners.anvil.LegacyAnvilListener;
 import dev.s3tupw1zard.awkgearmastery.profile.ProfileManager;
 import dev.s3tupw1zard.awkgearmastery.profile.stat.StatCalculator;
 import dev.s3tupw1zard.awkgearmastery.util.AwkGearMasteryUtil;
@@ -141,7 +140,7 @@ public final class AwkGearMasteryPlugin extends JavaPlugin {
 
     private void sendStartupBanner() {
         Bukkit.getConsoleSender().sendMessage(colorize(" &b         _____"));
-        Bukkit.getConsoleSender().sendMessage(colorize(" &d|          &b|     &8Based on AwkGearMastery by &2byteful"));
+        Bukkit.getConsoleSender().sendMessage(colorize(" &d|          &b|     &8Based on original work by &2byteful"));
         Bukkit.getConsoleSender().sendMessage(colorize(" &d|          &b|     &8Extended by &2s3tupw1zard"));
         Bukkit.getConsoleSender().sendMessage(colorize(format(
                 " &d|          &b|     &8Running &6%s &8on &6MC %s",
@@ -170,11 +169,7 @@ public final class AwkGearMasteryPlugin extends JavaPlugin {
         pm.registerEvents(new CombatProgressionListener(profileManager), this);
         pm.registerEvents(new DefenseListener(profileManager), this);
         pm.registerEvents(new XPBooster(), this);
-        if (AwkGearMasteryUtil.requiresLegacyAnvilListener()) {
-            pm.registerEvents(new LegacyAnvilListener(), this);
-        } else {
-            pm.registerEvents(new AnvilListener(), this);
-        }
+        pm.registerEvents(new AnvilListener(), this);
     }
 
     public void reloadPlugin() {

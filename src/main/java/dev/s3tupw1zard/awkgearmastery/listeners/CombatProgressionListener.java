@@ -24,7 +24,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityRemoveEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -85,11 +84,11 @@ public final class CombatProgressionListener implements Listener {
         final DefenseStats defense = calculateDefense(target);
 
         final double normalDamage = event.getDamage() * (1.0 + attackStats.damageBonus());
-        final boolean levelToolsCritical =
+        final boolean awkGearMasteryCritical =
                 !event.isCritical()
                         && attackStats.criticalChance() > 0.0
                         && ThreadLocalRandom.current().nextDouble() < attackStats.criticalChance();
-        final double criticalBonus = levelToolsCritical
+        final double criticalBonus = awkGearMasteryCritical
                 ? normalDamage
                         * attackStats.criticalDamage()
                         * (1.0 - defense.criticalDefense())
@@ -106,7 +105,7 @@ public final class CombatProgressionListener implements Listener {
                 prepared.projectileId(),
                 tool.getLevel(),
                 progression == null ? 0.0 : progression.normalizedProgress(tool.getLevel()),
-                levelToolsCritical,
+                awkGearMasteryCritical,
                 1.0,
                 1.0
         ));
@@ -146,7 +145,7 @@ public final class CombatProgressionListener implements Listener {
                             offHandProgression == null
                                     ? 0.0
                                     : offHandProgression.normalizedProgress(offHandTool.getLevel()),
-                            levelToolsCritical,
+                            awkGearMasteryCritical,
                             0.5,
                             dualWieldXpMultiplier
                     ));

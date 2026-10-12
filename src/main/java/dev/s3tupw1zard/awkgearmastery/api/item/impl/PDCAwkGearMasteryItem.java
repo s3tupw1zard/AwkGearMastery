@@ -26,9 +26,9 @@ import java.util.UUID;
 public class PDCAwkGearMasteryItem implements AwkGearMasteryItem {
     @NotNull
     public static final NamespacedKey
-            LEVEL_KEY = Objects.requireNonNull(NamespacedKey.fromString("awkgearmastery:awkgearmasterylevel")),
-            XP_KEY = Objects.requireNonNull(NamespacedKey.fromString("awkgearmastery:awkgearmasteryxp")),
-            LAST_REWARD_KEY = Objects.requireNonNull(NamespacedKey.fromString("awkgearmastery:awkgearmasteryreward")),
+            LEVEL_KEY = Objects.requireNonNull(NamespacedKey.fromString("awkgearmastery:level")),
+            XP_KEY = Objects.requireNonNull(NamespacedKey.fromString("awkgearmastery:xp")),
+            LAST_REWARD_KEY = Objects.requireNonNull(NamespacedKey.fromString("awkgearmastery:last_reward")),
             ITEM_ID_KEY = Objects.requireNonNull(NamespacedKey.fromString("awkgearmastery:item_id"));
 
     @NotNull

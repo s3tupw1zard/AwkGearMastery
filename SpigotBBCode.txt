@@ -5,13 +5,13 @@
 
 [SIZE=5][B]Features[/B][/SIZE][/CENTER]
 [LIST]
-[*]Supports Minecraft 1.8.8+
+[*]Targets Paper/Purpur 26.2 with Java 25
 [*]Supports Folia.
 [*]No required dependencies; PlaceholderAPI is optional.
 [*]Profile-based configuration system.
 [*]Any item can level up with custom triggers.
 [*]Configurable global, item-profile, and permission-based XP formulas.
-[*]Commands & enchants on level up.
+[*]Configurable milestone rewards without automatic enchantments.
 [*]Supports blacklisting/whitelisting for blocks, entities, and items.
 [*]ActionBar notifications.
 [*]Item lore modification.
@@ -19,14 +19,14 @@
 [*]Farming trigger support for fully grown player-planted crops.
 [/LIST]
 
-[CENTER][SIZE=5][B]What's New in 2.2[/B][/SIZE][/CENTER]
+[CENTER][SIZE=5][B]AwkGearMastery 2026.1[/B][/SIZE][/CENTER]
 [LIST]
 [*][B]ARMOR_DURABILITY[/B] trigger awards XP when armor takes damage.
 [*]Configurable XP formulas under [B]xp_formulas[/B], selectable per player via [B]awkgearmastery.formula.<id>[/B].
 [*]Toggle to block enchanted books from being applied to AwkGearMastery items.
 [*][B]block_data_storage[/B] option (SQLITE) for persisting per-block placement data.
 [*]Farming trigger gains [B]ignore_player_placed_blocks_for_fully_grown_crops[/B].
-[*]Automatic config migration from v1.x and earlier v2.x layouts.
+[*]Fresh AwkGearMastery configuration and item data; no legacy migration.
 [/LIST]
 
 [CENTER][SIZE=5][B]Profile System[/B][/SIZE][/CENTER]

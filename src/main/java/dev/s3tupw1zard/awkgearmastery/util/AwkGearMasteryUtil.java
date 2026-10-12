@@ -29,7 +29,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -58,7 +57,6 @@ public final class AwkGearMasteryUtil {
             LegacyComponentSerializer.legacySection();
     public static final boolean IS_PAPER = hasClass("com.destroystokyo.paper.PaperConfig") || hasClass("io.papermc.paper.configuration.Configuration");
     private static final MinecraftVersion MINECRAFT_VERSION;
-    private static final boolean REQUIRES_LEGACY_ANVIL_LISTENER;
     private static final boolean SUPPORTS_DUAL_WIELDING;
     private static final boolean SUPPORTS_TRANSLATABLE_ITEM_DISPLAY_NAMES;
     private static final boolean SUPPORTS_BLOCK_DATA;
@@ -68,7 +66,6 @@ public final class AwkGearMasteryUtil {
     static {
         MINECRAFT_VERSION = resolveMinecraftVersion();
         MID_VERSION = MINECRAFT_VERSION.getCompatibilityMajor();
-        REQUIRES_LEGACY_ANVIL_LISTENER = isMinecraftVersionBefore(1, 9);
         SUPPORTS_DUAL_WIELDING = isMinecraftVersionAtLeast(1, 9);
         SUPPORTS_TRANSLATABLE_ITEM_DISPLAY_NAMES = isMinecraftVersionAtLeast(1, 13);
         SUPPORTS_BLOCK_DATA = isMinecraftVersionAtLeast(1, 13);
@@ -326,10 +323,6 @@ public final class AwkGearMasteryUtil {
         return split[split.length - 1].trim().replace(")", "");
     }
 
-    public static boolean requiresLegacyAnvilListener() {
-        return REQUIRES_LEGACY_ANVIL_LISTENER;
-    }
-
     public static boolean supportsDualWielding() {
         return SUPPORTS_DUAL_WIELDING;
     }
@@ -352,10 +345,6 @@ public final class AwkGearMasteryUtil {
 
     private static boolean isMinecraftVersionAtLeast(int major, int minor) {
         return MINECRAFT_VERSION.compareTo(new MinecraftVersion(major, minor, 0)) >= 0;
-    }
-
-    private static boolean isMinecraftVersionBefore(int major, int minor) {
-        return MINECRAFT_VERSION.compareTo(new MinecraftVersion(major, minor, 0)) < 0;
     }
 
     private static MinecraftVersion resolveMinecraftVersion() {

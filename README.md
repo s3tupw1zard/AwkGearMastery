@@ -4,7 +4,6 @@
 <h5 align="center">Issues / support: https://github.com/s3tupw1zard/AwkGearMastery/issues</h5>
 <h5 align="center">Originally developed by byteful (AGPL-3.0)</h5>
 
-
 <h3 align="center">AwkGearMastery — configurable RPG-style equipment progression for Paper and Purpur.</h3>
 
 AwkGearMastery is based on open-source code originally authored by byteful; the original copyright notices and AGPL-3.0 licensing are retained.
@@ -158,7 +157,6 @@ GUI is intentionally left for a later feature.
 
 ## Attribution
 
-This repository is a maintained fork of byteful's AwkGearMastery and remains licensed
-under the GNU Affero General Public License v3.0. The original AwkGearMastery codebase
-was created by byteful; the 2026.1 modernization and extended progression work is
-maintained by s3tupw1zard.
+AwkGearMastery is an AGPL-3.0-licensed continuation of open-source work originally
+created by byteful. Original authorship and copyright notices remain credited;
+the current progression architecture and new development are maintained by s3tupw1zard.

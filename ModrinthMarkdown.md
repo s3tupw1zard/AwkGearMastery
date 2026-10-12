@@ -7,13 +7,13 @@
 
 ## Features
 
-- Supports Minecraft 1.8.8+
+- Targets Paper/Purpur 26.2 with Java 25
 - Supports Folia.
 - No required dependencies; PlaceholderAPI is optional.
 - Profile-based configuration system.
 - Any item can level up with custom triggers.
 - Configurable global, item-profile, and permission-based XP formulas.
-- Commands & enchants on level up.
+- Configurable milestone rewards; no automatic enchantment leveling.
 - Supports blacklisting/whitelisting for blocks, entities, and items.
 - ActionBar notifications.
 - Item lore modification.
@@ -23,11 +23,11 @@
 ## AwkGearMastery 2026.1
 
 - `ARMOR_DURABILITY` trigger awards XP when armor takes damage.
-- Configurable XP formulas under `xp_formulas`, selectable per player via `awkgearmastery.formula.<id>`.
+- Configurable XP formulas under XP formula profiles, selectable per player via `awkgearmastery.formula.<id>`.
 - Toggle to block enchanted books from being applied to AwkGearMastery items.
 - `block_data_storage` option (`SQLITE`) for persisting per-block placement data.
 - Farming trigger gains `ignore_player_placed_blocks_for_fully_grown_crops` for fully-grown crop handling.
-- Automatic config migration from v1.x and earlier v2.x layouts.
+- Fresh AwkGearMastery config and item state; no support for old configurations.
 
 ## Profile System
 
