@@ -1,6 +1,6 @@
 package dev.s3tupw1zard.awkgearmastery.api.scheduler.impl.folia;
 
-import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.AwkGearMasteryPlugin;
 import dev.s3tupw1zard.awkgearmastery.api.scheduler.ScheduledTask;
 import dev.s3tupw1zard.awkgearmastery.api.scheduler.Scheduler;
 import org.bukkit.Bukkit;
@@ -10,9 +10,9 @@ import org.bukkit.entity.Entity;
 import java.util.concurrent.TimeUnit;
 
 public class FoliaScheduler implements Scheduler {
-    private final LevelToolsPlugin plugin;
+    private final AwkGearMasteryPlugin plugin;
 
-    public FoliaScheduler(LevelToolsPlugin plugin) {
+    public FoliaScheduler(AwkGearMasteryPlugin plugin) {
         this.plugin = plugin;
     }
 

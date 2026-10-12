@@ -1,25 +1,25 @@
 package dev.s3tupw1zard.awkgearmastery.api.event;
 
-import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.AwkGearMasteryPlugin;
 import dev.s3tupw1zard.awkgearmastery.api.trigger.TriggerRegistry;
 import dev.s3tupw1zard.awkgearmastery.profile.ProfileManager;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
-public class LevelToolsLoadEvent extends Event {
+public class AwkGearMasteryLoadEvent extends Event {
     private static final HandlerList HANDLERS = new HandlerList();
 
-    private final LevelToolsPlugin plugin;
+    private final AwkGearMasteryPlugin plugin;
     private final LoadPhase phase;
 
-    public LevelToolsLoadEvent(@NotNull LevelToolsPlugin plugin, @NotNull LoadPhase phase) {
+    public AwkGearMasteryLoadEvent(@NotNull AwkGearMasteryPlugin plugin, @NotNull LoadPhase phase) {
         this.plugin = plugin;
         this.phase = phase;
     }
 
     @NotNull
-    public LevelToolsPlugin getPlugin() {
+    public AwkGearMasteryPlugin getPlugin() {
         return plugin;
     }
 

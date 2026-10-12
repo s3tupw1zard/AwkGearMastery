@@ -1,13 +1,13 @@
 package dev.s3tupw1zard.awkgearmastery.api.item;
 
-import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
-import dev.s3tupw1zard.awkgearmastery.util.LevelToolsUtil;
+import dev.s3tupw1zard.awkgearmastery.AwkGearMasteryPlugin;
+import dev.s3tupw1zard.awkgearmastery.util.AwkGearMasteryUtil;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import redempt.crunch.CompiledExpression;
 
-public interface LevelToolsItem {
+public interface AwkGearMasteryItem {
     @NotNull
     ItemStack getItemStack();
 
@@ -29,8 +29,8 @@ public interface LevelToolsItem {
     void setLastHandledReward(int rewardKey);
 
     default double getMaxXp() {
-        final CompiledExpression formula = LevelToolsPlugin.getInstance().getLevelXpFormula();
-        final double nextXpRequirement = LevelToolsUtil.round(formula.evaluate(getLevel()), 1);
+        final CompiledExpression formula = AwkGearMasteryPlugin.getInstance().getLevelXpFormula();
+        final double nextXpRequirement = AwkGearMasteryUtil.round(formula.evaluate(getLevel()), 1);
 
         if (nextXpRequirement <= 0.0) {
             throw new RuntimeException(

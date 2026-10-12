@@ -1,6 +1,6 @@
 package dev.s3tupw1zard.awkgearmastery.api.event;
 
-import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.api.item.AwkGearMasteryItem;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
@@ -9,22 +9,22 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-public class LevelToolsLevelIncreaseEvent extends Event implements Cancellable {
+public class AwkGearMasteryLevelIncreaseEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
     @NotNull
-    private final LevelToolsItem item;
+    private final AwkGearMasteryItem item;
     @NotNull
     private final Player player;
     private int newLevel;
     private boolean isCancelled;
 
-    public LevelToolsLevelIncreaseEvent(@NotNull LevelToolsItem item, @NotNull Player player) {
+    public AwkGearMasteryLevelIncreaseEvent(@NotNull AwkGearMasteryItem item, @NotNull Player player) {
         this.item = item;
         this.player = player;
     }
 
-    public LevelToolsLevelIncreaseEvent(
-            @NotNull LevelToolsItem item, @NotNull Player player, int newLevel, boolean isCancelled) {
+    public AwkGearMasteryLevelIncreaseEvent(
+            @NotNull AwkGearMasteryItem item, @NotNull Player player, int newLevel, boolean isCancelled) {
         this.item = item;
         this.player = player;
         this.newLevel = newLevel;
@@ -43,7 +43,7 @@ public class LevelToolsLevelIncreaseEvent extends Event implements Cancellable {
     }
 
     @NotNull
-    public LevelToolsItem getItem() {
+    public AwkGearMasteryItem getItem() {
         return item;
     }
 
@@ -74,7 +74,7 @@ public class LevelToolsLevelIncreaseEvent extends Event implements Cancellable {
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
-        LevelToolsLevelIncreaseEvent that = (LevelToolsLevelIncreaseEvent) object;
+        AwkGearMasteryLevelIncreaseEvent that = (AwkGearMasteryLevelIncreaseEvent) object;
         return getNewLevel() == that.getNewLevel()
                 && isCancelled() == that.isCancelled()
                 && Objects.equals(getItem(), that.getItem())
@@ -88,7 +88,7 @@ public class LevelToolsLevelIncreaseEvent extends Event implements Cancellable {
 
     @Override
     public String toString() {
-        return "LevelToolsLevelIncreaseEvent{"
+        return "AwkGearMasteryLevelIncreaseEvent{"
                 + "item="
                 + item
                 + ", player="

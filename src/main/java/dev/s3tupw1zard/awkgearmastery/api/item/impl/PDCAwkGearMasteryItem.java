@@ -1,8 +1,7 @@
 package dev.s3tupw1zard.awkgearmastery.api.item.impl;
 
-import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
-import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
-import dev.s3tupw1zard.awkgearmastery.util.LevelToolsUtil;
+import dev.s3tupw1zard.awkgearmastery.api.item.AwkGearMasteryItem;
+import dev.s3tupw1zard.awkgearmastery.util.AwkGearMasteryUtil;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
 import org.bukkit.NamespacedKey;
@@ -24,13 +23,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
-public class PDCLevelToolsItem implements LevelToolsItem {
+public class PDCAwkGearMasteryItem implements AwkGearMasteryItem {
     @NotNull
     public static final NamespacedKey
-            LEVEL_KEY = Objects.requireNonNull(NamespacedKey.fromString("leveltools:leveltoolslevel")),
-            XP_KEY = Objects.requireNonNull(NamespacedKey.fromString("leveltools:leveltoolsxp")),
-            LAST_REWARD_KEY = Objects.requireNonNull(NamespacedKey.fromString("leveltools:leveltoolsreward")),
-            ITEM_ID_KEY = Objects.requireNonNull(NamespacedKey.fromString("leveltools:item_id"));
+            LEVEL_KEY = Objects.requireNonNull(NamespacedKey.fromString("awkgearmastery:awkgearmasterylevel")),
+            XP_KEY = Objects.requireNonNull(NamespacedKey.fromString("awkgearmastery:awkgearmasteryxp")),
+            LAST_REWARD_KEY = Objects.requireNonNull(NamespacedKey.fromString("awkgearmastery:awkgearmasteryreward")),
+            ITEM_ID_KEY = Objects.requireNonNull(NamespacedKey.fromString("awkgearmastery:item_id"));
 
     @NotNull
     private ItemStack stack;
@@ -44,11 +43,11 @@ public class PDCLevelToolsItem implements LevelToolsItem {
     @NotNull
     private String itemId;
 
-    public PDCLevelToolsItem(@NotNull ItemStack stack) {
+    public PDCAwkGearMasteryItem(@NotNull ItemStack stack) {
         this(stack, stack.getItemMeta());
     }
 
-    public PDCLevelToolsItem(@NotNull ItemStack stack, @Nullable ItemMeta meta) {
+    public PDCAwkGearMasteryItem(@NotNull ItemStack stack, @Nullable ItemMeta meta) {
         this.stack = stack;
         this.enchantments = new HashMap<>();
         this.attributes = new HashMap<>();
@@ -93,8 +92,8 @@ public class PDCLevelToolsItem implements LevelToolsItem {
         pdc.set(LAST_REWARD_KEY, PersistentDataType.INTEGER, lastHandledReward);
         pdc.set(ITEM_ID_KEY, PersistentDataType.STRING, itemId);
 
-        LevelToolsUtil.applyCalculatedDurability(built, meta, level);
-        LevelToolsUtil.applyDisplay(built, meta, enchantments, level, xp, maxXp);
+        AwkGearMasteryUtil.applyCalculatedDurability(built, meta, level);
+        AwkGearMasteryUtil.applyDisplay(built, meta, enchantments, level, xp, maxXp);
         applyAttributes(meta);
         built.setItemMeta(meta);
 
@@ -109,7 +108,7 @@ public class PDCLevelToolsItem implements LevelToolsItem {
             final Attribute attribute = resolveAttribute(attributeRegistry, name);
             final NamespacedKey attributeKey = attributeRegistry.getKeyOrThrow(attribute);
             final NamespacedKey modifierKey =
-                    Objects.requireNonNull(NamespacedKey.fromString("leveltools:reward/" + attributeKey.getKey()));
+                    Objects.requireNonNull(NamespacedKey.fromString("awkgearmastery:reward/" + attributeKey.getKey()));
 
             final Collection<AttributeModifier> existing = meta.getAttributeModifiers(attribute);
             if (existing != null) {
@@ -236,7 +235,7 @@ public class PDCLevelToolsItem implements LevelToolsItem {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PDCLevelToolsItem that = (PDCLevelToolsItem) o;
+        PDCAwkGearMasteryItem that = (PDCAwkGearMasteryItem) o;
         return level == that.level
                 && Double.compare(that.xp, xp) == 0
                 && lastHandledReward == that.lastHandledReward
@@ -252,7 +251,7 @@ public class PDCLevelToolsItem implements LevelToolsItem {
 
     @Override
     public String toString() {
-        return "PDCLevelToolsItem{"
+        return "PDCAwkGearMasteryItem{"
                 + "stack="
                 + stack
                 + ", enchantments="

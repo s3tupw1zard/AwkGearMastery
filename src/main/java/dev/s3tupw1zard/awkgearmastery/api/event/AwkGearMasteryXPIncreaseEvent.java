@@ -1,6 +1,6 @@
 package dev.s3tupw1zard.awkgearmastery.api.event;
 
-import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.api.item.AwkGearMasteryItem;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
@@ -9,25 +9,25 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-public class LevelToolsXPIncreaseEvent extends Event implements Cancellable {
+public class AwkGearMasteryXPIncreaseEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
     @NotNull
-    private final LevelToolsItem item;
+    private final AwkGearMasteryItem item;
     @NotNull
     private final Player player;
     private final double initialXp;
     private double newXp;
     private boolean isCancelled, isModified = false;
 
-    public LevelToolsXPIncreaseEvent(
-            @NotNull LevelToolsItem item, @NotNull Player player, double initialXp) {
+    public AwkGearMasteryXPIncreaseEvent(
+            @NotNull AwkGearMasteryItem item, @NotNull Player player, double initialXp) {
         this.item = item;
         this.player = player;
         this.initialXp = initialXp;
     }
 
-    public LevelToolsXPIncreaseEvent(
-            @NotNull LevelToolsItem item,
+    public AwkGearMasteryXPIncreaseEvent(
+            @NotNull AwkGearMasteryItem item,
             @NotNull Player player,
             double initialXp,
             double newXp,
@@ -61,7 +61,7 @@ public class LevelToolsXPIncreaseEvent extends Event implements Cancellable {
     }
 
     @NotNull
-    public LevelToolsItem getItem() {
+    public AwkGearMasteryItem getItem() {
         return item;
     }
 
@@ -91,7 +91,7 @@ public class LevelToolsXPIncreaseEvent extends Event implements Cancellable {
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
-        LevelToolsXPIncreaseEvent that = (LevelToolsXPIncreaseEvent) object;
+        AwkGearMasteryXPIncreaseEvent that = (AwkGearMasteryXPIncreaseEvent) object;
         return Double.compare(getInitialXp(), that.getInitialXp()) == 0
                 && Double.compare(getNewXp(), that.getNewXp()) == 0
                 && isCancelled() == that.isCancelled()
@@ -106,7 +106,7 @@ public class LevelToolsXPIncreaseEvent extends Event implements Cancellable {
 
     @Override
     public String toString() {
-        return "LevelToolsXPIncreaseEvent{"
+        return "AwkGearMasteryXPIncreaseEvent{"
                 + "item="
                 + item
                 + ", player="

@@ -1,6 +1,6 @@
 package dev.s3tupw1zard.awkgearmastery.api.scheduler.impl.bukkit;
 
-import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.AwkGearMasteryPlugin;
 import dev.s3tupw1zard.awkgearmastery.api.scheduler.ScheduledTask;
 import dev.s3tupw1zard.awkgearmastery.api.scheduler.Scheduler;
 import org.bukkit.Bukkit;
@@ -8,9 +8,9 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 
 public class BukkitScheduler implements Scheduler {
-    private final LevelToolsPlugin plugin;
+    private final AwkGearMasteryPlugin plugin;
 
-    public BukkitScheduler(LevelToolsPlugin plugin) {
+    public BukkitScheduler(AwkGearMasteryPlugin plugin) {
         this.plugin = plugin;
     }
 
