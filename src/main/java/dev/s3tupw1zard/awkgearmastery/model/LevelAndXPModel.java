@@ -1,7 +1,7 @@
 package dev.s3tupw1zard.awkgearmastery.model;
 
-import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
-import dev.s3tupw1zard.awkgearmastery.util.LevelToolsUtil;
+import dev.s3tupw1zard.awkgearmastery.api.item.AwkGearMasteryItem;
+import dev.s3tupw1zard.awkgearmastery.util.AwkGearMasteryUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -12,11 +12,11 @@ public class LevelAndXPModel {
 
     public LevelAndXPModel(int level, double xp) {
         this.level = level;
-        this.xp = LevelToolsUtil.round(xp, 1);
+        this.xp = AwkGearMasteryUtil.round(xp, 1);
     }
 
     @NotNull
-    public static LevelAndXPModel fromItem(@NotNull LevelToolsItem item) {
+    public static LevelAndXPModel fromItem(@NotNull AwkGearMasteryItem item) {
         return new LevelAndXPModel(item.getLevel(), item.getXp());
     }
 

@@ -1,7 +1,7 @@
 package dev.s3tupw1zard.awkgearmastery.profile.reward;
 
 import dev.s3tupw1zard.awkgearmastery.api.RewardType;
-import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.api.item.AwkGearMasteryItem;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,7 +31,7 @@ public final class RewardEntry {
         return rawString;
     }
 
-    public void apply(@NotNull LevelToolsItem tool, @NotNull Player player) {
+    public void apply(@NotNull AwkGearMasteryItem tool, @NotNull Player player) {
         type.apply(tool, arguments, player);
     }
 

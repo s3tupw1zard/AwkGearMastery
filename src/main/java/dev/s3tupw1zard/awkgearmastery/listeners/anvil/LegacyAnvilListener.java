@@ -1,10 +1,10 @@
 package dev.s3tupw1zard.awkgearmastery.listeners.anvil;
 
-import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.AwkGearMasteryPlugin;
 import dev.s3tupw1zard.awkgearmastery.api.AnvilCombineMode;
-import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.api.item.AwkGearMasteryItem;
 import dev.s3tupw1zard.awkgearmastery.model.LevelAndXPModel;
-import dev.s3tupw1zard.awkgearmastery.util.LevelToolsUtil;
+import dev.s3tupw1zard.awkgearmastery.util.AwkGearMasteryUtil;
 import com.google.common.collect.Multimap;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
@@ -78,7 +78,7 @@ public class LegacyAnvilListener implements Listener {
 
         for (Map.Entry<Attribute, AttributeModifier> entry : sourceModifiers.entries()) {
             final AttributeModifier sourceModifier = entry.getValue();
-            if (!isLevelToolsAttributeModifier(sourceModifier)) {
+            if (!isAwkGearMasteryAttributeModifier(sourceModifier)) {
                 continue;
             }
 
@@ -99,11 +99,11 @@ public class LegacyAnvilListener implements Listener {
         return protectedResult;
     }
 
-    private static boolean isLevelToolsAttributeModifier(AttributeModifier modifier) {
+    private static boolean isAwkGearMasteryAttributeModifier(AttributeModifier modifier) {
         final NamespacedKey key = modifier.getKey();
 
         // Modern reward modifiers are keyed in this plugin's namespace.
-        if (key.getNamespace().equals(LevelToolsPlugin.getInstance().getName().toLowerCase(Locale.ROOT))
+        if (key.getNamespace().equals(AwkGearMasteryPlugin.getInstance().getName().toLowerCase(Locale.ROOT))
                 && key.getKey().startsWith("reward/")) {
             return true;
         }
@@ -117,28 +117,28 @@ public class LegacyAnvilListener implements Listener {
 
     static boolean isHandledAnvilAction(ItemStack firstItem, ItemStack secondItem, ItemStack result) {
         return result != null
-                && LevelToolsUtil.isSupportedTool(result.getType())
+                && AwkGearMasteryUtil.isSupportedTool(result.getType())
                 && firstItem != null
                 && secondItem != null
-                && LevelToolsUtil.isSupportedTool(firstItem.getType());
+                && AwkGearMasteryUtil.isSupportedTool(firstItem.getType());
     }
 
     static ItemStack createUpdatedResult(
             ItemStack firstItem, ItemStack secondItem, ItemStack result, HumanEntity viewer) {
         final ItemStack protectedResult = preserveBaseProgression(firstItem, result);
-        final LevelToolsItem finalItem = LevelToolsUtil.createLevelToolsItem(protectedResult);
+        final AwkGearMasteryItem finalItem = AwkGearMasteryUtil.createAwkGearMasteryItem(protectedResult);
 
-        if (LevelToolsUtil.isSupportedTool(secondItem.getType())) {
-            final AnvilCombineMode mode = LevelToolsPlugin.getInstance().getAnvilCombineMode();
+        if (AwkGearMasteryUtil.isSupportedTool(secondItem.getType())) {
+            final AnvilCombineMode mode = AwkGearMasteryPlugin.getInstance().getAnvilCombineMode();
             final LevelAndXPModel first =
-                    LevelAndXPModel.fromItem(LevelToolsUtil.createLevelToolsItem(firstItem));
+                    LevelAndXPModel.fromItem(AwkGearMasteryUtil.createAwkGearMasteryItem(firstItem));
             final LevelAndXPModel second =
-                    LevelAndXPModel.fromItem(LevelToolsUtil.createLevelToolsItem(secondItem));
+                    LevelAndXPModel.fromItem(AwkGearMasteryUtil.createAwkGearMasteryItem(secondItem));
             final LevelAndXPModel finished = mode.getHandler().apply(first, second);
             finalItem.setLevel(finished.getLevel());
             finalItem.setXp(finished.getXp());
         } else {
-            final LevelToolsItem original = LevelToolsUtil.createLevelToolsItem(firstItem);
+            final AwkGearMasteryItem original = AwkGearMasteryUtil.createAwkGearMasteryItem(firstItem);
             finalItem.setLevel(original.getLevel());
             finalItem.setXp(original.getXp());
             finalItem.setLastHandledReward(original.getLastHandledReward());
