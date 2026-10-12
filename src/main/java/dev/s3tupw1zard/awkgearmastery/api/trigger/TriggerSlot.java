@@ -42,7 +42,7 @@ public enum TriggerSlot {
             case LEGS:
                 return LEGGINGS;
             default:
-                throw new IllegalArgumentException("LevelTools needs to be updated for the new MC update.");
+                throw new IllegalArgumentException("AwkGearMastery needs to be updated for the new MC update.");
         }
     }
 }

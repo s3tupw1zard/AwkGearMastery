@@ -198,7 +198,7 @@ public final class CombatXpConfig {
                                     Math.max(0.0, rule.getDouble("curve_exponent", 0.0)),
                                     Math.max(0L, rule.getLong("claim_interval_seconds", 0L)) * 1000L,
                                     Math.max(1, rule.getInt("minimum_level", 1)),
-                                    Math.max(0, rule.getInt("required_leveltools_critical_hits", 0))
+                                    Math.max(0, rule.getInt("required_awkgearmastery_critical_hits", 0))
                             )
                     );
                 }
