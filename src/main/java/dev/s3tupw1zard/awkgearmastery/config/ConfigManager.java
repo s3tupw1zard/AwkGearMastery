@@ -2,8 +2,7 @@ package dev.s3tupw1zard.awkgearmastery.config;
 
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
-import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
-import dev.s3tupw1zard.awkgearmastery.config.migration.ConfigMigrator;
+import dev.s3tupw1zard.awkgearmastery.AwkGearMasteryPlugin;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.Sound;
@@ -27,7 +26,7 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 public final class ConfigManager {
-    private final LevelToolsPlugin plugin;
+    private final AwkGearMasteryPlugin plugin;
     private final Path dataFolder;
     private final Logger logger;
 
@@ -42,7 +41,7 @@ public final class ConfigManager {
     private FileConfiguration enchantmentModifiersConfig;
     private Settings settings;
 
-    public ConfigManager(@NotNull LevelToolsPlugin plugin) {
+    public ConfigManager(@NotNull AwkGearMasteryPlugin plugin) {
         this.plugin = plugin;
         this.dataFolder = plugin.getDataFolder().toPath();
         this.logger = plugin.getLogger();
@@ -50,16 +49,6 @@ public final class ConfigManager {
 
     public void loadAll() {
         ensureDataFolder();
-
-        if (needsMigration()) {
-            logger.info("Detected v1 configuration. Starting migration to v2...");
-            ConfigMigrator migrator = new ConfigMigrator(plugin, dataFolder, logger);
-            migrator.migrate();
-            logger.info("Migration complete!");
-        }
-
-        final ConfigUpdater updater = new ConfigUpdater(dataFolder, logger);
-        updater.updateMainConfig();
 
         mainConfig = loadOrCreate("config.yml");
         triggerProfilesConfig = loadOrCreate("trigger_profiles.yml");
@@ -70,12 +59,6 @@ public final class ConfigManager {
         statProfilesConfig = loadOrCreate("stat_profiles.yml");
         xpSourcesConfig = loadOrCreate("xp_sources.yml");
         enchantmentModifiersConfig = loadOrCreate("enchantment_modifiers.yml");
-
-        updater.updateProgressionConfigs();
-        itemProfilesConfig = loadOrCreate("item_profiles.yml");
-        progressionProfilesConfig = loadOrCreate("progression_profiles.yml");
-        displayProfilesConfig = loadOrCreate("display_profiles.yml");
-        xpSourcesConfig = loadOrCreate("xp_sources.yml");
 
         settings = Settings.from(mainConfig, logger);
 
@@ -94,16 +77,6 @@ public final class ConfigManager {
         } catch (IOException e) {
             logger.severe("Failed to create data folder: " + e.getMessage());
         }
-    }
-
-    private boolean needsMigration() {
-        Path configPath = dataFolder.resolve("config.yml");
-        if (!Files.exists(configPath)) {
-            return false;
-        }
-
-        YamlConfiguration config = YamlConfiguration.loadConfiguration(configPath.toFile());
-        return config.contains("tool_rewards") || config.contains("sword_rewards") || config.contains("bow_rewards");
     }
 
     @NotNull
@@ -188,7 +161,7 @@ public final class ConfigManager {
         private final boolean countPlayerPlacedBlocks;
         private final boolean ignorePlayerPlacedBlocksForFullyGrownCrops;
         private final boolean hideAttributes;
-        private final boolean preventEnchantedBooksOnLevelToolsItems;
+        private final boolean preventEnchantedBooksOnAwkGearMasteryItems;
         private final LevelUpSound levelUpSound;
 
         private Settings(
@@ -196,14 +169,14 @@ public final class ConfigManager {
                 boolean countPlayerPlacedBlocks,
                 boolean ignorePlayerPlacedBlocksForFullyGrownCrops,
                 boolean hideAttributes,
-                boolean preventEnchantedBooksOnLevelToolsItems,
+                boolean preventEnchantedBooksOnAwkGearMasteryItems,
                 @Nullable LevelUpSound levelUpSound
         ) {
             this.disabledWorlds = disabledWorlds;
             this.countPlayerPlacedBlocks = countPlayerPlacedBlocks;
             this.ignorePlayerPlacedBlocksForFullyGrownCrops = ignorePlayerPlacedBlocksForFullyGrownCrops;
             this.hideAttributes = hideAttributes;
-            this.preventEnchantedBooksOnLevelToolsItems = preventEnchantedBooksOnLevelToolsItems;
+            this.preventEnchantedBooksOnAwkGearMasteryItems = preventEnchantedBooksOnAwkGearMasteryItems;
             this.levelUpSound = levelUpSound;
         }
 
@@ -214,7 +187,7 @@ public final class ConfigManager {
                     config.getBoolean("playerPlacedBlocks"),
                     config.getBoolean("farming.ignore_player_placed_blocks_for_fully_grown_crops", true),
                     config.getBoolean("hide_attributes", true),
-                    config.getBoolean("prevent_enchanted_books_on_leveltools_items", false),
+                    config.getBoolean("prevent_enchanted_books_on_awkgearmastery_items", false),
                     LevelUpSound.from(config.getConfigurationSection("level_up_sound"), logger)
             );
         }
@@ -236,8 +209,8 @@ public final class ConfigManager {
             return hideAttributes;
         }
 
-        public boolean isPreventEnchantedBooksOnLevelToolsItems() {
-            return preventEnchantedBooksOnLevelToolsItems;
+        public boolean isPreventEnchantedBooksOnAwkGearMasteryItems() {
+            return preventEnchantedBooksOnAwkGearMasteryItems;
         }
 
         @Nullable

@@ -1,8 +1,8 @@
 package dev.s3tupw1zard.awkgearmastery.config;
 
-import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.AwkGearMasteryPlugin;
 import dev.s3tupw1zard.awkgearmastery.profile.item.ItemProfile;
-import dev.s3tupw1zard.awkgearmastery.util.LevelToolsUtil;
+import dev.s3tupw1zard.awkgearmastery.util.AwkGearMasteryUtil;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +23,7 @@ public final class XpFormulaRegistry {
     public static final String GLOBAL_ID = "global";
     private static final String DEFAULT_FORMULA = "100 + {current_level} * 100";
     private static final Pattern FORMULA_ID_PATTERN = Pattern.compile("^[a-z0-9_-]+$");
-    private static final String FORMULA_PERMISSION_PREFIX = "leveltools.formula.";
+    private static final String FORMULA_PERMISSION_PREFIX = "awkgearmastery.formula.";
     private static final int VALIDATION_MAX_LEVEL = 1000;
 
     private final LinkedHashMap<String, CompiledExpression> formulas;
@@ -144,7 +144,7 @@ public final class XpFormulaRegistry {
         double nextXpRequirement = evaluateRaw(formula, currentLevel);
         if (nextXpRequirement <= 0.0) {
             if (clampWarnedFormulas.add(formula)) {
-                LevelToolsPlugin.getInstance()
+                AwkGearMasteryPlugin.getInstance()
                         .getLogger()
                         .warning("The XP formula '" + formula + "' returned " + nextXpRequirement + " for level " + currentLevel + ". Clamping to 1.0. Please fix your formula.");
             }
@@ -157,7 +157,7 @@ public final class XpFormulaRegistry {
     // mutates a shared field and is not thread-safe. This is only safe while no custom Crunch
     // functions are registered, because FunctionCall nodes carry shared mutable state.
     private static double evaluateRaw(@NotNull CompiledExpression formula, int currentLevel) {
-        return LevelToolsUtil.round(formula.getValue().getValue(new double[]{currentLevel}), 1);
+        return AwkGearMasteryUtil.round(formula.getValue().getValue(new double[]{currentLevel}), 1);
     }
 
     private static final class PermissionFormula {

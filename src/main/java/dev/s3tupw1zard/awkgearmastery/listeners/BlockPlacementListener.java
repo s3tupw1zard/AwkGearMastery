@@ -1,6 +1,6 @@
 package dev.s3tupw1zard.awkgearmastery.listeners;
 
-import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.AwkGearMasteryPlugin;
 import dev.s3tupw1zard.awkgearmastery.api.block.BlockPosition;
 import dev.s3tupw1zard.awkgearmastery.api.scheduler.Scheduler;
 import org.bukkit.block.Block;
@@ -19,7 +19,7 @@ public final class BlockPlacementListener implements Listener {
     }
 
     private boolean isPPBEnabled() {
-        return !LevelToolsPlugin.getInstance().getConfigManager().getSettings().isCountPlayerPlacedBlocks();
+        return !AwkGearMasteryPlugin.getInstance().getConfigManager().getSettings().isCountPlayerPlacedBlocks();
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -30,11 +30,11 @@ public final class BlockPlacementListener implements Listener {
 
         Block block = event.getBlock();
         BlockPosition pos = BlockPosition.fromBukkit(block);
-        if (!LevelToolsPlugin.getInstance().getBlockDataManager().isPlacedBlock(pos)) {
+        if (!AwkGearMasteryPlugin.getInstance().getBlockDataManager().isPlacedBlock(pos)) {
             return;
         }
 
-        scheduler.locationDelayed(() -> LevelToolsPlugin.getInstance().getBlockDataManager().removePlacedBlock(pos), block.getLocation(), 1);
+        scheduler.locationDelayed(() -> AwkGearMasteryPlugin.getInstance().getBlockDataManager().removePlacedBlock(pos), block.getLocation(), 1);
     }
 
     @EventHandler(priority = EventPriority.LOW)
@@ -43,6 +43,6 @@ public final class BlockPlacementListener implements Listener {
             return;
         }
 
-        LevelToolsPlugin.getInstance().getBlockDataManager().addPlacedBlock(BlockPosition.fromBukkit(event.getBlock()));
+        AwkGearMasteryPlugin.getInstance().getBlockDataManager().addPlacedBlock(BlockPosition.fromBukkit(event.getBlock()));
     }
 }

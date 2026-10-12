@@ -1,16 +1,16 @@
 package dev.s3tupw1zard.awkgearmastery.listeners;
 
-import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
-import dev.s3tupw1zard.awkgearmastery.api.event.LevelToolsLevelIncreaseEvent;
-import dev.s3tupw1zard.awkgearmastery.api.event.LevelToolsXPIncreaseEvent;
-import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.AwkGearMasteryPlugin;
+import dev.s3tupw1zard.awkgearmastery.api.event.AwkGearMasteryLevelIncreaseEvent;
+import dev.s3tupw1zard.awkgearmastery.api.event.AwkGearMasteryXPIncreaseEvent;
+import dev.s3tupw1zard.awkgearmastery.api.item.AwkGearMasteryItem;
 import dev.s3tupw1zard.awkgearmastery.api.trigger.TriggerSlot;
 import dev.s3tupw1zard.awkgearmastery.config.ConfigManager;
 import dev.s3tupw1zard.awkgearmastery.profile.ProfileManager;
 import dev.s3tupw1zard.awkgearmastery.profile.display.DisplayProfile;
 import dev.s3tupw1zard.awkgearmastery.profile.item.ItemProfile;
 import dev.s3tupw1zard.awkgearmastery.profile.reward.RewardProfile;
-import dev.s3tupw1zard.awkgearmastery.util.LevelToolsUtil;
+import dev.s3tupw1zard.awkgearmastery.util.AwkGearMasteryUtil;
 import dev.s3tupw1zard.awkgearmastery.util.Text;
 import dev.s3tupw1zard.awkgearmastery.util.XPBooster;
 import org.bukkit.Bukkit;
@@ -35,14 +35,14 @@ public final class XPHandler {
             @NotNull Player player,
             @NotNull ItemProfile itemProfile,
             @Nullable TriggerSlot slot,
-            @NotNull LevelToolsItem tool,
+            @NotNull AwkGearMasteryItem tool,
             double modifier,
             boolean deferCommit
     ) {
         modifier = Math.max(0, XPBooster.apply(player, modifier));
-        double newXp = LevelToolsUtil.round(tool.getXp() + modifier, 1);
+        double newXp = AwkGearMasteryUtil.round(tool.getXp() + modifier, 1);
 
-        LevelToolsXPIncreaseEvent xpEvent = new LevelToolsXPIncreaseEvent(tool, player, newXp, newXp, false);
+        AwkGearMasteryXPIncreaseEvent xpEvent = new AwkGearMasteryXPIncreaseEvent(tool, player, newXp, newXp, false);
         Bukkit.getPluginManager().callEvent(xpEvent);
 
         if (xpEvent.isCancelled()) {
@@ -66,15 +66,15 @@ public final class XPHandler {
     public void handleDirectCommit(
             @NotNull Player player,
             @NotNull ItemProfile itemProfile,
-            @NotNull LevelToolsItem tool,
+            @NotNull AwkGearMasteryItem tool,
             double modifier,
             @NotNull Consumer<ItemStack> committer
     ) {
         modifier = Math.max(0, XPBooster.apply(player, modifier));
-        double newXp = LevelToolsUtil.round(tool.getXp() + modifier, 1);
+        double newXp = AwkGearMasteryUtil.round(tool.getXp() + modifier, 1);
 
-        LevelToolsXPIncreaseEvent xpEvent =
-                new LevelToolsXPIncreaseEvent(tool, player, newXp, newXp, false);
+        AwkGearMasteryXPIncreaseEvent xpEvent =
+                new AwkGearMasteryXPIncreaseEvent(tool, player, newXp, newXp, false);
         Bukkit.getPluginManager().callEvent(xpEvent);
 
         if (xpEvent.isCancelled()) {
@@ -92,38 +92,38 @@ public final class XPHandler {
     private void commitDeferred(
             @NotNull Player player,
             @Nullable TriggerSlot slot,
-            @NotNull LevelToolsItem tool,
+            @NotNull AwkGearMasteryItem tool,
             double maxXp
     ) {
-        ItemStack backing = LevelToolsUtil.getBackingItemStack(tool);
+        ItemStack backing = AwkGearMasteryUtil.getBackingItemStack(tool);
         if (backing == null) {
             updateItem(player, slot, tool.getItemStack(maxXp));
             return;
         }
 
         Material expectedType = backing.getType();
-        LevelToolsPlugin.getInstance().getScheduler().locationDelayed(() -> {
+        AwkGearMasteryPlugin.getInstance().getScheduler().locationDelayed(() -> {
             if (!player.isOnline()) {
                 return;
             }
 
-            ItemStack live = LevelToolsUtil.getItemInSlot(player, slot);
+            ItemStack live = AwkGearMasteryUtil.getItemInSlot(player, slot);
             if (live == null || live.getType() != expectedType) {
                 return;
             }
 
-            if (LevelToolsUtil.rebindLevelToolsItem(tool, live)) {
+            if (AwkGearMasteryUtil.rebindAwkGearMasteryItem(tool, live)) {
                 updateItem(player, slot, tool.getItemStack(maxXp));
             }
         }, player.getLocation(), 1);
     }
 
     private double advanceLevels(
-            @NotNull LevelToolsItem tool,
+            @NotNull AwkGearMasteryItem tool,
             @NotNull Player player,
             @NotNull ItemProfile itemProfile
     ) {
-        final int maxLevel = LevelToolsUtil.getMaxLevel(itemProfile);
+        final int maxLevel = AwkGearMasteryUtil.getMaxLevel(itemProfile);
         double maxXp = getMaxXp(player, itemProfile, tool);
 
         while (tool.getLevel() < maxLevel && tool.getXp() >= maxXp) {
@@ -143,27 +143,27 @@ public final class XPHandler {
     }
 
     private boolean handleLevelUp(
-            @NotNull LevelToolsItem tool,
+            @NotNull AwkGearMasteryItem tool,
             @NotNull Player player,
             @NotNull ItemProfile itemProfile,
             double maxXp
     ) {
         int newLevel = tool.getLevel() + 1;
-        int maxLevel = LevelToolsUtil.getMaxLevel(itemProfile);
+        int maxLevel = AwkGearMasteryUtil.getMaxLevel(itemProfile);
 
         if (newLevel > maxLevel) {
             tool.setXp(maxXp);
             return false;
         }
 
-        LevelToolsLevelIncreaseEvent levelEvent = new LevelToolsLevelIncreaseEvent(tool, player, newLevel, false);
+        AwkGearMasteryLevelIncreaseEvent levelEvent = new AwkGearMasteryLevelIncreaseEvent(tool, player, newLevel, false);
         Bukkit.getPluginManager().callEvent(levelEvent);
 
         if (levelEvent.isCancelled()) {
             return false;
         }
 
-        tool.setXp(LevelToolsUtil.round(Math.abs(tool.getXp() - maxXp), 1));
+        tool.setXp(AwkGearMasteryUtil.round(Math.abs(tool.getXp() - maxXp), 1));
         tool.setLevel(levelEvent.getNewLevel());
 
         if (levelEvent.getNewLevel() == maxLevel) {
@@ -176,14 +176,14 @@ public final class XPHandler {
     }
 
     private void playLevelUpSound(@NotNull Player player) {
-        ConfigManager.LevelUpSound sound = LevelToolsPlugin.getInstance().getConfigManager().getSettings().getLevelUpSound();
+        ConfigManager.LevelUpSound sound = AwkGearMasteryPlugin.getInstance().getConfigManager().getSettings().getLevelUpSound();
         if (sound != null) {
             sound.play(player);
         }
     }
 
     private void showActionBar(
-            @NotNull LevelToolsItem tool,
+            @NotNull AwkGearMasteryItem tool,
             @NotNull Player player,
             @NotNull ItemProfile itemProfile,
             double maxXp,
@@ -199,7 +199,7 @@ public final class XPHandler {
             return;
         }
 
-        final int maxLevel = LevelToolsUtil.getMaxLevel(itemProfile);
+        final int maxLevel = AwkGearMasteryUtil.getMaxLevel(itemProfile);
         if (tool.getLevel() >= maxLevel) {
             return;
         }
@@ -211,16 +211,16 @@ public final class XPHandler {
                 .replace("{xp}", String.valueOf(displayXp))
                 .replace("{max_xp}", String.valueOf(maxXp))
                 .replace("{level}", String.valueOf(tool.getLevel()))
-                .replace("{slot}", LevelToolsUtil.getReadableSlotName(slot))
-                .replace("{item}", LevelToolsUtil.getReadableItemName(tool.getItemStack()))
+                .replace("{slot}", AwkGearMasteryUtil.getReadableSlotName(slot))
+                .replace("{item}", AwkGearMasteryUtil.getReadableItemName(tool.getItemStack()))
                 .replace("{max_xp_formatted}", formatMoney(maxXp))
                 .replace("{xp_formatted}", formatMoney(displayXp)));
 
-        LevelToolsUtil.sendActionBar(player, text);
+        AwkGearMasteryUtil.sendActionBar(player, text);
     }
 
     private void handleReward(
-            @NotNull LevelToolsItem tool,
+            @NotNull AwkGearMasteryItem tool,
             @NotNull Player player,
             @NotNull ItemProfile itemProfile
     ) {
@@ -229,14 +229,14 @@ public final class XPHandler {
             return;
         }
 
-        LevelToolsUtil.applyRewards(tool, player, rewardProfile);
+        AwkGearMasteryUtil.applyRewards(tool, player, rewardProfile);
     }
 
-    private double getMaxXp(@NotNull Player player, @NotNull ItemProfile itemProfile, @NotNull LevelToolsItem tool) {
-        return LevelToolsUtil.getMaxXp(player, itemProfile, tool);
+    private double getMaxXp(@NotNull Player player, @NotNull ItemProfile itemProfile, @NotNull AwkGearMasteryItem tool) {
+        return AwkGearMasteryUtil.getMaxXp(player, itemProfile, tool);
     }
 
     private void updateItem(@NotNull Player player, @Nullable TriggerSlot slot, @NotNull ItemStack itemStack) {
-        LevelToolsUtil.setItemInSlot(player, slot, itemStack);
+        AwkGearMasteryUtil.setItemInSlot(player, slot, itemStack);
     }
 }

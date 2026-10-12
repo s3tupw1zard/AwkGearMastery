@@ -1,14 +1,14 @@
 package dev.s3tupw1zard.awkgearmastery.listeners;
 
-import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
-import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.AwkGearMasteryPlugin;
+import dev.s3tupw1zard.awkgearmastery.api.item.AwkGearMasteryItem;
 import dev.s3tupw1zard.awkgearmastery.api.trigger.TriggerIds;
 import dev.s3tupw1zard.awkgearmastery.config.CombatXpConfig;
 import dev.s3tupw1zard.awkgearmastery.profile.ProfileManager;
 import dev.s3tupw1zard.awkgearmastery.profile.item.ItemProfile;
 import dev.s3tupw1zard.awkgearmastery.profile.progression.ProgressionProfile;
 import dev.s3tupw1zard.awkgearmastery.profile.stat.CalculatedStats;
-import dev.s3tupw1zard.awkgearmastery.util.LevelToolsUtil;
+import dev.s3tupw1zard.awkgearmastery.util.AwkGearMasteryUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -56,10 +56,10 @@ public final class CombatProgressionListener implements Listener {
         }
 
         final AttackSource source = resolveAttackSource(event);
-        if (source == null || !source.player().hasPermission("leveltools.enabled")) {
+        if (source == null || !source.player().hasPermission("awkgearmastery.enabled")) {
             return;
         }
-        if (LevelToolsPlugin.getInstance()
+        if (AwkGearMasteryPlugin.getInstance()
                 .getConfigManager()
                 .getSettings()
                 .getDisabledWorlds()
@@ -77,9 +77,9 @@ public final class CombatProgressionListener implements Listener {
             return;
         }
 
-        final LevelToolsItem tool = LevelToolsUtil.createLevelToolsItem(prepared.item());
+        final AwkGearMasteryItem tool = AwkGearMasteryUtil.createAwkGearMasteryItem(prepared.item());
         final CalculatedStats attackStats =
-                LevelToolsPlugin.getInstance()
+                AwkGearMasteryPlugin.getInstance()
                         .getStatCalculator()
                         .calculate(prepared.item(), itemProfile, tool.getLevel());
         final DefenseStats defense = calculateDefense(target);
@@ -111,7 +111,7 @@ public final class CombatProgressionListener implements Listener {
                 1.0
         ));
 
-        final CombatXpConfig config = LevelToolsPlugin.getInstance().getCombatXpConfig();
+        final CombatXpConfig config = AwkGearMasteryPlugin.getInstance().getCombatXpConfig();
         if (config.getSharing().dualWieldSplit() && isDirectMeleeAttack(source)) {
             final PreparedWeapon offHand =
                     prepareInventoryWeapon(
@@ -123,8 +123,8 @@ public final class CombatProgressionListener implements Listener {
                 final ItemProfile offHandProfile =
                         profileManager.getProfileForMaterial(offHand.item().getType());
                 if (offHandProfile != null && isCombatTargetAllowed(offHandProfile, target)) {
-                    final LevelToolsItem offHandTool =
-                            LevelToolsUtil.createLevelToolsItem(offHand.item());
+                    final AwkGearMasteryItem offHandTool =
+                            AwkGearMasteryUtil.createAwkGearMasteryItem(offHand.item());
                     final ProgressionProfile offHandProgression =
                             profileManager.getProgressionProfileFor(offHandProfile);
 
@@ -165,7 +165,7 @@ public final class CombatProgressionListener implements Listener {
             return;
         }
 
-        final CombatXpConfig config = LevelToolsPlugin.getInstance().getCombatXpConfig();
+        final CombatXpConfig config = AwkGearMasteryPlugin.getInstance().getCombatXpConfig();
         final double finalDamage = Math.max(0.0, event.getFinalDamage());
         final double effectiveDamage = config.getSharing().countOverkill()
                 ? finalDamage
@@ -206,7 +206,7 @@ public final class CombatProgressionListener implements Listener {
     }
 
     private void distribute(@NotNull LivingEntity entity, @NotNull MobContribution mob) {
-        final CombatXpConfig config = LevelToolsPlugin.getInstance().getCombatXpConfig();
+        final CombatXpConfig config = AwkGearMasteryPlugin.getInstance().getCombatXpConfig();
         final CombatXpConfig.Sharing sharing = config.getSharing();
         final long now = System.currentTimeMillis();
 
@@ -264,7 +264,7 @@ public final class CombatProgressionListener implements Listener {
             }
 
             final List<Contribution> playerContributions = List.copyOf(playerEntry.getValue());
-            LevelToolsPlugin.getInstance()
+            AwkGearMasteryPlugin.getInstance()
                     .getScheduler()
                     .entityDelayed(
                             () -> awardPlayerContributions(
@@ -299,7 +299,7 @@ public final class CombatProgressionListener implements Listener {
         final NamespacedKey cooldownKey = rule == null
                 ? null
                 : new NamespacedKey(
-                        LevelToolsPlugin.getInstance(),
+                        AwkGearMasteryPlugin.getInstance(),
                         "combat_bonus_" + entityType.toLowerCase(java.util.Locale.ROOT)
                 );
 
@@ -370,7 +370,7 @@ public final class CombatProgressionListener implements Listener {
         xpHandler.handleDirectCommit(
                 player,
                 itemProfile,
-                LevelToolsUtil.createLevelToolsItem(resolved.item()),
+                AwkGearMasteryUtil.createAwkGearMasteryItem(resolved.item()),
                 xp,
                 resolved.committer()
         );
@@ -386,14 +386,14 @@ public final class CombatProgressionListener implements Listener {
             final Entity projectile = Bukkit.getEntity(contribution.projectileId);
             if (projectile instanceof Trident trident) {
                 final ItemStack item = trident.getItemStack();
-                if (contribution.itemId.equals(LevelToolsUtil.getStoredItemId(item))) {
+                if (contribution.itemId.equals(AwkGearMasteryUtil.getStoredItemId(item))) {
                     return new ResolvedWeapon(item, trident::setItemStack);
                 }
             }
         }
 
         final ItemStack mainHand = player.getInventory().getItemInMainHand();
-        if (contribution.itemId.equals(LevelToolsUtil.getStoredItemId(mainHand))) {
+        if (contribution.itemId.equals(AwkGearMasteryUtil.getStoredItemId(mainHand))) {
             return new ResolvedWeapon(
                     mainHand,
                     updated -> player.getInventory().setItemInMainHand(updated)
@@ -401,7 +401,7 @@ public final class CombatProgressionListener implements Listener {
         }
 
         final ItemStack offHand = player.getInventory().getItemInOffHand();
-        if (contribution.itemId.equals(LevelToolsUtil.getStoredItemId(offHand))) {
+        if (contribution.itemId.equals(AwkGearMasteryUtil.getStoredItemId(offHand))) {
             return new ResolvedWeapon(
                     offHand,
                     updated -> player.getInventory().setItemInOffHand(updated)
@@ -414,7 +414,7 @@ public final class CombatProgressionListener implements Listener {
             if (item == null || item.getType() == Material.AIR) {
                 continue;
             }
-            if (!contribution.itemId.equals(LevelToolsUtil.getStoredItemId(item))) {
+            if (!contribution.itemId.equals(AwkGearMasteryUtil.getStoredItemId(item))) {
                 continue;
             }
 
@@ -436,14 +436,14 @@ public final class CombatProgressionListener implements Listener {
             return null;
         }
 
-        String itemId = LevelToolsUtil.getStoredItemId(weapon);
+        String itemId = AwkGearMasteryUtil.getStoredItemId(weapon);
         ItemStack prepared = weapon;
 
         if (itemId == null) {
             final ItemProfile itemProfile = profileManager.getProfileForMaterial(weapon.getType());
-            final LevelToolsItem tool = LevelToolsUtil.createLevelToolsItem(weapon);
-            prepared = LevelToolsUtil.getItemStack(tool, source.player(), itemProfile);
-            itemId = LevelToolsUtil.getStoredItemId(prepared);
+            final AwkGearMasteryItem tool = AwkGearMasteryUtil.createAwkGearMasteryItem(weapon);
+            prepared = AwkGearMasteryUtil.getItemStack(tool, source.player(), itemProfile);
+            itemId = AwkGearMasteryUtil.getStoredItemId(prepared);
             if (itemId == null) {
                 return null;
             }
@@ -478,15 +478,15 @@ public final class CombatProgressionListener implements Listener {
             return null;
         }
 
-        String itemId = LevelToolsUtil.getStoredItemId(weapon);
+        String itemId = AwkGearMasteryUtil.getStoredItemId(weapon);
         ItemStack prepared = weapon;
 
         if (itemId == null) {
             final ItemProfile itemProfile =
                     profileManager.getProfileForMaterial(weapon.getType());
-            final LevelToolsItem tool = LevelToolsUtil.createLevelToolsItem(weapon);
-            prepared = LevelToolsUtil.getItemStack(tool, player, itemProfile);
-            itemId = LevelToolsUtil.getStoredItemId(prepared);
+            final AwkGearMasteryItem tool = AwkGearMasteryUtil.createAwkGearMasteryItem(weapon);
+            prepared = AwkGearMasteryUtil.getItemStack(tool, player, itemProfile);
+            itemId = AwkGearMasteryUtil.getStoredItemId(prepared);
             if (itemId == null) {
                 return null;
             }
@@ -552,9 +552,9 @@ public final class CombatProgressionListener implements Listener {
                 continue;
             }
 
-            final LevelToolsItem item = LevelToolsUtil.createLevelToolsItem(armor);
+            final AwkGearMasteryItem item = AwkGearMasteryUtil.createAwkGearMasteryItem(armor);
             final CalculatedStats stats =
-                    LevelToolsPlugin.getInstance()
+                    AwkGearMasteryPlugin.getInstance()
                             .getStatCalculator()
                             .calculate(armor, profile, item.getLevel());
             remainingCriticalDefense *= 1.0 - stats.criticalDefense();

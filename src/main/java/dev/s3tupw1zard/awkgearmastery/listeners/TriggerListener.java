@@ -1,15 +1,15 @@
 package dev.s3tupw1zard.awkgearmastery.listeners;
 
-import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
+import dev.s3tupw1zard.awkgearmastery.AwkGearMasteryPlugin;
 import dev.s3tupw1zard.awkgearmastery.api.block.BlockPosition;
-import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.api.item.AwkGearMasteryItem;
 import dev.s3tupw1zard.awkgearmastery.api.trigger.*;
 import dev.s3tupw1zard.awkgearmastery.api.trigger.impl.FarmingTrigger;
 import dev.s3tupw1zard.awkgearmastery.config.ConfigManager;
 import dev.s3tupw1zard.awkgearmastery.profile.ProfileManager;
 import dev.s3tupw1zard.awkgearmastery.profile.item.ItemProfile;
 import dev.s3tupw1zard.awkgearmastery.profile.trigger.TriggerProfile;
-import dev.s3tupw1zard.awkgearmastery.util.LevelToolsUtil;
+import dev.s3tupw1zard.awkgearmastery.util.AwkGearMasteryUtil;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -50,13 +50,13 @@ public final class TriggerListener implements Listener {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if (!player.hasPermission("leveltools.enabled")) {
+        if (!player.hasPermission("awkgearmastery.enabled")) {
             return;
         }
 
-        ConfigManager.Settings settings = LevelToolsPlugin.getInstance().getConfigManager().getSettings();
+        ConfigManager.Settings settings = AwkGearMasteryPlugin.getInstance().getConfigManager().getSettings();
         if (!settings.isCountPlayerPlacedBlocks()
-                && LevelToolsPlugin.getInstance().getBlockDataManager().isPlacedBlock(BlockPosition.fromBukkit(block))) {
+                && AwkGearMasteryPlugin.getInstance().getBlockDataManager().isPlacedBlock(BlockPosition.fromBukkit(block))) {
             if (settings.isIgnorePlayerPlacedBlocksForFullyGrownCrops() && FarmingTrigger.isMatureCropSource(block)) {
                 handleTrigger(player, player.getInventory().getItemInMainHand(), TriggerSlot.HAND, block, event, TriggerIds.FARMING);
             }
@@ -73,7 +73,7 @@ public final class TriggerListener implements Listener {
         }
 
         Player player = event.getPlayer();
-        if (!player.hasPermission("leveltools.enabled")) {
+        if (!player.hasPermission("awkgearmastery.enabled")) {
             return;
         }
 
@@ -81,7 +81,7 @@ public final class TriggerListener implements Listener {
         ItemStack item;
         TriggerSlot slot;
 
-        if (!LevelToolsUtil.supportsDualWielding() || event.getHand() == null) {
+        if (!AwkGearMasteryUtil.supportsDualWielding() || event.getHand() == null) {
             item = event.getPlayer().getInventory().getItemInMainHand();
             slot = TriggerSlot.HAND;
         } else {
@@ -110,11 +110,11 @@ public final class TriggerListener implements Listener {
         }
 
         Player player = event.getPlayer();
-        if (!player.hasPermission("leveltools.enabled")) {
+        if (!player.hasPermission("awkgearmastery.enabled")) {
             return;
         }
 
-        TriggerSlot slot = !LevelToolsUtil.supportsDualWielding() || event.getHand() == null
+        TriggerSlot slot = !AwkGearMasteryUtil.supportsDualWielding() || event.getHand() == null
                 ? TriggerSlot.HAND
                 : TriggerSlot.fromBukkit(event.getHand());
 
@@ -128,11 +128,11 @@ public final class TriggerListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPlayerItemConsume(PlayerItemConsumeEvent event) {
         Player player = event.getPlayer();
-        if (!player.hasPermission("leveltools.enabled")) {
+        if (!player.hasPermission("awkgearmastery.enabled")) {
             return;
         }
 
-        TriggerSlot slot = !LevelToolsUtil.supportsDualWielding()
+        TriggerSlot slot = !AwkGearMasteryUtil.supportsDualWielding()
                 ? TriggerSlot.HAND
                 : TriggerSlot.fromBukkit(event.getHand());
         ItemStack consumedItem = event.getItem();
@@ -142,7 +142,7 @@ public final class TriggerListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPlayerItemDamage(PlayerItemDamageEvent event) {
         Player player = event.getPlayer();
-        if (!player.hasPermission("leveltools.enabled")) {
+        if (!player.hasPermission("awkgearmastery.enabled")) {
             return;
         }
 
@@ -183,7 +183,7 @@ public final class TriggerListener implements Listener {
             return;
         }
 
-        ConfigManager.Settings settings = LevelToolsPlugin.getInstance().getConfigManager().getSettings();
+        ConfigManager.Settings settings = AwkGearMasteryPlugin.getInstance().getConfigManager().getSettings();
         if (settings.getDisabledWorlds().contains(player.getWorld().getName())) {
             return;
         }
@@ -229,8 +229,8 @@ public final class TriggerListener implements Listener {
                 continue;
             }
 
-            if (LevelToolsPlugin.getInstance().getXpSourceRegistry().hasSource(triggerProfile.getId())) {
-                totalModifier += LevelToolsPlugin.getInstance()
+            if (AwkGearMasteryPlugin.getInstance().getXpSourceRegistry().hasSource(triggerProfile.getId())) {
+                totalModifier += AwkGearMasteryPlugin.getInstance()
                         .getXpSourceRegistry()
                         .calculate(triggerProfile.getId(), context);
             } else {
@@ -242,7 +242,7 @@ public final class TriggerListener implements Listener {
             return;
         }
 
-        LevelToolsItem tool = LevelToolsUtil.createLevelToolsItem(item);
+        AwkGearMasteryItem tool = AwkGearMasteryUtil.createAwkGearMasteryItem(item);
         if (committer != null) {
             xpHandler.handleDirectCommit(player, itemProfile, tool, totalModifier, committer);
         } else {

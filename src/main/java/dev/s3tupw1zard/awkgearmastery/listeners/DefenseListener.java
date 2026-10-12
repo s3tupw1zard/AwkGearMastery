@@ -1,11 +1,11 @@
 package dev.s3tupw1zard.awkgearmastery.listeners;
 
-import dev.s3tupw1zard.awkgearmastery.LevelToolsPlugin;
-import dev.s3tupw1zard.awkgearmastery.api.item.LevelToolsItem;
+import dev.s3tupw1zard.awkgearmastery.AwkGearMasteryPlugin;
+import dev.s3tupw1zard.awkgearmastery.api.item.AwkGearMasteryItem;
 import dev.s3tupw1zard.awkgearmastery.profile.ProfileManager;
 import dev.s3tupw1zard.awkgearmastery.profile.item.ItemProfile;
 import dev.s3tupw1zard.awkgearmastery.profile.stat.CalculatedStats;
-import dev.s3tupw1zard.awkgearmastery.util.LevelToolsUtil;
+import dev.s3tupw1zard.awkgearmastery.util.AwkGearMasteryUtil;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,7 +27,7 @@ public final class DefenseListener implements Listener {
         if (!(event.getEntity() instanceof Player player)) {
             return;
         }
-        if (LevelToolsPlugin.getInstance()
+        if (AwkGearMasteryPlugin.getInstance()
                 .getConfigManager()
                 .getSettings()
                 .getDisabledWorlds()
@@ -46,9 +46,9 @@ public final class DefenseListener implements Listener {
                 continue;
             }
 
-            final LevelToolsItem item = LevelToolsUtil.createLevelToolsItem(armor);
+            final AwkGearMasteryItem item = AwkGearMasteryUtil.createAwkGearMasteryItem(armor);
             final CalculatedStats stats =
-                    LevelToolsPlugin.getInstance()
+                    AwkGearMasteryPlugin.getInstance()
                             .getStatCalculator()
                             .calculate(armor, profile, item.getLevel());
             remainingDamage *= 1.0 - stats.defense();
