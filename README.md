@@ -75,7 +75,9 @@ unchanged soil do not award tilling XP.
 Minecraft 26.3 gives shields priority over hoes. With `farming.shield_priority`
 enabled (default), aiming at valid soil prioritizes the hoe unless a mob within
 8 blocks has you as its target. Sneaking deliberately prioritizes tilling even
-under threat. This is evaluated only on interaction, not every tick. The soil
+under threat. The farming action is evaluated on interaction. While the hoe/shield pair is
+equipped, an aim guard prevents predicted shield raising over soil and newly
+tilled farmland. The soil
 conversion respects interaction cancellation and a cancellable `BlockPlaceEvent`;
 vanilla durability/Unbreaking processing still applies.
 
