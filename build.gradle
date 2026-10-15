@@ -51,7 +51,7 @@ dependencies {
 }
 
 group = 'dev.s3tupw1zard'
-version = '2026.1.0-SNAPSHOT'
+version = '2026.1.0-rc.1'
 description = 'AwkGearMastery - configurable RPG-style equipment progression for Paper and Purpur'
 
 java {
