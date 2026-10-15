@@ -27,11 +27,11 @@ profiles:
       - COPPER_AXE
       - DIAMOND_AXE
       - NETHERITE_AXE
-    trigger_profiles: [block_mining]
+    trigger_profiles: [block_mining, combat]
     reward_profile: none
-    display_profile: tool
+    display_profile: weapon
     progression_profile: default
-    stat_profile: tool
+    stat_profile: melee_weapon
 
   shovels:
     materials:
@@ -154,6 +154,16 @@ profiles:
     display_profile: armor
     progression_profile: default
     stat_profile: armor
+
+  # Shields gain XP from actual durability damage while blocking, in either hand.
+  # They do not grant passive armor defense or share offensive combat XP.
+  shields:
+    materials: [SHIELD]
+    trigger_profiles: [shield_block]
+    reward_profile: none
+    display_profile: shield
+    progression_profile: default
+    stat_profile: utility
 
   hoes:
     materials:

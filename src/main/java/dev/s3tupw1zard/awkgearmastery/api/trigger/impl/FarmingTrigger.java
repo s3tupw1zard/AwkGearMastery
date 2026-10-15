@@ -1,6 +1,5 @@
 package dev.s3tupw1zard.awkgearmastery.api.trigger.impl;
 
-import com.cryptomorin.xseries.XMaterial;
 import dev.s3tupw1zard.awkgearmastery.api.trigger.Trigger;
 import dev.s3tupw1zard.awkgearmastery.api.trigger.TriggerContext;
 import dev.s3tupw1zard.awkgearmastery.api.trigger.TriggerIds;
@@ -17,12 +16,12 @@ import java.util.EnumSet;
 import java.util.Set;
 
 public final class FarmingTrigger implements Trigger {
-    private static final Set<XMaterial> TILLABLE_BLOCKS = EnumSet.of(
-            XMaterial.DIRT,
-            XMaterial.GRASS_BLOCK,
-            XMaterial.DIRT_PATH,
-            XMaterial.COARSE_DIRT,
-            XMaterial.ROOTED_DIRT
+    private static final Set<Material> TILLABLE_BLOCKS = EnumSet.of(
+            Material.DIRT,
+            Material.GRASS_BLOCK,
+            Material.DIRT_PATH,
+            Material.COARSE_DIRT,
+            Material.ROOTED_DIRT
     );
 
     @Override
@@ -33,20 +32,16 @@ public final class FarmingTrigger implements Trigger {
 
     @Override
     public boolean canHandle(@NotNull TriggerContext context) {
+        final TriggerProfile profile = context.getTriggerProfile();
+        if (context.getOriginalEventAs(PlayerInteractEvent.class) != null) {
+            // Only the listener's verified post-interaction conversion uses this source.
+            return "TILL".equals(context.getSourceAs(String.class)) && profile.isSourceAllowed("TILL");
+        }
         final Block block = context.getSourceAs(Block.class);
         if (block == null) {
             return false;
         }
-
-        final TriggerProfile profile = context.getTriggerProfile();
         final Material blockType = block.getType();
-
-        if (context.getOriginalEventAs(PlayerInteractEvent.class) != null) {
-            if (!TILLABLE_BLOCKS.contains(XMaterial.matchXMaterial(blockType))) {
-                return false;
-            }
-            return profile.isSourceAllowed("TILL");
-        }
 
         if (context.getOriginalEventAs(BlockBreakEvent.class) != null) {
             if (!isMatureCropSource(block)) {
@@ -61,18 +56,24 @@ public final class FarmingTrigger implements Trigger {
 
     @Override
     public double calculateXpModifier(@NotNull TriggerContext context) {
-        final Block block = context.getSourceAs(Block.class);
-        if (block == null) {
-            return 0;
-        }
-
         final TriggerProfile profile = context.getTriggerProfile();
-
         if (context.getOriginalEventAs(PlayerInteractEvent.class) != null) {
-            return profile.calculateXpModifier("TILL");
+            return "TILL".equals(context.getSourceAs(String.class)) ? profile.calculateXpModifier("TILL") : 0.0;
         }
+        final Block block = context.getSourceAs(Block.class);
+        return block == null ? 0.0 : profile.calculateXpModifier(block.getType().name());
+    }
 
-        return profile.calculateXpModifier(block.getType().name());
+    public static boolean isTillableSoil(@NotNull Material material) {
+        return TILLABLE_BLOCKS.contains(material);
+    }
+
+    public static boolean isSuccessfulTill(@NotNull Material before, @NotNull Material after) {
+        return switch (before) {
+            case DIRT, GRASS_BLOCK, DIRT_PATH -> after == Material.FARMLAND;
+            case COARSE_DIRT, ROOTED_DIRT -> after == Material.DIRT;
+            default -> false;
+        };
     }
 
     public static boolean isMatureCropSource(@NotNull Block block) {

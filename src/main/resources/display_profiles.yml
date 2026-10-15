@@ -101,3 +101,10 @@ profiles:
         - "{progress_bar} &e{xp_formatted}&6/&e{max_xp_formatted}"
         - ""
         - "&aDurability: &f+{durability_bonus}"
+
+
+  shield:
+    extends: utility
+    action_bar:
+      enabled: true
+      text: "&bShield: {progress_bar} &e{xp_formatted}&6/&e{max_xp_formatted}"

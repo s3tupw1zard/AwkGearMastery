@@ -9,6 +9,7 @@
 [*]Supports Folia.
 [*]No required dependencies; PlaceholderAPI is optional.
 [*]Profile-based configuration system.
+[*]Axes gain mining and combat XP; shields gain blocking durability XP in either hand.
 [*]Any item can level up with custom triggers.
 [*]Configurable global, item-profile, and permission-based XP formulas.
 [*]Configurable milestone rewards without automatic enchantments.

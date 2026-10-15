@@ -52,6 +52,13 @@ profiles:
       type: BLACKLIST
       list: []
 
+  shield_block:
+    type: ARMOR_DURABILITY
+    slots: [HAND, OFF_HAND]
+    filter:
+      type: WHITELIST
+      list: [SHIELD]
+
   farming:
     type: FARMING
     filter:
