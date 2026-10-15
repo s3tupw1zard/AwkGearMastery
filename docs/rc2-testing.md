@@ -75,3 +75,16 @@ shield priority returns when a nearby mob targets the player, while a passive or
 uninterested mob does not block farming. Confirm sneak override and disabled mode.
 On Folia, unfamiliar-region mob AI is treated conservatively as a threat and soil
 outside the current player region is not modified.
+
+### Shield animation while aiming
+
+A short, client-visible shield cooldown is maintained while the hoe targets
+eligible soil (and the farmland immediately after tilling). This prevents the
+normal raise-then-cancel animation instead of waiting to stop an active shield.
+The guard updates on movement/rotation and while the hoe/shield combination is
+equipped. Looking away releases only its own cooldown; real combat or other
+plugin cooldowns are left intact. Threat/sneak priority settings still apply.
+Verify both a single click and holding right-click, aiming away after tilling,
+switching hotbar slots, swapping hands, and an externally applied shield cooldown.
+Client prediction before a newly equipped/aimed state reaches the server can
+still depend on latency; this is not a client mod.

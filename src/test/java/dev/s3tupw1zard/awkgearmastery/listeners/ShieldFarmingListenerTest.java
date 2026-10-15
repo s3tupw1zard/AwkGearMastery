@@ -55,6 +55,16 @@ class ShieldFarmingListenerTest {
     }
 
     @Test
+    void farmlandKeepsTheShieldSuppressedAfterTheHoeActionCompletes() {
+        final Block farmland = mock(Block.class);
+        when(farmland.getType()).thenReturn(Material.FARMLAND);
+        assertTrue(ShieldFarmingListener.aimUsesHoe(farmland, BlockFace.UP));
+        assertFalse(ShieldFarmingListener.aimUsesHoe(farmland, BlockFace.DOWN));
+        when(farmland.getType()).thenReturn(Material.STONE);
+        assertFalse(ShieldFarmingListener.aimUsesHoe(farmland, BlockFace.UP));
+    }
+
+    @Test
     void crosshairMustActuallyPointAtTheClickedSoil() {
         final Player player = mock(Player.class);
         final Block soil = mock(Block.class);

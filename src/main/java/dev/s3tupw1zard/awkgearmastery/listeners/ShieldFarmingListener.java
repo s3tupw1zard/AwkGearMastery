@@ -107,6 +107,28 @@ public final class ShieldFarmingListener implements Listener {
         pending.remove(event.getPlayer().getUniqueId());
     }
 
+    public boolean prefersHoeAim(Player player) {
+        if (!plugin.getConfigManager().getMainConfig().getBoolean("farming.shield_priority.enabled", true)
+                || !eligiblePlayer(player)
+                || !player.getInventory().getItemInMainHand().getType().name().endsWith("_HOE")
+                || player.getInventory().getItemInOffHand().getType() != Material.SHIELD
+                || plugin.getProfileManager().getProfileForMaterial(
+                        player.getInventory().getItemInMainHand().getType()) == null) {
+            return false;
+        }
+        final var attribute = player.getAttribute(Attribute.BLOCK_INTERACTION_RANGE);
+        final double reach = attribute == null ? 4.5 : attribute.getValue();
+        final var hit = player.rayTraceBlocks(reach, FluidCollisionMode.NEVER);
+        if (hit == null || hit.getHitBlock() == null) { return false; }
+        final Block block = hit.getHitBlock();
+        return aimUsesHoe(block, hit.getHitBlockFace()) && !shouldKeepShield(player);
+    }
+
+    static boolean aimUsesHoe(Block block, BlockFace face) {
+        // Keep the shield down after a successful till while the same button is held.
+        return face != BlockFace.DOWN && (block.getType() == Material.FARMLAND || validSoil(block, face));
+    }
+
     private boolean eligiblePlayer(Player player) {
         return !player.isDead() && (player.getGameMode() == GameMode.SURVIVAL
                 || player.getGameMode() == GameMode.CREATIVE)
