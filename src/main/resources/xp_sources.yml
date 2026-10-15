@@ -128,7 +128,7 @@ combat:
     minimum_contribution: 0.02
     count_overkill: false
 
-    # When a player is holding two valid LevelTools combat items during a melee
+    # When a player is holding two valid AwkGearMastery combat items during a melee
     # attack, split that player's contribution evenly between both concrete items.
     dual_wield_split: true
 
@@ -149,7 +149,7 @@ combat:
     curve_exponent: 1.25
 
     # Optional extra multiplier based on how much of a contributor's effective
-    # damage came from LevelTools critical hits. This is damage-weighted rather
+    # damage came from AwkGearMastery critical hits. This is damage-weighted rather
     # than hit-count based so rapid weak attacks cannot farm the bonus.
     critical_damage_bonus:
       enabled: true
@@ -162,34 +162,34 @@ combat:
         curve_exponent: 1.35
         claim_interval_seconds: 300
         minimum_level: 20
-        required_leveltools_critical_hits: 0
+        required_awkgearmastery_critical_hits: 0
       RAVAGER:
         max_multiplier: 1.35
         curve_exponent: 1.30
         claim_interval_seconds: 300
         minimum_level: 20
-        required_leveltools_critical_hits: 0
+        required_awkgearmastery_critical_hits: 0
       ELDER_GUARDIAN:
         max_multiplier: 1.50
         curve_exponent: 1.25
         claim_interval_seconds: 600
         minimum_level: 20
-        required_leveltools_critical_hits: 0
+        required_awkgearmastery_critical_hits: 0
       WARDEN:
         max_multiplier: 2.25
         curve_exponent: 1.10
         claim_interval_seconds: 1800
         minimum_level: 20
-        required_leveltools_critical_hits: 0
+        required_awkgearmastery_critical_hits: 0
       WITHER:
         max_multiplier: 1.90
         curve_exponent: 1.20
         claim_interval_seconds: 1200
         minimum_level: 20
-        required_leveltools_critical_hits: 0
+        required_awkgearmastery_critical_hits: 0
       ENDER_DRAGON:
         max_multiplier: 2.10
         curve_exponent: 1.15
         claim_interval_seconds: 3600
         minimum_level: 20
-        required_leveltools_critical_hits: 0
+        required_awkgearmastery_critical_hits: 0

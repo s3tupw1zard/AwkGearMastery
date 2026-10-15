@@ -1,0 +1,108 @@
+package dev.s3tupw1zard.awkgearmastery.api.block.impl;
+
+import dev.s3tupw1zard.awkgearmastery.api.block.BlockDataManager;
+import dev.s3tupw1zard.awkgearmastery.api.block.BlockPosition;
+import dev.s3tupw1zard.awkgearmastery.api.scheduler.ScheduledTask;
+import dev.s3tupw1zard.awkgearmastery.api.scheduler.Scheduler;
+import dev.s3tupw1zard.awkgearmastery.util.Text;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.AtomicMoveNotSupportedException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
+
+public class FileBlockDataManager implements BlockDataManager {
+    private static final int MAX_CACHE_SIZE = 1_000_000;
+    private final Set<BlockPosition> cache = ConcurrentHashMap.newKeySet();
+    private final AtomicBoolean dirty = new AtomicBoolean(false);
+    private final Path file;
+    private final ScheduledTask saveTask;
+
+    public FileBlockDataManager(Path file, Scheduler scheduler) {
+        this.file = file;
+        this.saveTask = scheduler.asyncTimer(this::save, 5 * 20, 5 * 20);
+    }
+
+    private synchronized void save() {
+        if (!dirty.compareAndSet(true, false)) {
+            return;
+        }
+
+        final Set<String> lines = cache.stream()
+                .map(x -> String.format("{%s}{%s}{%s}%s", x.getX(), x.getY(), x.getZ(), x.getWorld()))
+                .collect(Collectors.toSet());
+
+        try {
+            final Path temp = file.resolveSibling(file.getFileName().toString() + ".tmp");
+            Files.write(temp, lines, StandardCharsets.UTF_8);
+
+            try {
+                Files.move(temp, file, StandardCopyOption.ATOMIC_MOVE);
+            } catch (AtomicMoveNotSupportedException e) {
+                Files.move(temp, file, StandardCopyOption.REPLACE_EXISTING);
+            }
+        } catch (IOException e) {
+            dirty.set(true);
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean isPlacedBlock(BlockPosition pos) {
+        return cache.contains(pos);
+    }
+
+    @Override
+    public void addPlacedBlock(BlockPosition pos) {
+        if (cache.size() >= MAX_CACHE_SIZE) return;
+        if (cache.add(pos)) {
+            dirty.set(true);
+        }
+    }
+
+    @Override
+    public void removePlacedBlock(BlockPosition pos) {
+        if (cache.remove(pos)) {
+            dirty.set(true);
+        }
+    }
+
+    @Override
+    public void load() {
+        if (!Files.exists(file)) {
+            return;
+        }
+
+        try {
+            for (String line : Files.readAllLines(file, StandardCharsets.UTF_8)) {
+                final String[] data = Text.substringsBetween(line, "{", "}");
+                if (data == null || data.length != 3) continue;
+
+                try {
+                    final int x = Integer.parseInt(data[0]);
+                    final int y = Integer.parseInt(data[1]);
+                    final int z = Integer.parseInt(data[2]);
+                    final String world = line.substring(String.format("{%s}{%s}{%s}", x, y, z).length());
+
+                    cache.add(new BlockPosition(world, x, y, z));
+                } catch (Exception ignored) {
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void close() {
+        saveTask.stop();
+        save();
+        cache.clear();
+    }
+}

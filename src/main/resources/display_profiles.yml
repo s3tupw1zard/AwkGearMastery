@@ -6,12 +6,12 @@
 # {progress_bar}, {item}
 #
 # Formula-stat placeholders:
-# {attack_damage}      estimated full-strength base attack after LevelTools scaling
-# {damage_bonus}       LevelTools damage bonus
-# {critical_chance}    LevelTools critical hit chance
-# {critical_damage}    bonus damage of a LevelTools critical hit
-# {defense}            LevelTools normal damage reduction
-# {critical_defense}   LevelTools reduction of critical bonus damage
+# {attack_damage}      estimated full-strength base attack after AwkGearMastery scaling
+# {damage_bonus}       AwkGearMastery damage bonus
+# {critical_chance}    AwkGearMastery critical hit chance
+# {critical_damage}    bonus damage of a AwkGearMastery critical hit
+# {defense}            AwkGearMastery normal damage reduction
+# {critical_defense}   AwkGearMastery reduction of critical bonus damage
 # {durability_bonus}   extra max durability
 #
 profiles:
