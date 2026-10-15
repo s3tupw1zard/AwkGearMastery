@@ -26,6 +26,16 @@ class ShieldAimCooldownTest {
     }
 
     @Test
+    void anAlreadyRaisedShieldIsLoweredWhenTheAimChangesToSoil() {
+        final Fixture f = new Fixture();
+        when(f.player.hasActiveItem()).thenReturn(true);
+        when(f.player.getActiveItem()).thenReturn(f.shield);
+        f.guard.update(f.player, true, 100);
+        verify(f.player).clearActiveItem();
+        verify(f.player).setCooldown(f.shield, 4);
+    }
+
+    @Test
     void existingCombatCooldownIsNeverShortened() {
         final Fixture f = new Fixture();
         f.remaining.set(100);

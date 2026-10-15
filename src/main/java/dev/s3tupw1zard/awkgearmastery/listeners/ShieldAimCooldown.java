@@ -117,6 +117,9 @@ public final class ShieldAimCooldown implements Listener {
             }
             return;
         }
+        if (player.hasActiveItem() && player.getActiveItem().getType() == Material.SHIELD) {
+            player.clearActiveItem();
+        }
         final ItemStack shield = player.getInventory().getItemInOffHand();
         final int remaining = player.getCooldown(shield);
         if (lease == null && remaining > 0) { return; }
