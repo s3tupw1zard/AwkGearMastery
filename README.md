@@ -10,9 +10,11 @@ AwkGearMastery is based on open-source code originally authored by byteful; the 
 
 ## AwkGearMastery 2026.1 Direction
 
-The first release candidate targets Paper/Purpur 26.2 and Java 25. Later candidates will target 26.3. Versioning uses
-SemVer-compatible CalVer (`YYYY.RELEASE.PATCH`), with `2026.1.0` as the first
-stable target and `2026.1.0-SNAPSHOT` for development builds.
+The current development branch targets Paper/Purpur 26.3 and Java 25, preparing
+`2026.1.0-rc.2` with compatibility updates and bug fixes. The released
+`2026.1.0-rc.1` remains the final planned candidate for Minecraft 26.2.
+Versioning uses SemVer-compatible CalVer (`YYYY.RELEASE.PATCH`), with `2026.1.0`
+as the first stable target and `2026.1.0-rc.2-SNAPSHOT` for current development builds.
 
 The 2026.1 progression model deliberately separates item levels from enchantments:
 

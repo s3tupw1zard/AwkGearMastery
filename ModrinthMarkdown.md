@@ -7,7 +7,7 @@
 
 ## Features
 
-- Targets Paper/Purpur 26.2 with Java 25
+- Targets Paper/Purpur 26.3 with Java 25
 - Supports Folia.
 - No required dependencies; PlaceholderAPI is optional.
 - Profile-based configuration system.

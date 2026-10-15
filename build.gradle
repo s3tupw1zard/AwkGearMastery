@@ -40,7 +40,7 @@ dependencies {
     implementation 'io.github.revxrsal:lamp.bukkit:4.0.0-rc.17'
     implementation 'com.jeff-media:MorePersistentDataTypes:2.4.0'
 
-    compileOnly 'io.papermc.paper:paper-api:26.2.build.+'
+    compileOnly 'io.papermc.paper:paper-api:26.3.build.+'
     compileOnly 'net.kyori:adventure-api:4.26.1'
     compileOnly 'net.kyori:adventure-platform-bukkit:4.4.1'
     compileOnly 'org.jetbrains:annotations:26.1.0'
@@ -51,7 +51,7 @@ dependencies {
 }
 
 group = 'dev.s3tupw1zard'
-version = '2026.1.0-rc.1'
+version = '2026.1.0-rc.2-SNAPSHOT'
 description = 'AwkGearMastery - configurable RPG-style equipment progression for Paper and Purpur'
 
 java {
