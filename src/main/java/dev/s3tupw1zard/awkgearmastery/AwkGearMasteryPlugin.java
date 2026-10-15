@@ -165,7 +165,10 @@ public final class AwkGearMasteryPlugin extends JavaPlugin {
     private void registerListeners() {
         final PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new BlockPlacementListener(scheduler), this);
-        pm.registerEvents(new TriggerListener(profileManager, triggerRegistry), this);
+        final TriggerListener triggers = new TriggerListener(profileManager, triggerRegistry);
+        pm.registerEvents(triggers, this);
+        pm.registerEvents(new dev.s3tupw1zard.awkgearmastery.listeners.ShieldFarmingListener(
+                this, triggers::awardVerifiedTilling), this);
         pm.registerEvents(new CombatProgressionListener(profileManager), this);
         pm.registerEvents(new DefenseListener(profileManager), this);
         pm.registerEvents(new XPBooster(), this);

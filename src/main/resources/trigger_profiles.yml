@@ -4,7 +4,7 @@
 #
 # Trigger Types:
 # BLOCK_BREAK, ENTITY_KILL, FISHING, RIGHT_CLICK, LEFT_CLICK,
-# CONSUME, FARMING, ARMOR_DURABILITY
+# CONSUME, FARMING, ARMOR_DURABILITY, SHIELD_BLOCK
 #
 profiles:
   block_mining:
@@ -53,7 +53,7 @@ profiles:
       list: []
 
   shield_block:
-    type: ARMOR_DURABILITY
+    type: SHIELD_BLOCK
     slots: [HAND, OFF_HAND]
     filter:
       type: WHITELIST

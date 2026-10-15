@@ -20,7 +20,7 @@ class DefaultProfilesTest {
         assertEquals("melee_weapon", items.getString("profiles.axes.stat_profile"));
         assertEquals("weapon", items.getString("profiles.axes.display_profile"));
         assertEquals(java.util.List.of("shield_block"), items.getStringList("profiles.shields.trigger_profiles"));
-        assertEquals("ARMOR_DURABILITY", triggers.getString("profiles.shield_block.type"));
+        assertEquals("SHIELD_BLOCK", triggers.getString("profiles.shield_block.type"));
         assertEquals(java.util.List.of("HAND", "OFF_HAND"), triggers.getStringList("profiles.shield_block.slots"));
         assertTrue(sources.getDouble("sources.shield_block.default.min") > 0);
         assertTrue(sources.getDouble("sources.block_mining.default.max") <= 0.4);
@@ -32,8 +32,8 @@ class DefaultProfilesTest {
                 java.util.logging.Logger.getAnonymousLogger()).load(resource("progression_profiles.yml"));
         final var profile = Objects.requireNonNull(profiles.get("default"));
         assertEquals(100, profile.getMaxLevel());
-        assertEquals(25.0, profile.xpRequiredForLevel(1), 0.01);
-        assertTrue(profile.xpRequiredForLevel(5) < 30.0);
+        assertEquals(100.0, profile.xpRequiredForLevel(1), 0.01);
+        assertTrue(profile.xpRequiredForLevel(5) < 150.0);
         assertEquals(50000.0, profile.xpRequiredForLevel(99), 0.01);
     }
 

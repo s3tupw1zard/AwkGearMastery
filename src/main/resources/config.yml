@@ -56,6 +56,13 @@ playerPlacedBlocks: false
 farming:
   # Should fully grown farming crops ignore playerPlacedBlocks?
   ignore_player_placed_blocks_for_fully_grown_crops: true
+  # Minecraft 26.3 normally raises an offhand shield instead of using a hoe.
+  shield_priority:
+    # Prefer tilling valid soil under the crosshair when no nearby mob targets you.
+    enabled: true
+    threat_radius: 8.0
+    # Sneak to deliberately till even when a nearby mob has you as its target.
+    sneak_to_force_tilling: true
 
 # Should enchanted books be blocked from applying to AwkGearMastery items in anvils?
 prevent_enchanted_books_on_awkgearmastery_items: false

@@ -23,11 +23,11 @@ progression; the level cap remains 100.
 ## Progression defaults
 
 - `max_level: 100`, `reference_max_level: 100`
-- `first_level_xp: 25.0`, `final_level_xp: 50000.0`
-- `curve_exponent: 3.2`, `max_level_influence: 0.50`
+- `first_level_xp: 100.0`, `final_level_xp: 50000.0`
+- `curve_exponent: 2.2`, `max_level_influence: 0.50`
 
 `final_level_xp` is the last transition cost, not total XP to reach level 100.
-At the default cap, the entire curve costs approximately 1.19 million XP.
+At the default cap, the entire curve costs approximately 1.56 million XP.
 Keeping the reference cap at 100 and influence at 0.50 preserves sublinear
 scaling when changing the level cap. First/final transition costs are scaled by
 that setting when the cap differs from the reference.
@@ -42,14 +42,36 @@ that setting when the cap differs from the reference.
   no tilling XP. Spam-click one dirt block: only its real conversion earns XP.
 - Till coarse/rooted dirt: conversion to dirt is eligible; coarse dirt's second
   conversion to farmland is a separate legitimate action.
-- Block attacks with a shield in either hand: actual durability damage earns
-  shield XP. Merely holding or raising it does not, nor does attacking with a
+- Block attacks with a shield in either hand: confirmed blocked damage earns
+  shield XP, even when weak hits or Unbreaking cause no durability loss. Merely holding or raising it does not, nor does attacking with a
   sword while carrying a shield. Verify Unbreaking/cancelled durability events.
 - Switch/remove a shield or hoe during a delayed update: a different item must
   not be overwritten. Verify shield durability decreases normally and persists.
 - Compare ordinary block, ore, crop, armor, fishing, and mob XP against the bundled
   tables with XP booster permissions disabled.
-- Verify level 1 -> 2 costs 25 XP, late levels are much slower, and reload/restart
+- Verify level 1 -> 2 costs 100 XP, late levels are much slower, and reload/restart
   preserves progression.
 
 Compilation and automated tests do not replace these in-game checks.
+
+## Hoe/offhand-shield priority in Minecraft 26.3
+
+The vanilla game now deliberately prioritizes raising a shield over tilling.
+AwkGearMastery can override this only for a supported main-hand hoe, offhand
+shield and valid soil actually under the crosshair, within interaction reach.
+With no nearby mob targeting the player, right-click tills; when a mob within
+8 blocks targets the player, normal shield behavior wins. Sneaking forces farming.
+
+Configure `farming.shield_priority.enabled`, `threat_radius` and
+`sneak_to_force_tilling` in `config.yml`. Missing entries use the bundled defaults;
+regenerating existing files is not needed for this fix. Existing rc.2 shield
+profiles using `ARMOR_DURABILITY` remain compatible, but the new default type is
+`SHIELD_BLOCK`. Shields no longer also gain XP from their durability event.
+
+Verify weak and strong melee hits, arrows, Unbreaking, rear/unblocked hits,
+cancelled damage, main/offhand shields, and rapid consecutive blocked attacks.
+Verify protected/obstructed soil and repeated clicks never yield farming XP;
+shield priority returns when a nearby mob targets the player, while a passive or
+uninterested mob does not block farming. Confirm sneak override and disabled mode.
+On Folia, unfamiliar-region mob AI is treated conservatively as a threat and soil
+outside the current player region is not modified.

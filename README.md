@@ -56,8 +56,8 @@ Armor defense is combined multiplicatively across pieces, avoiding accidental
 
 Required XP is configured in `progression_profiles.yml`.
 
-The default profile starts at **25 XP for level 1 -> 2** and ramps to
-**50,000 XP for level 99 -> 100**, using a curve exponent of **3.2**. These are
+The default profile starts at **100 XP for level 1 -> 2** and ramps to
+**50,000 XP for level 99 -> 100**, using a curve exponent of **2.2**. These are
 per-level transition costs, not cumulative totals. The first few levels stay
 accessible while later levels require sustained play.
 
@@ -65,12 +65,19 @@ Ordinary blocks grant 0.2–0.4 XP; ore rewards are reduced to roughly one quart
 of their previous values. Farming and armor XP are also reduced, fishing rewards
 are halved, and the combat XP formula and extra boss bonuses are toned down.
 Axes gain both mining and combat XP and use melee weapon stats. Shields gain XP
-from actual blocking durability damage in either hand and improve durability;
+from confirmed blocked attacks in either hand, even when no durability is lost, and improve durability;
 they do not grant passive armor defense or receive offensive kill XP.
 
 Tilling XP is awarded only after the soil actually changes, including when a
 shield is held in the other hand. Cancelled, blocked, or repeated clicks on
 unchanged soil do not award tilling XP.
+
+Minecraft 26.3 gives shields priority over hoes. With `farming.shield_priority`
+enabled (default), aiming at valid soil prioritizes the hoe unless a mob within
+8 blocks has you as its target. Sneaking deliberately prioritizes tilling even
+under threat. This is evaluated only on interaction, not every tick. The soil
+conversion respects interaction cancellation and a cancellable `BlockPlaceEvent`;
+vanilla durability/Unbreaking processing still applies.
 
 Existing configuration files are preserved when updating the JAR. See
 [the rc.2 testing notes](docs/rc2-testing.md) to apply the new defaults and test
@@ -127,7 +134,7 @@ per-mob claim interval.
 - Tridents
 - Maces
 - Wooden through Netherite spears, including Copper
-- Shields (blocking durability XP in either hand)
+- Shields (blocked-hit XP in either hand)
 - Wearable armor, including Copper and Turtle Helmet
 - Fishing rods
 

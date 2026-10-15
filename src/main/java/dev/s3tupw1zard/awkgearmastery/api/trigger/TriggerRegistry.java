@@ -1,6 +1,7 @@
 package dev.s3tupw1zard.awkgearmastery.api.trigger;
 
 import dev.s3tupw1zard.awkgearmastery.api.trigger.impl.BlockBreakTrigger;
+import dev.s3tupw1zard.awkgearmastery.api.trigger.impl.ShieldBlockTrigger;
 import dev.s3tupw1zard.awkgearmastery.api.trigger.impl.ConsumeTrigger;
 import dev.s3tupw1zard.awkgearmastery.api.trigger.impl.EntityKillTrigger;
 import dev.s3tupw1zard.awkgearmastery.api.trigger.impl.FarmingTrigger;
@@ -66,5 +67,6 @@ public final class TriggerRegistry {
         register(new ConsumeTrigger());
         register(new FarmingTrigger());
         register(new ArmorDurabilityTrigger());
+        register(new ShieldBlockTrigger());
     }
 }

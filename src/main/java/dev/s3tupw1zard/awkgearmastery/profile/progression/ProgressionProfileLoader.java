@@ -40,9 +40,9 @@ public final class ProgressionProfileLoader {
                         id,
                         section.getInt("max_level", 100),
                         xp.getInt("reference_max_level", 100),
-                        xp.getDouble("first_level_xp", 25.0),
+                        xp.getDouble("first_level_xp", 100.0),
                         xp.getDouble("final_level_xp", 50000.0),
-                        xp.getDouble("curve_exponent", 3.2),
+                        xp.getDouble("curve_exponent", 2.2),
                         xp.getDouble("max_level_influence", 0.5)
                 ));
             } catch (RuntimeException e) {

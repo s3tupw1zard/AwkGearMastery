@@ -155,7 +155,7 @@ profiles:
     progression_profile: default
     stat_profile: armor
 
-  # Shields gain XP from actual durability damage while blocking, in either hand.
+  # Shields gain XP from confirmed blocked attacks, even without durability loss.
   # They do not grant passive armor defense or share offensive combat XP.
   shields:
     materials: [SHIELD]
