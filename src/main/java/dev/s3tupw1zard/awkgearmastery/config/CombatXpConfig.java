@@ -64,11 +64,11 @@ public final class CombatXpConfig {
         }
 
         return new CombatXpConfig(
-                formula == null ? 2.0 : formula.getDouble("base_xp", 2.0),
-                formula == null ? 0.35 : formula.getDouble("health_scale", 0.35),
+                formula == null ? 1.0 : formula.getDouble("base_xp", 1.0),
+                formula == null ? 0.15 : formula.getDouble("health_scale", 0.15),
                 formula == null ? 0.80 : formula.getDouble("health_exponent", 0.80),
-                formula == null ? 1.0 : formula.getDouble("minimum_xp", 1.0),
-                formula == null ? 750.0 : formula.getDouble("maximum_xp", 750.0),
+                formula == null ? 0.5 : formula.getDouble("minimum_xp", 0.5),
+                formula == null ? 350.0 : formula.getDouble("maximum_xp", 350.0),
                 multipliers,
                 Sharing.from(combat.getConfigurationSection("sharing")),
                 LevelBonus.from(combat.getConfigurationSection("level_bonus"))
@@ -99,11 +99,11 @@ public final class CombatXpConfig {
 
     private static CombatXpConfig defaults() {
         return new CombatXpConfig(
-                2.0,
-                0.35,
-                0.80,
                 1.0,
-                750.0,
+                0.15,
+                0.80,
+                0.5,
+                350.0,
                 Collections.emptyMap(),
                 Sharing.defaults(),
                 LevelBonus.disabled()

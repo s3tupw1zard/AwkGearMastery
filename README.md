@@ -10,9 +10,11 @@ AwkGearMastery is based on open-source code originally authored by byteful; the 
 
 ## AwkGearMastery 2026.1 Direction
 
-The first release candidate targets Paper/Purpur 26.2 and Java 25. Later candidates will target 26.3. Versioning uses
-SemVer-compatible CalVer (`YYYY.RELEASE.PATCH`), with `2026.1.0` as the first
-stable target and `2026.1.0-SNAPSHOT` for development builds.
+The current development branch targets Paper/Purpur 26.3 and Java 25, preparing
+`2026.1.0-rc.2` with compatibility updates and bug fixes. The released
+`2026.1.0-rc.1` remains the final planned candidate for Minecraft 26.2.
+Versioning uses SemVer-compatible CalVer (`YYYY.RELEASE.PATCH`), with `2026.1.0`
+as the first stable target and `2026.1.0-rc.2-SNAPSHOT` for current development builds.
 
 The 2026.1 progression model deliberately separates item levels from enchantments:
 
@@ -54,8 +56,34 @@ Armor defense is combined multiplicatively across pieces, avoiding accidental
 
 Required XP is configured in `progression_profiles.yml`.
 
-The default profile starts at 100 XP for Level 1 -> 2 and ramps non-linearly to
-10,000 XP for the final Level 99 -> 100 transition.
+The default profile starts at **100 XP for level 1 -> 2** and ramps to
+**50,000 XP for level 99 -> 100**, using a curve exponent of **2.2**. These are
+per-level transition costs, not cumulative totals. The first few levels stay
+accessible while later levels require sustained play.
+
+Ordinary blocks grant 0.2–0.4 XP; ore rewards are reduced to roughly one quarter
+of their previous values. Farming and armor XP are also reduced, fishing rewards
+are halved, and the combat XP formula and extra boss bonuses are toned down.
+Axes gain both mining and combat XP and use melee weapon stats. Shields gain XP
+from confirmed blocked attacks in either hand, even when no durability is lost, and improve durability;
+they do not grant passive armor defense or receive offensive kill XP.
+
+Tilling XP is awarded only after the soil actually changes, including when a
+shield is held in the other hand. Cancelled, blocked, or repeated clicks on
+unchanged soil do not award tilling XP.
+
+Minecraft 26.3 gives shields priority over hoes. With `farming.shield_priority`
+enabled (default), aiming at valid soil prioritizes the hoe unless a mob within
+8 blocks has you as its target. Sneaking deliberately prioritizes tilling even
+under threat. The farming action is evaluated on interaction. While the hoe/shield pair is
+equipped, an aim guard prevents predicted shield raising over soil and newly
+tilled farmland. The soil
+conversion respects interaction cancellation and a cancellable `BlockPlaceEvent`;
+vanilla durability/Unbreaking processing still applies.
+
+Existing configuration files are preserved when updating the JAR. See
+[the rc.2 testing notes](docs/rc2-testing.md) to apply the new defaults and test
+these changes without resetting item progress.
 
 `max_level_influence` controls how total grind changes when the level cap changes:
 
@@ -108,6 +136,7 @@ per-mob claim interval.
 - Tridents
 - Maces
 - Wooden through Netherite spears, including Copper
+- Shields (blocked-hit XP in either hand)
 - Wearable armor, including Copper and Turtle Helmet
 - Fishing rods
 

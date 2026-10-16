@@ -102,20 +102,21 @@ public final class XPHandler {
         }
 
         Material expectedType = backing.getType();
-        AwkGearMasteryPlugin.getInstance().getScheduler().locationDelayed(() -> {
+        AwkGearMasteryPlugin.getInstance().getScheduler().entityDelayed(() -> {
             if (!player.isOnline()) {
                 return;
             }
 
             ItemStack live = AwkGearMasteryUtil.getItemInSlot(player, slot);
-            if (live == null || live.getType() != expectedType) {
+            if (live == null || live.getType() != expectedType
+                    || !TriggerListener.sameItemIgnoringWear(backing, live)) {
                 return;
             }
 
             if (AwkGearMasteryUtil.rebindAwkGearMasteryItem(tool, live)) {
                 updateItem(player, slot, tool.getItemStack(maxXp));
             }
-        }, player.getLocation(), 1);
+        }, player, 1);
     }
 
     private double advanceLevels(

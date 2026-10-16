@@ -7,10 +7,11 @@
 
 ## Features
 
-- Targets Paper/Purpur 26.2 with Java 25
+- Targets Paper/Purpur 26.3 with Java 25
 - Supports Folia.
 - No required dependencies; PlaceholderAPI is optional.
 - Profile-based configuration system.
+- Axes gain mining and combat XP; shields gain blocked-hit XP in either hand.
 - Any item can level up with custom triggers.
 - Configurable global, item-profile, and permission-based XP formulas.
 - Configurable milestone rewards; no automatic enchantment leveling.

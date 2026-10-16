@@ -11,6 +11,7 @@ public final class TriggerIds {
     public static final String LEFT_CLICK = "left_click";
     public static final String CONSUME = "consume";
     public static final String FARMING = "farming";
+    public static final String SHIELD_BLOCK = "shield_block";
     public static final String ARMOR_DURABILITY = "armor_durability";
 
     private TriggerIds() {}
@@ -30,6 +31,7 @@ public final class TriggerIds {
                 || LEFT_CLICK.equals(normalized)
                 || CONSUME.equals(normalized)
                 || FARMING.equals(normalized)
-                || ARMOR_DURABILITY.equals(normalized);
+                || ARMOR_DURABILITY.equals(normalized)
+                || SHIELD_BLOCK.equals(normalized);
     }
 }

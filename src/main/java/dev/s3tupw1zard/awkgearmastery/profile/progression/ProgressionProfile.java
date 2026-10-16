@@ -26,13 +26,14 @@ public final class ProgressionProfile {
         if (referenceMaxLevel < 2) {
             throw new IllegalArgumentException("reference_max_level must be at least 2");
         }
-        if (firstLevelXp <= 0.0 || finalLevelXp <= 0.0) {
+        if (!Double.isFinite(firstLevelXp) || !Double.isFinite(finalLevelXp)
+                || firstLevelXp <= 0.0 || finalLevelXp <= 0.0) {
             throw new IllegalArgumentException("XP requirements must be positive");
         }
-        if (curveExponent <= 0.0) {
+        if (!Double.isFinite(curveExponent) || curveExponent <= 0.0) {
             throw new IllegalArgumentException("curve_exponent must be positive");
         }
-        if (maxLevelInfluence < 0.0 || maxLevelInfluence > 1.0) {
+        if (!Double.isFinite(maxLevelInfluence) || maxLevelInfluence < 0.0 || maxLevelInfluence > 1.0) {
             throw new IllegalArgumentException("max_level_influence must be between 0 and 1");
         }
 
@@ -69,7 +70,7 @@ public final class ProgressionProfile {
 
         final int level = Math.max(1, currentLevel);
         final double transitionProgress = maxLevel <= 2
-                ? 1.0
+                ? 0.0
                 : clamp01((level - 1.0) / (maxLevel - 2.0));
         final double shapedProgress = Math.pow(transitionProgress, curveExponent);
         final double referenceXp =

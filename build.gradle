@@ -40,18 +40,20 @@ dependencies {
     implementation 'io.github.revxrsal:lamp.bukkit:4.0.0-rc.17'
     implementation 'com.jeff-media:MorePersistentDataTypes:2.4.0'
 
-    compileOnly 'io.papermc.paper:paper-api:26.2.build.+'
+    compileOnly 'io.papermc.paper:paper-api:26.3.build.+'
     compileOnly 'net.kyori:adventure-api:4.26.1'
     compileOnly 'net.kyori:adventure-platform-bukkit:4.4.1'
     compileOnly 'org.jetbrains:annotations:26.1.0'
     compileOnly 'me.clip:placeholderapi:2.12.2'
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
+    testImplementation 'io.papermc.paper:paper-api:26.3.build.+'
+    testImplementation 'org.mockito:mockito-core:5.21.0'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.4'
 }
 
 group = 'dev.s3tupw1zard'
-version = '2026.1.0-rc.1'
+version = '2026.1.0-rc.2-SNAPSHOT'
 description = 'AwkGearMastery - configurable RPG-style equipment progression for Paper and Purpur'
 
 java {
@@ -90,6 +92,7 @@ tasks.withType(JavaCompile).configureEach {
 
 tasks.named('test') {
     useJUnitPlatform()
+    jvmArgs '-javaagent:' + configurations.testRuntimeClasspath.find { it.name.startsWith('mockito-core-') }.absolutePath
 }
 
 processResources {

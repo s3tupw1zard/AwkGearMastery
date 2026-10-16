@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ProgressionProfileTest {
     @Test
@@ -20,9 +21,9 @@ class ProgressionProfileTest {
     void firstAndLastTransitionsUseConfiguredXpBounds() {
         final ProgressionProfile profile = profile(100, 0.5);
 
-        assertEquals(100.0, profile.xpRequiredForLevel(1), 0.1);
-        assertEquals(10000.0, profile.xpRequiredForLevel(99), 0.1);
-        assertEquals(10000.0, profile.xpRequiredForLevel(100), 0.1);
+        assertEquals(25.0, profile.xpRequiredForLevel(1), 0.1);
+        assertEquals(50000.0, profile.xpRequiredForLevel(99), 0.1);
+        assertEquals(50000.0, profile.xpRequiredForLevel(100), 0.1);
     }
 
     @Test
@@ -56,14 +57,42 @@ class ProgressionProfileTest {
         }
     }
 
+    @Test
+    void highFinalCostKeepsEarlyLevelsAccessible() {
+        final ProgressionProfile profile = profile(100, 0.5);
+        assertEquals(25.0, profile.xpRequiredForLevel(1), 0.1);
+        assertTrue(profile.xpRequiredForLevel(5) < 30.0);
+        assertTrue(profile.xpRequiredForLevel(10) < 60.0);
+        assertTrue(profile.xpRequiredForLevel(50) > 5000.0);
+        assertTrue(totalXp(profile) > 1_000_000.0);
+    }
+
+    @Test
+    void twoLevelProfileUsesFirstTransitionCost() {
+        final ProgressionProfile profile = new ProgressionProfile("short", 2, 2, 25, 50000, 3.2, 0.5);
+        assertEquals(25.0, profile.xpRequiredForLevel(1), 0.1);
+    }
+
+    @Test
+    void nonFiniteSettingsAreRejected() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new ProgressionProfile("bad", 100, 100, Double.NaN, 50000, 3.2, 0.5));
+        assertThrows(IllegalArgumentException.class,
+                () -> new ProgressionProfile("bad", 100, 100, 25, Double.POSITIVE_INFINITY, 3.2, 0.5));
+        assertThrows(IllegalArgumentException.class,
+                () -> new ProgressionProfile("bad", 100, 100, 25, 50000, Double.NaN, 0.5));
+        assertThrows(IllegalArgumentException.class,
+                () -> new ProgressionProfile("bad", 100, 100, 25, 50000, 3.2, Double.NaN));
+    }
+
     private static ProgressionProfile profile(int maxLevel, double influence) {
         return new ProgressionProfile(
                 "test",
                 maxLevel,
                 100,
-                100.0,
-                10000.0,
-                1.85,
+                25.0,
+                50000.0,
+                3.2,
                 influence
         );
     }

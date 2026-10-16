@@ -8,103 +8,132 @@
 sources:
   block_mining:
     default:
-      min: 0.5
-      max: 1.5
+      min: 0.2
+      max: 0.4
     custom:
       COAL_ORE:
-        min: 1.5
-        max: 2.5
+        min: 0.4
+        max: 0.6
+      DEEPSLATE_COAL_ORE:
+        min: 0.4
+        max: 0.6
       COPPER_ORE:
-        min: 1.5
-        max: 2.5
+        min: 0.4
+        max: 0.6
+      DEEPSLATE_COPPER_ORE:
+        min: 0.4
+        max: 0.6
       IRON_ORE:
+        min: 0.5
+        max: 0.8
+      DEEPSLATE_IRON_ORE:
+        min: 0.5
+        max: 0.8
+      GOLD_ORE:
+        min: 0.6
+        max: 1.0
+      DEEPSLATE_GOLD_ORE:
+        min: 0.6
+        max: 1.0
+      REDSTONE_ORE:
+        min: 0.6
+        max: 1.0
+      DEEPSLATE_REDSTONE_ORE:
+        min: 0.6
+        max: 1.0
+      LAPIS_ORE:
+        min: 0.8
+        max: 1.1
+      DEEPSLATE_LAPIS_ORE:
+        min: 0.8
+        max: 1.1
+      DIAMOND_ORE:
+        min: 1.2
+        max: 2.0
+      DEEPSLATE_DIAMOND_ORE:
+        min: 1.2
+        max: 2.0
+      EMERALD_ORE:
+        min: 1.5
+        max: 2.2
+      DEEPSLATE_EMERALD_ORE:
+        min: 1.5
+        max: 2.2
+      ANCIENT_DEBRIS:
         min: 2.0
         max: 3.0
-      GOLD_ORE:
-        min: 2.5
-        max: 4.0
-      REDSTONE_ORE:
-        min: 2.5
-        max: 4.0
-      LAPIS_ORE:
-        min: 3.0
-        max: 4.5
-      DIAMOND_ORE:
-        min: 5.0
-        max: 8.0
-      EMERALD_ORE:
-        min: 6.0
-        max: 9.0
-      ANCIENT_DEBRIS:
-        min: 8.0
-        max: 12.0
 
   fishing:
     default:
-      min: 1.5
-      max: 3.0
+      min: 0.8
+      max: 1.5
     custom:
       COD:
-        min: 1.5
-        max: 2.5
+        min: 0.8
+        max: 1.2
       SALMON:
-        min: 2.0
-        max: 3.0
+        min: 1.0
+        max: 1.5
       TROPICAL_FISH:
-        min: 2.5
-        max: 4.0
+        min: 1.2
+        max: 2.0
       PUFFERFISH:
-        min: 2.5
-        max: 4.0
+        min: 1.2
+        max: 2.0
 
   armor_durability:
     default:
-      min: 0.5
-      max: 1.0
+      min: 0.1
+      max: 0.2
 
   farming:
     default:
-      min: 1.0
-      max: 2.0
+      min: 0.2
+      max: 0.5
     custom:
       TILL:
-        min: 0.5
-        max: 1.0
+        min: 0.1
+        max: 0.2
       WHEAT:
-        min: 1.0
-        max: 2.0
+        min: 0.2
+        max: 0.5
       CARROTS:
-        min: 1.0
-        max: 2.0
+        min: 0.2
+        max: 0.5
       POTATOES:
-        min: 1.0
-        max: 2.0
+        min: 0.2
+        max: 0.5
       BEETROOTS:
-        min: 1.5
-        max: 2.5
+        min: 0.4
+        max: 0.6
       NETHER_WART:
-        min: 2.0
-        max: 3.0
+        min: 0.5
+        max: 0.8
       MELON:
-        min: 1.5
-        max: 2.5
+        min: 0.4
+        max: 0.6
       PUMPKIN:
-        min: 1.5
-        max: 2.5
+        min: 0.4
+        max: 0.6
       COCOA:
-        min: 1.5
-        max: 2.5
+        min: 0.4
+        max: 0.6
       SWEET_BERRY_BUSH:
-        min: 1.0
-        max: 1.5
+        min: 0.2
+        max: 0.4
+
+  shield_block:
+    default:
+      min: 0.2
+      max: 0.4
 
 combat:
   formula:
-    base_xp: 2.0
-    health_scale: 0.35
+    base_xp: 1.0
+    health_scale: 0.15
     health_exponent: 0.80
-    minimum_xp: 1.0
-    maximum_xp: 750.0
+    minimum_xp: 0.5
+    maximum_xp: 350.0
 
   entity_multipliers:
     BLAZE: 1.50
@@ -153,42 +182,42 @@ combat:
     # than hit-count based so rapid weak attacks cannot farm the bonus.
     critical_damage_bonus:
       enabled: true
-      max_multiplier: 1.10
+      max_multiplier: 1.05
       curve_exponent: 1.00
 
     mobs:
       PIGLIN_BRUTE:
-        max_multiplier: 1.25
+        max_multiplier: 1.125
         curve_exponent: 1.35
         claim_interval_seconds: 300
         minimum_level: 20
         required_awkgearmastery_critical_hits: 0
       RAVAGER:
-        max_multiplier: 1.35
+        max_multiplier: 1.175
         curve_exponent: 1.30
         claim_interval_seconds: 300
         minimum_level: 20
         required_awkgearmastery_critical_hits: 0
       ELDER_GUARDIAN:
-        max_multiplier: 1.50
+        max_multiplier: 1.25
         curve_exponent: 1.25
         claim_interval_seconds: 600
         minimum_level: 20
         required_awkgearmastery_critical_hits: 0
       WARDEN:
-        max_multiplier: 2.25
+        max_multiplier: 1.625
         curve_exponent: 1.10
         claim_interval_seconds: 1800
         minimum_level: 20
         required_awkgearmastery_critical_hits: 0
       WITHER:
-        max_multiplier: 1.90
+        max_multiplier: 1.45
         curve_exponent: 1.20
         claim_interval_seconds: 1200
         minimum_level: 20
         required_awkgearmastery_critical_hits: 0
       ENDER_DRAGON:
-        max_multiplier: 2.10
+        max_multiplier: 1.55
         curve_exponent: 1.15
         claim_interval_seconds: 3600
         minimum_level: 20

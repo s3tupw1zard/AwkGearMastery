@@ -11,8 +11,10 @@ profiles:
   default:
     max_level: 100
     xp:
+      # XP per transition (not cumulative XP). Level 1 -> 2 stays inexpensive;
+      # the high exponent postpones most of the increased cost to later levels.
       reference_max_level: 100
       first_level_xp: 100.0
-      final_level_xp: 10000.0
-      curve_exponent: 1.85
+      final_level_xp: 50000.0
+      curve_exponent: 2.2
       max_level_influence: 0.50
