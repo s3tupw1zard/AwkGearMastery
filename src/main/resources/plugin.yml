@@ -6,7 +6,8 @@ authors:
   - s3tupw1zard
 description: "Configurable RPG-style equipment progression for Paper and Purpur with formula-based leveling and combat XP sharing. Based on open-source work originally authored by byteful."
 website: "https://github.com/s3tupw1zard/AwkGearMastery"
-api-version: "26.3"
+# Oldest API this JAR compiles against; Paper 26.3 remains recommended.
+api-version: "1.21.11"
 folia-supported: true
 softdepend:
   - PlaceholderAPI

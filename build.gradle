@@ -33,6 +33,11 @@ repositories {
     }
 }
 
+// Compile the distributed JAR against the oldest supported API to avoid accidental
+// references to methods/classes that only exist on the recommended server version.
+def minimumPaperApi = '1.21.11-R0.1-SNAPSHOT'
+def testPaperApi = providers.gradleProperty('paperTestApi').getOrElse(minimumPaperApi)
+
 dependencies {
     implementation 'com.github.Redempt:Crunch:2.0.3'
     implementation 'com.github.cryptomorin:XSeries:13.7.1'
@@ -40,14 +45,14 @@ dependencies {
     implementation 'io.github.revxrsal:lamp.bukkit:4.0.0-rc.17'
     implementation 'com.jeff-media:MorePersistentDataTypes:2.4.0'
 
-    compileOnly 'io.papermc.paper:paper-api:26.3.build.+'
+    compileOnly "io.papermc.paper:paper-api:${minimumPaperApi}"
     compileOnly 'net.kyori:adventure-api:4.26.1'
     compileOnly 'net.kyori:adventure-platform-bukkit:4.4.1'
     compileOnly 'org.jetbrains:annotations:26.1.0'
     compileOnly 'me.clip:placeholderapi:2.12.2'
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
-    testImplementation 'io.papermc.paper:paper-api:26.3.build.+'
+    testImplementation "io.papermc.paper:paper-api:${testPaperApi}"
     testImplementation 'org.mockito:mockito-core:5.21.0'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.4'
 }
