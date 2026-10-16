@@ -42,7 +42,7 @@ def main():
     (root / "server.properties").write_text(
         "server-ip=127.0.0.1\nserver-port=25565\nonline-mode=false\n"
         "view-distance=2\nsimulation-distance=2\nmax-players=1\n"
-        "level-type=minecraft:flat\ngenerate-structures=false\n"
+        "level-type=minecraft:normal\ngenerate-structures=false\n"
         "enable-rcon=false\nspawn-protection=0\n"
     )
     print(f"Testing {jars[0].name} on Paper {version} build {build['id']}", flush=True)
