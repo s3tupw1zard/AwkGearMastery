@@ -7,7 +7,7 @@
 
 ## Features
 
-- Targets Paper/Purpur 26.3 with Java 25
+- Built against Paper 26.3 (recommended/gameplay-tested); compatible older servers may load from API 1.21.11, Java 25 required
 - Supports Folia.
 - No required dependencies; PlaceholderAPI is optional.
 - Profile-based configuration system.
