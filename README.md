@@ -10,9 +10,18 @@ AwkGearMastery is based on open-source code originally authored by byteful; the 
 
 ## AwkGearMastery 2026.1 Direction
 
-The current development branch targets Paper/Purpur 26.3 and Java 25, preparing
-`2026.1.0-rc.2` with compatibility updates and bug fixes. The released
-`2026.1.0-rc.1` remains the final planned candidate for Minecraft 26.2.
+**Build target and recommended/gameplay-tested server:** Paper/Purpur 26.3 with Java 25.
+The production and test dependencies remain `paper-api:26.3.build.+`.
+
+**Older-server loading:** `plugin.yml` declares API 1.21.11 as the loader floor,
+so Paper/Purpur 26.2 and other compatible older versions are not rejected solely
+because they predate 26.3. This does not change the compile target to an older API.
+The same JAR built against Paper 26.3 is startup-checked in CI on Paper 1.21.11,
+26.1.2, 26.2 and 26.3, including its help command and clean shutdown.
+Java 25 is required on every version. Versions below 1.21.11 are not supported.
+Startup checks are not complete gameplay certification on older servers.
+Materials absent from an older server are skipped by the item-profile loader.
+
 Versioning uses SemVer-compatible CalVer (`YYYY.RELEASE.PATCH`), with `2026.1.0`
 as the first stable target and `2026.1.0-rc.2-SNAPSHOT` for current development builds.
 
